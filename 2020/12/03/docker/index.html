@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>docker汇总 | Astrals</title><meta name="description" content="[TOC]   docker常见命令docker start ：启动一个已经创建过的容器 docker run ：创建一个新容器并运行一个命令 docker exec：在运行的容器中执行命令 docker search mysql：查询Mysql镜像 docker pull mysql  ：拉取Mysql（默认最新版） docker安装流程1.yum包更新到最新 1yum update 2.安装需"><meta name="author" content="DSAD"><meta name="copyright" content="DSAD"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/Astrals24.github.io/img/favicon.png"><link rel="canonical" href="https://astrals24.github.io/2020/12/03/docker/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="docker汇总"><meta property="og:url" content="https://astrals24.github.io/2020/12/03/docker/"><meta property="og:site_name" content="Astrals"><meta property="og:description" content="[TOC]   docker常见命令docker start ：启动一个已经创建过的容器 docker run ：创建一个新容器并运行一个命令 docker exec：在运行的容器中执行命令 docker search mysql：查询Mysql镜像 docker pull mysql  ：拉取Mysql（默认最新版） docker安装流程1.yum包更新到最新 1yum update 2.安装需"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2020-12-03T11:06:50.000Z"><meta property="article:modified_time" content="2021-01-10T15:36:56.116Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/Astrals24.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/Astrals24.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-01-10 23:36:56'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 5.3.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/Astrals24.github.io/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/Astrals24.github.io/archives/"><div class="headline">文章</div><div class="length_num">5</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/Astrals24.github.io/tags/"><div class="headline">标签</div><div class="length_num">1</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/Astrals24.github.io/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/Astrals24.github.io/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">docker常见命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">docker安装流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker%E5%AE%89%E8%A3%85mysql"><span class="toc-number">3.</span> <span class="toc-text">docker安装mysql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker-mysql%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5"><span class="toc-number">4.</span> <span class="toc-text">docker-mysql配置主从同步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#docker%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">docker常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85docker"><span class="toc-number">5.0.1.</span> <span class="toc-text">**1.安装docker **</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%8B%89%E5%8F%96-mysql-%E5%A4%AA%E6%85%A2"><span class="toc-number">5.0.2.</span> <span class="toc-text">2.拉取 mysql 太慢</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-docker%E5%8F%8A%E5%85%B6%E5%AE%B9%E5%99%A8%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="toc-number">5.0.3.</span> <span class="toc-text">3.docker及其容器开机自启</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-docker%E4%B8%ADmysql%E6%9C%8D%E5%8A%A1%E6%97%A0%E6%B3%95%E6%88%90%E5%8A%9F%E9%87%8D%E5%90%AF"><span class="toc-number">5.0.4.</span> <span class="toc-text">4.docker中mysql服务无法成功重启</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-docker-mysql%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8ESlave-IO-%E4%B8%BANO"><span class="toc-number">5.0.5.</span> <span class="toc-text">5.docker-mysql配置主从Slave-IO 为NO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-docker%E5%AE%89%E8%A3%85vim%E5%87%BA%E9%94%99"><span class="toc-number">5.0.6.</span> <span class="toc-text">6.docker安装vim出错</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-docker%E5%AE%B9%E5%99%A8%E5%86%85apt-get-%E5%A4%AA%E6%85%A2"><span class="toc-number">5.0.7.</span> <span class="toc-text">7.docker容器内apt-get 太慢</span></a></li></ol></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/Astrals24.github.io/">Astrals</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/Astrals24.github.io/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/Astrals24.github.io/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">docker汇总</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-03T11:06:50.000Z" title="发表于 2020-12-03 19:06:50">2020-12-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-10T15:36:56.116Z" title="更新于 2021-01-10 23:36:56">2021-01-10</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p>[TOC]</p>
+<a id="more"></a>
+
+<h2 id="docker常见命令"><a href="#docker常见命令" class="headerlink" title="docker常见命令"></a>docker常见命令</h2><p>docker start ：启动一个已经创建过的容器</p>
+<p>docker run ：创建一个新容器并运行一个命令</p>
+<p>docker exec：在运行的容器中执行命令</p>
+<p>docker search mysql：查询Mysql镜像</p>
+<p>docker pull mysql  ：拉取Mysql（默认最新版）</p>
+<h2 id="docker安装流程"><a href="#docker安装流程" class="headerlink" title="docker安装流程"></a>docker安装流程</h2><p><strong>1.yum包更新到最新</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br></pre></td></tr></table></figure>
+<p><strong>2.安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install <span class="literal">-y</span> yum<span class="literal">-utils</span> device<span class="literal">-mapper</span><span class="literal">-persistent</span><span class="literal">-data</span> lvm2</span><br></pre></td></tr></table></figure>
+<p><strong>3.设置yum源（阿里仓库）</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum<span class="literal">-config</span><span class="literal">-manager</span> -<span class="literal">-add</span><span class="literal">-repo</span> http://mirrors.aliyun.com/docker<span class="literal">-ce</span>/linux/centos/docker<span class="literal">-ce</span>.repo</span><br></pre></td></tr></table></figure>
+<p><strong>4.查看所有仓库中docker版本，可选择特定版本安装（直接安装最新版可忽略</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list docker<span class="literal">-ce</span> -<span class="literal">-showduplicates</span> | <span class="built_in">sort</span> <span class="literal">-r</span></span><br></pre></td></tr></table></figure>
+<p><strong>5.安装Docker （yum install docker-ce-版本号,不加 -版本号默认最新版）</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker<span class="literal">-ce</span></span><br></pre></td></tr></table></figure>
+<p><strong>6.开机启动docker</strong></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="literal">start</span> docker</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="docker安装mysql"><a href="#docker安装mysql" class="headerlink" title="docker安装mysql"></a>docker安装mysql</h2><p><strong>1.拉取mysql镜像（不加版本号默认最新）</strong></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql</span><br></pre></td></tr></table></figure>
+<p><strong>2.启动mysql</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run <span class="literal">-itd</span> -<span class="literal">-name</span> mysql<span class="literal">-test</span> <span class="literal">-p</span> <span class="number">3306</span>:<span class="number">3306</span> <span class="literal">-e</span> MYSQL_ROOT_PASSWORD=<span class="number">123456</span> mysql</span><br></pre></td></tr></table></figure>
+<p>端口：本机：容器   3307:3306 or 3308：3306</p>
+<p><strong>3.进入容器</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec <span class="literal">-it</span> mysql bash</span><br></pre></td></tr></table></figure>
+<p><strong>4.登录mysql 并允许远程连接</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line"></span><br><span class="line">ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;wyt123!&#39;;</span><br><span class="line"></span><br><span class="line">ALTER USER &#39;root&#39;@&#39;%&#39; IDENTIFIED WITH mysql_native_password BY &#39;wyt123!&#39;; </span><br></pre></td></tr></table></figure>
+<p><strong>5.刷新数据库</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="docker-mysql配置主从同步"><a href="#docker-mysql配置主从同步" class="headerlink" title="docker-mysql配置主从同步"></a>docker-mysql配置主从同步</h2><p><strong>1.准备2台服务器或者docker下创建2个mysql容器</strong></p>
+<p>主：master</p>
+<p>从：slave</p>
+<p><strong>[注]如果用在docker下创建2个mysql容器的方式配置 注意主从的UUID一致问题</strong></p>
+<p><strong>2.修改master中的配置文件my.cnf 并重启mysql容器（主库操作）</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[mysqlid]</span><br><span class="line">log-bin=mysql-bin</span><br><span class="line">server-id=1</span><br></pre></td></tr></table></figure>
+<p>**[注1]先docker exec -it [容器] /bin/bash 进入mysql容器，其路径一般是/etc/mysql/my.cnf **</p>
+<p><strong>[注2]该配置为简易版</strong></p>
+<p><strong>[注3]server-id不能重复</strong></p>
+<p><strong>[注4]</strong></p>
+<p>Slave的配置与master类似，你同样需要重启slave的MySQL。如下：<br>log_bin      = mysql-bin<br>server_id     = 2<br>relay_log     = mysql-relay-bin<br>log_slave_updates = 1<br>read_only     = 1<br><strong>server_id：</strong>是必须的，而且唯一。</p>
+<p><strong>log_bin：</strong>slave没有必要开启二进制日志bin_log，但是在一些情况下，必须设置，例如，如果slave为其它slave的master，必须设置bin_log。在这里，我们开启了二进制日志，而且显示的命名(默认名称为hostname，但是，如果hostname改变则会出现问题)。<br><strong>relay_log：</strong>配置中继日志，log_slave_updates表示slave将复制事件写进自己的二进制日志(后面会看到它的用处)。<br>有些人开启了slave的二进制日志，却没有设置log_slave_updates，然后查看slave的数据是否改变，这是一种错误的配置。</p>
+<p><strong>read_only：</strong>尽量使用read_only，它防止改变数据(除了特殊的线程)。但是，read_only并是很实用，特别是那些需要在slave上创建表的应用。</p>
+<p>设定全局锁“flush tables with read lock;”，对应的解锁模式命令为：“unlock tables;”</p>
+<p>经过实际测试，对于MySQL单实例数据库和master库，如果需要设置为只读状态，需要进行如下操作和设置：<br>将MySQL设置为只读状态的命令：<br># mysql -uroot -p<br>mysql&gt; show global variables like “%read_only%”;<br>mysql&gt; flush tables with read lock;<br>mysql&gt; set global read_only=1;<br>mysql&gt; show global variables like “%read_only%”;</p>
+<p>将MySQL从只读设置为读写状态的命令：<br>mysql&gt; unlock tables;<br>mysql&gt; set global read_only=0;</p>
+<p>对于需要保证master-slave主从同步的salve库，如果要设置为只读状态，需要执行的命令为：<br>mysql&gt; set global read_only=1;</p>
+<p>将salve库从只读状态变为读写状态，需要执行的命令是：<br>mysql&gt; set global read_only=0;</p>
+<p><strong>限制super用户写入 使用 super-read-only=on</strong></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hguisu/article/details/7325124">参考资料高性能mysql复制篇</a></p>
+<p><strong>3.登录mysql（主库操作）</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 容器id /bin/bash</span><br></pre></td></tr></table></figure>
+<p><strong>4.创建一个用户，用于从库通过此用户访问主库（主库操作）</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;slave&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;slave&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> REPLICATION SLAVE <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;slave&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> <span class="string">&#x27;slave&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">with</span> mysql_native_password <span class="keyword">by</span> <span class="string">&#x27;slave&#x27;</span>;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<p>**[注1]GRANT REPLICATION SLAVE 为授予用户复制权限 后面可自己增加查询等权限 **</p>
+<p><strong>[注2]%可替换为从服务器的IP 意思为slave用户可通过此IP访问主库</strong></p>
+<p><strong>5.查看主库状态（主库操作）</strong></p>
+<p>SHOW MASTER STATUS;  或者 SHOW MASTER STATUS/G</p>
+<p><strong>[注1]SHOW MASTER STATUS/G 后面没有冒号 不然会报错</strong></p>
+<p><strong>[注2]请记住此时表中File和POS的值 并且不要对主库有任何的CRUD操作 不然该值会发生变化影响后续的操作</strong></p>
+<p><strong>[注3]</strong></p>
+<p><strong>mysql&gt; show master status;</strong><br><strong>+——————+———-+————–+——————+——————-+</strong><br><strong>| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |</strong><br><strong>+——————+———-+————–+——————+——————-+</strong><br><strong>| mysql-bin.000120 |     666 |              | mysql            |                   |</strong><br><strong>+——————+———-+————–+——————+——————-+</strong><br><strong>字段含义：</strong><br><strong>File : 从哪个日志文件开始推送日志文件</strong><br><strong>Position ： 从哪个位置开始推送日志</strong><br><strong>Binlog_Ignore_DB : 指定不需要同步的数据库</strong></p>
+<p><strong>6.修改从库my.cnf文件并重启数据库（从库操作）</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqlid]</span><br><span class="line">server-id=2</span><br></pre></td></tr></table></figure>
+<p><strong>[注]操作与方法和主库一致  log-bin可不开启如果该从库不会作为其他主库</strong></p>
+<p><strong>7.进入容器 登录mysql 连接主数据库（从库操作）</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec it 容器id /bin/bash</span><br><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+<p><strong>输入：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CHANGE MASTER TO</span><br><span class="line">MASTER_HOST&#x3D;&#39;XXX.XXX.XXX.XXX&#39;,</span><br><span class="line">MASTER_PORT&#x3D;3306, </span><br><span class="line">MASTER_USER&#x3D;&#39;slave&#39;,</span><br><span class="line">MASTER_PASSWORD&#x3D;&#39;slave&#39;,</span><br><span class="line">MASTER_LOG_FILE&#x3D;&#39;binlog.XXXXXX&#39;,</span><br><span class="line">MASTER_LOG_POS&#x3D;XXX;</span><br></pre></td></tr></table></figure>
+<p><strong>[注] HOST为主机IP；PORT为主机映射端口；USER/PASSWORD为刚才新建的账号密码；LOG_FILE/POS为刚才记住主库中查询到的FILE/POST值</strong></p>
+<p><strong>8.开启从库功能 查看数据库状态</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start slave;</span><br><span class="line"></span><br><span class="line">show slave status\G;</span><br></pre></td></tr></table></figure>
+<img src="C:\Users\DSADhh\Desktop\遇到的问题\res\docker+mysql主从复制.png" style="zoom:67%;" />
+
+
+
+<h2 id="docker常见问题"><a href="#docker常见问题" class="headerlink" title="docker常见问题"></a>docker常见问题</h2><h4 id="1-安装docker"><a href="#1-安装docker" class="headerlink" title="**1.安装docker **"></a>**1.安装docker **</h4><p>**出现  Problem: package docker-ce-3:19.03.12-3.el7.x86_64 requires containerd.io &gt;= 1.2.2-3, but none of the providers can be installed 错误 **</p>
+<p><strong>此时需要安装新版containerd.io</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<p><strong>再次安装</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install  docker-ce </span><br></pre></td></tr></table></figure>
+<p><strong>查看版本</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="literal">-v</span></span><br></pre></td></tr></table></figure>
+<p><strong>拉取compose</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">curl</span> <span class="literal">-L</span> https://get.daocloud.io/docker/compose/releases/download/<span class="number">1.25</span>.<span class="number">0</span>/docker<span class="literal">-compose</span>-`uname <span class="literal">-s</span>`-`uname <span class="literal">-m</span>` &gt; /usr/local/bin/docker<span class="literal">-compose</span></span><br></pre></td></tr></table></figure>
+<p><strong>赋权限</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<p><strong>查看版本</strong></p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
+
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shana_8/article/details/105190368">参考网址</a></p>
+<p><a target="_blank" rel="noopener" href="http://get.daocloud.io/#install-docker">快速下载docker-compose网址</a></p>
+<h4 id="2-拉取-mysql-太慢"><a href="#2-拉取-mysql-太慢" class="headerlink" title="2.拉取 mysql 太慢"></a>2.拉取 mysql 太慢</h4><p> <strong>a.拉取最新版mysql</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:latest</span><br></pre></td></tr></table></figure>
+<p><strong>b.将docker修改为国内镜像源</strong>,在**/etc/docker/daemon.json**文件中添加下面参数<br>此处使用的是中国科技大学的docker镜像源</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;registry-mirrors&quot;</span> : [<span class="string">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>c.重启docker</strong></p>
+ <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service docker restart</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="3-docker及其容器开机自启"><a href="#3-docker及其容器开机自启" class="headerlink" title="3.docker及其容器开机自启"></a>3.docker及其容器开机自启</h4><p><strong>docker 开机自启动</strong></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable docker.service</span><br></pre></td></tr></table></figure>
+<p><strong>如果已经启动的项目，则使用update更新</strong></p>
+<p>docker update –restart=always 容器ID</p>
+<p><strong>未启动 启动时加–restart=always</strong></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker</span> run -tid --name isaler_v<span class="number">0</span>.<span class="number">0</span>.<span class="number">11</span> -p <span class="number">8081</span>:<span class="number">8080</span> --restart=always -v /alidata/iDocker/run/projectImages/isaler/v<span class="number">0</span>.<span class="number">0</span>.<span class="number">11</span>/log:/usr/local/tomcat/logs isaler_v<span class="number">0</span>.<span class="number">0</span>.<span class="number">11</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attribute">Flag</span>	Description</span><br><span class="line"><span class="attribute">no</span>		不自动重启容器. (默认value)</span><br><span class="line"><span class="attribute">on</span>-failure 	容器发生error而退出(容器退出状态不为<span class="number">0</span>)重启容器</span><br><span class="line"><span class="attribute">unless</span>-stopped 	在容器已经stop掉或Docker stoped/restarted的时候才重启容器</span><br><span class="line"><span class="attribute">always</span> 	在容器已经stop掉或Docker stoped/restarted的时候才重启容器</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="4-docker中mysql服务无法成功重启"><a href="#4-docker中mysql服务无法成功重启" class="headerlink" title="4.docker中mysql服务无法成功重启"></a>4.docker中mysql服务无法成功重启</h4><p>​    <strong>问题描述：</strong>在配置mysql主从的过程中 需要重启mysql服务 但是docker restart [容器ID]/[容器名] 之后 status 一直是restarting 状态 并且ports为null，</p>
+<p>   <strong>问题解决：</strong></p>
+<ol>
+<li><p>查看<strong>docker logs [容器ID]/[容器名]</strong></p>
+</li>
+<li><p>发现是容器mysql 中 /etc/mysql/my.cnf 出现了问题 （我这里的原因是之前配置主从server-id=1 -前面多了个空格）</p>
+</li>
+<li><p>由于mysql容器并未成功启动 无法通过docker exec -it [容器ID]/[容器名] /bin/bash 方式进入mysql容器内部修改配置文件所以只能利用docker cp 把docker容器中的配置文件复制到主机中，在主机中修改完成后 再复制到docker容器中，命令如下：</p>
+<p><strong>用法：docker cp [容器ID]:容器中配置文件路径 需要保存文件到docker中的路径</strong></p>
+<p>例：docker cp [容器ID]：/etc/mysql/my.cnf /home/my.cnf       <strong>[注] 把/etc/mysql/my.cnf文件 复制到 /home/my.cnf</strong> </p>
+<p><strong>然后直接修改 /home/my.cnf 配置文件</strong></p>
+<p><strong>最后再copy回去</strong></p>
+</li>
+</ol>
+<p>​       例：docker cp  /home/my.cnf [容器ID]：/etc/mysql/my.cnf      </p>
+<p>​      重启docker容器即可  docker restart [容器ID]/[容器名]</p>
+<h4 id="5-docker-mysql配置主从Slave-IO-为NO"><a href="#5-docker-mysql配置主从Slave-IO-为NO" class="headerlink" title="5.docker-mysql配置主从Slave-IO 为NO"></a>5.docker-mysql配置主从Slave-IO 为NO</h4><p><strong>报错：</strong>Got fatal error 1236 from master when reading data from binary log: ‘binlog truncated in the middle of event; consider out of disk space on master; the first event ‘mysql-bin.000001’ at 98, the last event read from ‘./mysql-bin.000001’ at 125, the last byte read from ‘./mysql-bin.000001’ at 179.’</p>
+<p><strong>解决方法：</strong></p>
+<p><strong>1.在master 中 输入</strong></p>
+<p>show master status;</p>
+<p>里面的<strong>file</strong> 和 pos  需要和 <strong>Master_Log_File</strong> 和 <strong>Master_Log_Pos</strong> <strong>保持一致</strong></p>
+<p>change master to Master_Log_File=’XXX’,Master_Log_Pos=XXX;</p>
+<p><strong>2.在slave中输入</strong></p>
+<p>stop slave；</p>
+<p>CHANGE MASTER TO<br>MASTER_HOST=’119.45.181.128’,<br>master_port=3306,<br>MASTER_USER=’slave’,<br>MASTER_PASSWORD=’slave’,<br>MASTER_LOG_FILE=’XXX’,<br>MASTER_LOG_POS=XXX;</p>
+<p>start slave；       </p>
+<p>show slave status/G;</p>
+<p><strong>Slave_SQL线程会重新的尝试工作</strong></p>
+<p><strong>[注] 任何对主数据库的CRUD都可能会导致pos发生变化 以致于主从不一致 此时需要重新CHANGE MASTER TO 可以通过锁表方式先防止写入等主从配置完毕再解锁</strong> </p>
+<img src="C:\Users\DSADhh\Desktop\遇到的问题\res\docker+mysql主从复制.png" style="zoom: 67%;" />
+
+
+
+<h4 id="6-docker安装vim出错"><a href="#6-docker安装vim出错" class="headerlink" title="6.docker安装vim出错"></a>6.docker安装vim出错</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install vim</span><br></pre></td></tr></table></figure>
+<h4 id="7-docker容器内apt-get-太慢"><a href="#7-docker容器内apt-get-太慢" class="headerlink" title="7.docker容器内apt-get 太慢"></a>7.docker容器内apt-get 太慢</h4><p><strong>问题：docker容器内更新太慢</strong></p>
+<p><strong>解决：替换为阿里源</strong></p>
+<p>1.查看源配置文件（此时无vim）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<p>默认内容为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">deb http://deb.debian.org/debian jessie main</span><br><span class="line">deb http://deb.debian.org/debian jessie-updates main</span><br><span class="line">deb http://security.debian.org jessie/updates main</span><br></pre></td></tr></table></figure>
+<p>2.将 <code>deb.debian.org</code> 替换为 <code>mirrors.aliyun.com</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/apt/sources.list /etc/apt/sources.list.bak ; # 先备份</span><br><span class="line">echo &quot; &quot; &gt; /etc/apt/sources.list ;　# 清空文件</span><br><span class="line">echo &quot;deb http://mirrors.aliyun.com/debian jessie main&quot; &gt;&gt; /etc/apt/sources.list ;</span><br><span class="line">echo &quot;deb http://mirrors.aliyun.com/debian jessie-updates main&quot; &gt;&gt; /etc/apt/sources.list ;</span><br></pre></td></tr></table></figure>
+<p>3.执行以下命令进行安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get clean;  # 清空缓存</span><br><span class="line">apt-get update;  # 更新</span><br><span class="line">apt-get -y install vim; # -y自动确认，更方便 </span><br></pre></td></tr></table></figure>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">DSAD</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://astrals24.github.io/2020/12/03/docker/">https://astrals24.github.io/2020/12/03/docker/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://astrals24.github.io" target="_blank">Astrals</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/Astrals24.github.io/2021/01/03/hello-world/"><img class="prev-cover" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/Astrals24.github.io/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Hello World</div></div></a></div></nav></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By DSAD</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/Astrals24.github.io/js/utils.js"></script><script src="/Astrals24.github.io/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
