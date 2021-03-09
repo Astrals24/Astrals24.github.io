@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>软考中级-软件设计师 | Astrals</title><meta name="description" content="软考中级后的一些感受（后附真题和资料）"><meta name="keywords" content="软考"><meta name="author" content="DSAD"><meta name="copyright" content="DSAD"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/Astrals24.github.io/img/favicon.png"><link rel="canonical" href="https://astrals24.github.io/2019/07/08/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="软考中级-软件设计师"><meta property="og:url" content="https://astrals24.github.io/2019/07/08/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/"><meta property="og:site_name" content="Astrals"><meta property="og:description" content="软考中级后的一些感受（后附真题和资料）"><meta property="og:image" content="https://img-blog.csdnimg.cn/20210309190551711.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><meta property="article:published_time" content="2019-07-08T09:12:04.000Z"><meta property="article:modified_time" content="2021-03-09T11:08:25.497Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/Astrals24.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/Astrals24.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-03-09 19:08:25'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" type="text/css" href="/css/background.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/css/hideCategory.min.css"><meta name="generator" content="Hexo 5.3.0"></head><body><canvas class="fireworks"></canvas><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/Astrals24.github.io/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/Astrals24.github.io/archives/"><div class="headline">文章</div><div class="length_num">8</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/Astrals24.github.io/tags/"><div class="headline">标签</div><div class="length_num">4</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/Astrals24.github.io/categories/"><div class="headline">分类</div><div class="length_num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%84%9F%E5%8F%97"><span class="toc-number">1.</span> <span class="toc-text">感受</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8A%E5%8D%88%E7%9C%9F%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">上午真题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E5%8D%88%E7%9C%9F%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">下午真题</span></a></li></ol></div></div></div><header class="post-bg" id="page-header"> <nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/Astrals24.github.io/">Astrals</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">软考中级-软件设计师</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-07-08T09:12:04.000Z" title="发表于 2019-07-08 17:12:04">2019-07-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-03-09T11:08:25.497Z" title="更新于 2021-03-09 19:08:25">2021-03-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Astrals24.github.io/categories/%E8%BD%AF%E8%80%83/">软考</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h1><p><img src="/Astrals24.github.io/2019/07/08/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88%5C%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88%E6%88%90%E7%BB%A9.jpg" alt="软考"></p>
+<p>有惊无险，本来感觉上午题错了很多大概45左右，好在运气还是在我身边。</p>
+<p>中级相比于初级难度上明显增加了一个档次，知识点也丰富许多，特别是下午大题算法部分考的更加深入了，上午题的知识结构和初级差不多，就是考察内容从教材的前几章变成了后面几章。</p>
+<p>中级如果感觉自己看书不稳可以花几百块淘宝买个网课,再搭配中级的同步辅导<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88%E8%80%83%E8%AF%95%E5%90%8C%E6%AD%A5%E8%BE%85%E5%AF%BC%E2%80%94%E2%80%94%E8%80%83%E7%82%B9%E4%B8%B2%E8%AE%B2%E3%80%81%E7%9C%9F%E9%A2%98%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%BC%BA%E5%8C%96%E8%AE%AD%E7%BB%83%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/17487453?fr=aladdin">软件设计师同步辅导</a> 通过基本问题不大，可以在用同步辅导这本书的时候把每章节考的分值标到目录上去 这样分值构成就一目了然了（ 每章开头会有写分值）</p>
+<p>**软件设计师资料：链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1nHldSgxIoBc3vC5HbjPC9g">https://pan.baidu.com/s/1nHldSgxIoBc3vC5HbjPC9g</a>   提取码：zz85 **</p>
+<h1 id="上午真题"><a href="#上午真题" class="headerlink" title="上午真题"></a>上午真题</h1><p>![2019.5软件设计师上午题答案 (2)](软考中级-软件设计师/2019.5软件设计师上午题答案 (2).jpg)</p>
+<h1 id="下午真题"><a href="#下午真题" class="headerlink" title="下午真题"></a><strong>下午真题</strong></h1><p><strong>试题一（共15分）</strong> </p>
+<p><strong>阅读下列说明和图，回答问题1至问题4,将解答填入答题纸的对应栏内。</strong> </p>
+<p><strong>【说明】</strong> </p>
+<p>某学校欲开发一学生跟踪系统，以便更自动化、更全面地对学生在校情况（到课情况和健康状态等）进行管理和追踪，使家长能及时了解子女的到课情况和健康状态，并在有 健康问题时及时与医护机构对接。该系统的主要功能是： </p>
+<p>（1）采集学生状态。通过学生卡传感器，采集学生心率、体温（摄氏度）等健康指 标及其所在位置等信息并记录。每张学生卡有唯一的标识（ID）与一个学生对应。 </p>
+<p>（2）健康状态告警。在学生健康状态出问题时，系统向班主任、家长和医护机构健 康服务系统发出健康状态警告，由医护机构健康服务系统通知相关医生进行处理。 </p>
+<p>（3）到课检查。综合比对学生状态、课表以及所处校园场所之间的信息对学生到课 情况进行判定。对旷课学生，向其家长和班主任发送旷课警告。 </p>
+<p>（4）汇总在校情况。定期汇总在校情况，并将报告发送给家长和班主任。 </p>
+<p>（5）家长注册。家长注册使用该系统，指定自己子女，存入家长信息，待审核。 </p>
+<p>（6）基础信息管理。学校管理人员对学生及其所用学生卡和班主任、课表（班级、 上课时间及场所等）、校园场所（名称和所在位置区域）等基础信息进行管理；对家长注册申请进行审核，更新家长状态，将家长ID加入学生信息记录中使家长与其子女进行关 联，向家长发送注册结果。一个学生至少有一个家长，可以有多个家长。课表信息包括班 级、班主任、时间和位置等。 </p>
+<p><strong>现采用结构化方法对学生跟踪系统进行分析与设计，获得如图1-1所示的上下文数据流图和图1-2所示的0层数据流图。</strong> </p>
+<p> <img src="/Astrals24.github.io/2019/07/08/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/image-20210309172607325.png" alt="image-20210309172607325"></p>
+<p><img src="/Astrals24.github.io/2019/07/08/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/image-20210309172722782.png" alt="image-20210309172722782"></p>
+<p><strong>【问题1】（5分）</strong> </p>
+<p>使用说明中的词语，给出图1-1中的实体E1〜E5的名称。 </p>
+<p><strong>【问题2】（4分）</strong> </p>
+<p>使用说明中的词语，给出图1-2中的数据存储D1〜D4的名称。 </p>
+<p><strong>【问题3】（3分）</strong> </p>
+<p>根据说明和图中术语，补充图1-2中缺失的数据流及其起点和终点（三条即可）。 </p>
+<p><strong>【问题4】（3分）</strong> </p>
+<p>根据说明中的术语，说明图1-1中数据流“学生状态”和“学生信息”的组成。 </p>
+<p><strong>试题二（共15分）</strong> </p>
+<p><strong>阅读下列说明，回答问题1至问题3,将解答填入答题纸的对应栏内。</strong> </p>
+<p><strong>【说明】</strong> </p>
+<p>某创业孵化基地管理若干孵化公司和创业公司，为规范管理创业项目投资业务，需要 开发一个信息系统。请根据下述需求描述完成该系统的数据库设计。 </p>
+<p><strong>【需求描述】</strong> </p>
+<p>（1）记录孵化公司和创业公司的信息。孵化公司信息包括公司代码、公司名称、法 人代表名称、注册地址和一个电话；创业公司信息包括</p>
+<p>公司代码、公司名称和一个电话。 孵化公司和创业公司的公司代码编码不同。 </p>
+<p>（2）统一管理孵化公司和创业公司的员工。员工信息包括工号、身份证号、姓名、 性别、所属公司代码和一个手机号，工号唯一标识每位员工。 </p>
+<p>（3）记录投资方信息。投资方信息包括投资方编号、投资方名称和一个电话。 </p>
+<p>（4）投资方和创业公司之间依靠孵化公司牵线建立创业项目合作关系，具体实施由 孵化公司的一位员工负责协调投资方和创业公司的一个创业项目。一个创业项目只属于一个创业公司，但可以接受若干投资方的投资。创业项目信息包括项目编号、创业公司代码、 投资方编号和孵化公司员工工号。 </p>
+<p><strong>【概念模型设计】</strong> </p>
+<p><strong>根据需求阶段收集的信息，设计的实体联系图（不完整）如图2-1所示。</strong> </p>
+<p> <img src="/Astrals24.github.io/2019/07/08/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/image-20210309172756344.png" alt="image-20210309172756344"></p>
+<p><strong>【逻辑结构设计】</strong> </p>
+<p>根据概念模型设计阶段完成的实体联系图，得出如下关系模式（不完整）:</p>
+<p>孵化公司（公司代码，公司名称，法人代表名称，注册地址，电话） </p>
+<p>创业公司（公司代码，公司名称，电话） </p>
+<p>员工（工号，身份证号，姓名，性别， （a）,手机号） </p>
+<p>投资方（投资方编号、投资方名称，电话） </p>
+<p>项目（项目编号，创业公司代码（b），孵化公司员工号）</p>
+<p><strong>【问题1】（5分）</strong> </p>
+<p>根据问题描述，补充图2-1的实体联系图。 </p>
+<p><strong>【问题2】（4分）</strong> </p>
+<p>补充逻辑结构设计结果中的（a）、（b）两处空缺及完整性约束关系。 </p>
+<p><strong>【问题3】（6分）</strong> </p>
+<p>若创业项目的信息还需要包括投资额和投资时间，那么： </p>
+<p>（1）是否需要增加新的实体来存储投资额和投资时间？ </p>
+<p>（2）如果增加新的实体，请给出新实体的关系模式，并对图2-1进行补充。如果不需要增加新的实体，请将“投资额”和“投资时间”两个属性补充连线到图2-1合适的对象上，并对变化的关系模式进行修改。 </p>
+<p><strong>试题三(共15分)</strong> </p>
+<p><strong>阅读下列说明和图，回答问题1至问题3,将解答填入答题纸的对应栏内。</strong> </p>
+<p><strong>【说明】</strong> </p>
+<p>某图书公司欲开发一个基于Web的书籍销售系统，为顾客(Customer)提供在线购买书籍(Books)的功能，同时对公司书籍的库存及销售情况进行管理。系统的主要功能描述如下： </p>
+<p>（1）首次使用系统时，顾客需要在系统中注册(Register detail)。顾客填写注册信息表要求的信息，包括姓名(name)、收货地址(address)、电子邮箱(email)等，系统将为其生成一个注册码。 </p>
+<p>（2）注册成功的顾客可以登录系统在线购买书籍(Buy books)。购买时可以浏览书籍 信息，包括书名(title)、作者(author)、内容简介(introduction)等。如果某种书籍的库存量为0，那么顾客无法查询到该书籍的信息。顾客选择所需购买的书籍及购买数量 (quantities),若购买数量超过库存量，提示库存不足；若购买数量小于库存量，系统将显示验证界面，要求顾客输入注册码。注册码验证正确后，自动生成订单(Order),否则， 提示验证错误。如果顾客需要，可以选择打印订单(Printorder)。 </p>
+<p>（3）派送人员(Dispatcher)每天早晨从系统中获取当日的派送列表信息(Produce picklist),按照收货地址派送顾客订购的书籍。 </p>
+<p>（4）用于销售的书籍由公司的采购人员(Buyer)进行采购</p>
+<p>(Reorderbooks)。采购人员每天从系统中获取库存量低于再次订购量的书籍信息，对这些书籍进行再次购买，以保证充足的库存量。新书籍到</p>
+<p>货时，采购人员向在线销售目录(Catalog)中添加新的书籍信息(Addbooks)。 </p>
+<p>（5）采购人员裉据书籍的销售情况，对销量较低的书籍设置折扣或促销活动(Promote books)。 </p>
+<p>（6）当新书籍到货时，仓库管理员(Warehouseman)接收书籍，更新库存(Update stock)。 </p>
+<p>现采用面向对象方法开发书籍销售系统，得到如图3-1所示的用例图和图3-2所示的初始类图(部分)。 </p>
+<p> <img src="/Astrals24.github.io/2019/07/08/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/image-20210309172916462.png" alt="image-20210309172916462"></p>
+<p><strong>【问题1】（6分）</strong> </p>
+<p>根据说明中的描述，给出图3-1中A1〜A3所对应的参与者名称和U1〜U3处所对应 的用例名称。 </p>
+<p><strong>【问题2】（6分）</strong> </p>
+<p>根据说明中的描述，给出图3-1中用例U3的用例描述。（用例描述中必须包括基本事 件流和所有的备选事件流）。 </p>
+<p><strong>【问题3】（3分）</strong> </p>
+<p>根据说明中的描述，给出图3-2中C1〜C3所对应的类名。 </p>
+<p> <strong>试题四(共15分)</strong></p>
+<p><strong>阅读下列说明和C代码，回答问题1至3，将解答写在答题纸的对应栏内。</strong></p>
+<p>【说明】</p>
+<p>n皇后问题描述为：在一个nXn的棋盘上摆放n个皇后，要求任意两个皇后不能冲突, 即任意两个皇后不在同一行、同一列或者同一斜线上。</p>
+<p>算法的基本思想如下：</p>
+<p>将第i个皇后摆放在第i行，i从1开始，每个皇后都从第1列开始尝试。尝试时判断 在该列摆放皇后是否与前面的皇后有冲突，如果没有冲突，则在该列摆放皇后，并考虑摆 放下一个皇后；如果有冲突，则考虑下一列。如果该行没有合适的位置，回溯到上一个皇后考虑在原来位置的下一个位置上继续尝试摆放皇后，……，直到找到所有合理摆放方案。</p>
+<p>【C代码】</p>
+<p>下面是算法的C语言实现。</p>
+<p><img src="/Astrals24.github.io/2019/07/08/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/image-20210309173604578.png" alt="image-20210309173604578"></p>
+<p><strong>【问题1】（8分）</strong></p>
+<p>根据题干说明，填充C代码中的空（1）〜（4）。</p>
+<p><strong>【问题2】（3分）</strong></p>
+<p>根据题干说明和C代码，算法采用的设计策略为 （5）</p>
+<p><strong>【问题3】（4分）</strong></p>
+<p>当n=4时，有 （6） 种摆放方式，分别为 （7） 。</p>
+<p><strong>【试题五和试题六中任选1题解答。若解答超过1题，则题号小的1题解答有效。】</strong></p>
+<p><strong>试题五（共15分）</strong></p>
+<p><strong>阅读下列说明和Java代码，将应填入（n）处的字句写在答题纸的对应栏内。</strong></p>
+<p><strong>【说明】</strong></p>
+<p>某软件公司欲开发一款汽车竞速类游戏，需要模拟长轮胎和短轮胎急刹车时在路面上 留下的不同痕迹，并考虑后续能模拟更多种轮胎急刹车时的痕迹。现采用策略（Strategy） 设计模式来实现该需求，所设计的类图如图5-1所示。</p>
+<p><img src="/Astrals24.github.io/2019/07/08/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/image-20210309173917402.png" alt="image-20210309173917402"></p>
+<p><img src="/Astrals24.github.io/2019/07/08/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/image-20210309173952348.png" alt="image-20210309173952348"></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">DSAD</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://astrals24.github.io/2019/07/08/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/">https://astrals24.github.io/2019/07/08/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://astrals24.github.io" target="_blank">Astrals</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Astrals24.github.io/tags/%E8%BD%AF%E8%80%83/">软考</a></div><div class="post_share"><div class="social-share" data-image="https://img-blog.csdnimg.cn/20210309190551711.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Astrals24.github.io/2019/11/23/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%AB%9E%E8%B5%9B/"><img class="prev-cover" data-lazy-src="https://img-blog.csdnimg.cn/20210309190400515.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" onerror="onerror=null;src='/Astrals24.github.io/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">数学建模竞赛</div></div></a></div><div class="next-post pull-right"><a href="/Astrals24.github.io/2019/04/20/%E5%AD%A6%E6%A0%A1%E8%B4%A8%E7%AE%A1%E7%B3%BB%E7%BB%9F/"><img class="next-cover" data-lazy-src="https://img-blog.csdnimg.cn/20210308144118201.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" onerror="onerror=null;src='/Astrals24.github.io/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">教师教学质量管理系统</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/Astrals24.github.io/2020/01/25/关于软考/" title="关于软考"><img class="relatedPosts_cover" data-lazy-src="https://img-blog.csdnimg.cn/20210308144148988.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-25</div><div class="relatedPosts_title">关于软考</div></div></a></div><div class="relatedPosts_item"><a href="/Astrals24.github.io/2021/03/08/软考高级-系统架构师/" title="软考高级-系统架构师"><img class="relatedPosts_cover" data-lazy-src="https://img-blog.csdnimg.cn/20210309190513229.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-08</div><div class="relatedPosts_title">软考高级-系统架构师</div></div></a></div><div class="relatedPosts_item"><a href="/Astrals24.github.io/2019/01/12/软考初级-程序员/" title="软考初级-程序员"><img class="relatedPosts_cover" data-lazy-src="https://img-blog.csdnimg.cn/20210309185735771.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2019-01-12</div><div class="relatedPosts_title">软考初级-程序员</div></div></a></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By DSAD</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/Astrals24.github.io/js/utils.js"></script><script src="/Astrals24.github.io/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/Astrals24.github.io/js/third-party/fireworks.js"></script><script src="/Astrals24.github.io/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/hideCategory.min.js"></script></div></body></html>

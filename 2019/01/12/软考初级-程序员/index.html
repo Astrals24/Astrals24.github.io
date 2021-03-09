@@ -1,0 +1,520 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>软考初级-程序员 | Astrals</title><meta name="description" content="首次软考的一些感受（后附真题和资料）"><meta name="keywords" content="软考"><meta name="author" content="DSAD"><meta name="copyright" content="DSAD"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/Astrals24.github.io/img/favicon.png"><link rel="canonical" href="https://astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="软考初级-程序员"><meta property="og:url" content="https://astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/"><meta property="og:site_name" content="Astrals"><meta property="og:description" content="首次软考的一些感受（后附真题和资料）"><meta property="og:image" content="https://img-blog.csdnimg.cn/20210309185735771.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><meta property="article:published_time" content="2019-01-12T07:56:00.000Z"><meta property="article:modified_time" content="2021-03-09T11:07:46.656Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/Astrals24.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/Astrals24.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-03-09 19:07:46'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" type="text/css" href="/css/background.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/css/hideCategory.min.css"><meta name="generator" content="Hexo 5.3.0"></head><body><canvas class="fireworks"></canvas><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/Astrals24.github.io/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/Astrals24.github.io/archives/"><div class="headline">文章</div><div class="length_num">8</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/Astrals24.github.io/tags/"><div class="headline">标签</div><div class="length_num">4</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/Astrals24.github.io/categories/"><div class="headline">分类</div><div class="length_num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%84%9F%E5%8F%97"><span class="toc-number">1.</span> <span class="toc-text">感受</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8A%E5%8D%88%E7%9C%9F%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">上午真题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E5%8D%88%E7%9C%9F%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">下午真题</span></a></li></ol></div></div></div><header class="post-bg" id="page-header"> <nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/Astrals24.github.io/">Astrals</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">软考初级-程序员</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-01-12T07:56:00.000Z" title="发表于 2019-01-12 15:56:00">2019-01-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-03-09T11:07:46.656Z" title="更新于 2021-03-09 19:07:46">2021-03-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Astrals24.github.io/categories/%E8%BD%AF%E8%80%83/">软考</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h1><p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%88%90%E7%BB%A9.png"></p>
+<p>强烈建议购买这本软考编委会主编的  <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%80%83%E8%AF%95%E5%90%8C%E6%AD%A5%E8%BE%85%E5%AF%BC%E2%80%94%E2%80%94%E8%80%83%E7%82%B9%E4%B8%B2%E8%AE%B2%E3%80%81%E7%9C%9F%E9%A2%98%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%BC%BA%E5%8C%96%E8%AE%AD%E7%BB%83/7320699?fr=aladdin#1">程序员考试同步辅导</a>   不需要其他书籍与课程，吃透这一本，考150不是梦。</p>
+<p>咋说呢 上午题除了英语基本难度不大，由于还没学过计算机网络，资料也看的有点头疼可能丢分较多，不过也就几分，丢了就丢了，核心还是数据结构，操作系统，计算机组成原理，这3门把握住基本问题不大，下午题更简单了，第一题流程图要仔细点，后面的编程题和二级C语言大题难度差不多，不知道哪丢了4分，可能是最后一个面向对象大题填空丢了几分。总体说初级更多还只是启到一个打基础的作用，要再接再厉，希望后面软件设计师也能一次过！。</p>
+<p><strong>程序员资料:链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1i9_zwnYlBhe3x3pYXc0W_Q">https://pan.baidu.com/s/1i9_zwnYlBhe3x3pYXc0W_Q</a>    提取码：wvut</strong> </p>
+<h1 id="上午真题"><a href="#上午真题" class="headerlink" title="上午真题"></a>上午真题</h1><p><strong>一、单项选择题（共 75 分，每题 1 分。每题备选项中，只有 1 个最符合题意）</strong> </p>
+<p>l 第1题，某编辑在编辑文稿时发现如下错误，其中最严重的错误是( )。</p>
+<p>A:段落标题编号错误 </p>
+<p>B:将某地区名列入了国家名单   </p>
+<p>C:语句不通顺、有明显的错别字 </p>
+<p>D:标点符号、字体、字号不符合要求</p>
+<p>l 第2题，某县有6.6万个贫困户，县委组织人员调查这6.6万个贫困户经济收入，从中抽取1800个贫困户的经济收入进行分析。请向本次调查的总体、个体、样本及样本容量分别为( )。</p>
+<p>A:6.6万个贫困户经济收入、每个贫困户的经济收入、1800、1800个贫困户</p>
+<p>B:6.6万个贫困户、1800个贫困户经济收入、每个贫困的经济收入、1800<br>C:6.6万个贫困户、每个贫困户的经济收入、1800个贫困户、1800</p>
+<p>D:6.6万个贫困户、每个贫困户的经济收入、1800、1800个贫困户经济收入</p>
+<p>l 第3题，在Excel中，若在A1单元格输入如下图所示的内容，则A1的值为( )。</p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/wps1.jpg" alt="img"> </p>
+<p>A:7</p>
+<p>B:8<br>C:TRUE<br>D:#NAME?</p>
+<p>l 第4题，在Excel中，单元格L3内容为“软件工程技术”，若要取单元格L3前两个学“软件”放入单元格M3中，则在M3中可输入( )，并按下回车键即可。<br>A:=LEFTB(M3,2) </p>
+<p>B:=LEFT(M3,2)</p>
+<p>C:=LEFTB(L3,2) </p>
+<p>D:=LEFT(L3,2)</p>
+<p>l 第5题，电子邮件地址“<a href="mailto:&#x7a;&#x68;&#x61;&#x6e;&#x67;&#108;&#105;&#x40;&#x6d;&#97;&#x69;&#x6c;&#99;&#105;&#x61;&#101;&#x63;&#x2e;&#111;&#x72;&#x67;">&#x7a;&#x68;&#x61;&#x6e;&#x67;&#108;&#105;&#x40;&#x6d;&#97;&#x69;&#x6c;&#99;&#105;&#x61;&#101;&#x63;&#x2e;&#111;&#x72;&#x67;</a>“中的zhangli、@和imilciac.org分别表示用户信箱的( )。</p>
+<p>A:邮件接收服务器域名、帐号和分隔符 </p>
+<p>B:邮件接收服务器域名、分隔符和帐号</p>
+<p>C:帐号、分隔符和邮件接收服务器城名 </p>
+<p>D:帐号、邮件接收服务器域名和分隔符</p>
+<p>l 第6题，程序计数器(PC)是用来指出下一条待执行指令地址的，它属于( )中的部件。</p>
+<p>A:CPU </p>
+<p>B:RAM</p>
+<p>C:Cache </p>
+<p>D:USB</p>
+<p>l 第7题，以下关于主流固态硬盘的叙述中，正确的是( )。<br>A:存储介质是磁表面存储器，比机械硬盘功耗高 </p>
+<p>B:存储介质是磁表面存储器，比机械硬盘功耗低</p>
+<p>C:存储介质是闪存芯片，比机械硬盘功耗高 </p>
+<p>D:存储介质是闪存芯片，比机械硬盘功耗低</p>
+<p>l 第8题，CPU中可用来暂存运算结果的是( )。</p>
+<p>A:算逻运算单元  </p>
+<p>B:累加器</p>
+<p>C:数据总线  </p>
+<p>D:状态寄存器</p>
+<p>l 第9题，微机系统中系统总线的( )是指单位时间内总线上传送的数据量。</p>
+<p>A:主频  </p>
+<p>B:工作频率</p>
+<p>C:位宽</p>
+<p>D:带宽</p>
+<p>l 第10题2018 上，计算机中机械硬盘的性能指标不包括( ) ;其平均访问时间等于( )。</p>
+<p>A:磁盘转速及容量  </p>
+<p>B:盘片数及磁道数</p>
+<p>C:容量及平均寻道时间  </p>
+<p>D:磁盘转速及平均寻道时间</p>
+<p>l 第11题，</p>
+<p>A:磁盘转速+平均等待时间  </p>
+<p>B:磁盘转速+平均寻道时间</p>
+<p>C:平均数据传输时间+磁盘转速  </p>
+<p>D:平均寻道时间+平均等待时间</p>
+<p>l 第12题，在互联网中，各种电子媒体按照超链接的方式组织，通常使用( )来描述超链接信息。</p>
+<p>A: HTML  </p>
+<p>B: XML</p>
+<p>C: SGML  </p>
+<p>D: VRML</p>
+<p>l 第13题2018 上，使用图像扫描仪以300DPI的分辨率扫描一幅3英寸x3英寸的图片，可以得到( )内存像素的数字图像。</p>
+<p>A: 100x100  </p>
+<p>B: 300x300</p>
+<p>C: 600x600  </p>
+<p>D: 900x900</p>
+<p>l 第14题，根据《计算机软件保护条例》的规定，当软件( )后，其软件著作权才能得到保护。</p>
+<p>A:作品发表  </p>
+<p>B:作品创作完成并固定在某种有形物体上</p>
+<p>C:作品创作完成  </p>
+<p>D:作品上加注版权标记</p>
+<p>l 第15题，甲程序员为乙软件设计师开发的应用软件编写了操作说明书,并已交付用户使用，( ) 享有该应用软件的软件著作权。</p>
+<p>A:甲程序员  </p>
+<p>B:甲程序员和乙软件设计师共同</p>
+<p>C:乙软件设计师  </p>
+<p>D:甲程序员和乙软件设计师都不</p>
+<p>l 第16题，数字信封技术能够( )。</p>
+<p>A:保证数据在传输过程中的安全性  </p>
+<p>B:隐藏发送者的真实身份</p>
+<p>C:对发送者和接收者的身份进行认证  </p>
+<p>D:防止交易中的抵赖发生</p>
+<p>l 第17题2018上，( )属于DoS攻击。</p>
+<p>A:为Wi-F设置安全连接口令,拒绝用户访问网络  </p>
+<p>B:设置访问列表从而拒绝指定用户访问</p>
+<p>C:发送大量非法请求使得服务器拒绝正常用户的访问</p>
+<p>D:为用户设定相应的访问权限</p>
+<p>l 第18题，在网络安全管理中，加强内防内控可采取的策略有( )。①控制终端接入数量②终端访问授权，防止合法终端越权访问图加强终端的安全检查号策略管理④加强员I.上网行为管理与违规审计</p>
+<p>A:②③  </p>
+<p>B:②④</p>
+<p>C:①②③④  </p>
+<p>D:②③④</p>
+<p>l 第19题，某计算机内存空间按字节编址，起始地址为00000H、终止地址0000BFFFH的内存区域容量为( ) KB。</p>
+<p>A:8  </p>
+<p>B:13</p>
+<p>C:1024  </p>
+<p>D:8192</p>
+<p>l 第20题，计算机在进行浮点数的相加(减)运算前需先进行对阶操作，著x的阶码大于y的阶码，则应将( )。</p>
+<p>A: x的阶码縮小至与y的阶码相同，并对x的尾数进行</p>
+<p>B: x的阶码缩小至与y的阶码相同，并对x的尾数进行算术左移算术右移</p>
+<p>C: y的阶码扩大至与x的阶码相同，并对y的尾数进行</p>
+<p>D: y的阶码扩大至与x的阶码相同，并对y的尾数进行算数右移</p>
+<p>l 第21题，与X&bull;Y+X*Y等价的逻辑表达式是（）。</p>
+<p>A: X+Y</p>
+<p>B: X</p>
+<p>C: Y</p>
+<p>D: X+Y</p>
+<p>l 第22题，设机器码的长度为8位，已知[X]<sub> 原</sub>=[Y]<sub>补</sub>= 111111,且X和Y都是带符号的整数，则X和Y的真值分别为( )。</p>
+<p>A:-127,-127  </p>
+<p>B:-1,-127</p>
+<p>C:-127,-1  </p>
+<p>D:-1,-1</p>
+<p>l 第23题，以下关于Windows系统中文件的叙述中，正确的是( )。</p>
+<p>A:文件一旦保存后则不能被删除  </p>
+<p>B:文件必须占用磁盘的连续区域</p>
+<p>C: “xls” 也是可执行文件的扩展名  </p>
+<p>D:不同文件夹下的文件允许同名</p>
+<p>l 第24题，在Windows资源管理器中，若要选择窗口中分散的多个文件，在缺省配置下，可以先选择一个文件，然后（）</p>
+<p>A: CTRL键不放，并用鼠标右键单击要选择的文件 </p>
+<p>B: CTRI键不放，并用鼠标左键单击要选择的文件</p>
+<p>C: SHIFT键不放，并用鼠标右键单击要选择的文件  </p>
+<p>D: SHIFT键不放，并用鼠标左键单击要选择的文件</p>
+<p>l 第25题，假设某计算机系统中资源R的可用数为9,系统中有3个进程竞争R,且每个进程都需要<em>i</em>个R,则该系统可能会发生死锁的最小<em>i</em>值是( ),<br>A:2 </p>
+<p>B:3<br>C:3   </p>
+<p>D:5</p>
+<p>l 第26题，某计算机系统页面大小为4K,进程P的页面变换表如下图所示。若进程P要访问逻辑地址25EFH (十六进制)，那么经过地址变换后物理地址应为( )。</p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/wps2.jpg" alt="img"><br>A: 15EFH </p>
+<p>B: 35EFH</p>
+<p>C: 45EFH </p>
+<p>D: 65EFH</p>
+<p>l 第27题，嵌入式操作系统主要特点包括:微型化、( ) 。<br>A:可定制、实时、可靠，但不易移植 </p>
+<p>B:可定制、实时、可靠和易移植<br>C:实时、可靠、易移植,但不可定制 </p>
+<p>D:可定制、实时、易移植性，但可靠性差</p>
+<p>l 第28题，( )不属于脚本语言。<br>A:COBOL </p>
+<p>B:Python</p>
+<p>C:PHP </p>
+<p>D:JavaScript</p>
+<p>l 第29题上，将某高级语言程序翻译为汇编语言形式的目标程序，该过程称为( )。</p>
+<p>A:编译 </p>
+<p>B:解释</p>
+<p>C:汇编 </p>
+<p>D:解析</p>
+<p>l 第30题，在Windows系统中，执行x exe时系统报告找不到y.dl,原因是( )。<br>A:程序x中存在语法或语义错误，需要修改与x对应的</p>
+<p>B:程序y中存在语法错误，需要修改与y对应的源程序源程序<br>C:程序y中存在语义错误，需要修改与y对应的源程序</p>
+<p>D:程序x执行时需要调用y中的函数。要要安装y.dll并重新编译</p>
+<p>l 第31题 上，算术表达式采用后缀式表示时不需要使用括号，使用( )就可以方便地进行求值。a-b* (c+d) 的后缀式为( )。<br>A:队列 </p>
+<p>B:数组</p>
+<p>C:栈 </p>
+<p>D:广义表</p>
+<p>l 第32题，</p>
+<p>A:abcd-*+ </p>
+<p>B:abcd*+-</p>
+<p>C:a b–c*d+ </p>
+<p>D:abcd+*-</p>
+<p>l 第33题，下图是一个有限自动机的状态转换图(A为初态、C为终态)，该自动机识别的字符串集合可用正规式( )来表示。</p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/wps3.jpg" alt="img"> </p>
+<p>A: (1|2) *00  </p>
+<p>B:0 (1|2) *0</p>
+<p>C:(01|2) *  </p>
+<p>D:00 (1|2)。</p>
+<p>l 第34题，已知函数10、20的定义如下，调用f时为传值调用，调用2时为引用调用。设有函数调用t=f1(5),那么调用执行后的值为0)。</p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/wps4.jpg" alt="img"> </p>
+<p>A:1  </p>
+<p>B:5</p>
+<p>C:6  </p>
+<p>D:7</p>
+<p>l 第35题2018 上，设数组1[..m.1..n] (m&gt;1, n&gt;1)中的元素按行存放，每个元素占用1个存储单元，则数组元素alijl (l8≤i≤m, l&amp;lej≤n) 相对于数组首元素的偏移量为( )。</p>
+<p>A: (i-1)*m+j-1  </p>
+<p>B: (i-1)*n+j-1</p>
+<p>C: (i-1)*m+i-1  </p>
+<p>D: (j-1)*n+i-1</p>
+<p>l 第36题，一个计算机算法是对特定问题求解步骤的一种描述。算法的( )是指算法能够对不合理数据及非法操作进行识别和处理的能力。</p>
+<p>A:有穷性  </p>
+<p>B:可行性</p>
+<p>C:确定性  </p>
+<p>D:健壮性</p>
+<p>l 第37题，假设以S和X分别表示入栈和出栈操作，并且初始和终止时栈都为空，那么( )不是合法的操作序列。</p>
+<p>A: SSXXXSSXSX  </p>
+<p>B: SSXXXSSXX </p>
+<p>C: SSXSSXSXXX  </p>
+<p>D: SXSXSXSXSX</p>
+<p>l 第38题，设有一份电文中共使用a、b. c、d、e、f这6个字符，它们的出现频率如下表所示，现通过构造哈夫曼树为这些字符编码。那么，编码长度最长的两个字符是（）。</p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/wps5.jpg" alt="img"> </p>
+<p>A:c、e  </p>
+<p>B:b、e</p>
+<p>C:b. f  </p>
+<p>D:e、f</p>
+<p>l 第39题，对二叉树进行后序遍历和中序遍历时，都依照左子树在前右子树在后的顺序。已知对某二叉树进行后序遍历时，结点M是最后被访问的结点，而对其进行中序遍历时，M是第一一个 被访问的结点，那么该二叉树的树根结点为M,直( )。</p>
+<p>A:其左子树和右子树都必定为空  </p>
+<p>B:其左子树和右子树都不为空</p>
+<p>C:其左子树必定为空  </p>
+<p>D:其右子树必定为空</p>
+<p>l 第40题2018 上，某图的邻接矩阵如下，该图为( ) ;若采用邻接表表示该图，则邻接表中用来表示边(或弧)的表结点总数为个。</p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/wps6.jpg" alt="img"> </p>
+<p>A:无向图  </p>
+<p>B:有向图</p>
+<p>C:完全图  </p>
+<p>D:二部图</p>
+<p>l 第41题，</p>
+<p>A:9  </p>
+<p>B:18</p>
+<p>C:21  </p>
+<p>D:49</p>
+<p>l 第42题，若关键码序列(47, 61, 55. 39, 10. 26. 90. 82), 采用散列法进行存储和查找。设散列函数为，H(Key)= Key mod ii (mod表示整 除取余运算)，拟采用链地址法(拉链法)解决冲突构造散列表。以下关于该散列表的叙述中，正确的是( )。</p>
+<p>A:关键码10和90位于同一一个链中  </p>
+<p>B:关键码61和82位于同一个链中</p>
+<p>C:关键码61利139位于同-一个链中  </p>
+<p>D:关键码47、55和139位于同一一个链中</p>
+<p>l 第43题，用某排序方法对一个关键码序列进行递增排序时，对于其中关键码相同的元素，若该方法可保证在排序前后这些元素的相对位置不变，则称该排序方法是稳定的。以下关于排序方法稳定性的叙述中，正确的是( )。</p>
+<p>A:冒泡排序和简单选择排序都是稳定的排序方法  </p>
+<p>B:冒泡排序是稳定的排序方法，简单选择排序不是</p>
+<p>C:简单选择排序是稳定的排序方法，冒泡排序不是</p>
+<p>D: 冒泡排序和简单选择排序都不是稳定的排序方法</p>
+<p>l 第44题，多态分为参数多态、包含多态过载多态和强制多态四种不同形式。其中，子类型化一个类型是另一个类型的子类型)属于( )多态; ( )多态是指同一个名字在不同上下文中可代表不同的含义。</p>
+<p>A:参数  </p>
+<p>B:包含</p>
+<p>C:过载  </p>
+<p>D:强制</p>
+<p>l 第45题，</p>
+<p>A:参数  </p>
+<p>B:包含</p>
+<p>C:过载  </p>
+<p>D:强制</p>
+<p>l 第46题， UML中的结构事物是模型中的静态部分，采用名同描述概念或物理元素。( )属于结构事物，以此事物为主的UML模型图为( )。</p>
+<p>A:组件  </p>
+<p>B:状态机</p>
+<p>C:注释  </p>
+<p>D:包</p>
+<p>l 第47题，</p>
+<p>A:类图  </p>
+<p>B:组件图</p>
+<p>C:包图  </p>
+<p>D:部署图</p>
+<p>l 第48题，创建型设计模式抽象了实例化过程，它分为面向类和面向对象两种。其中，( )模式是保证-一个类仅有一个实例，并提供个访同它的至局访问点。</p>
+<p>A:工厂(Factory)  </p>
+<p>B:构建器(Builder)</p>
+<p>C:原型(Prototype)  </p>
+<p>D:单例(Singleton)</p>
+<p>l 第49题，以下关于软件工程的叙述中，错误的是( )。</p>
+<p>A:软件:工程是开发、运行、维护软件的系统方法  </p>
+<p>B:软性工程把系统的、规范的、可度量的途径应用于软件开发、运行、维护过程</p>
+<p>C:软件工程将工程技术、工程管理和工程经济融入软</p>
+<p>D:软件工程就是以工业流水线生产方式开发软件的件开发过程  过程</p>
+<p>l 第50题，用户界面设计的原则不包括( )。</p>
+<p>A:将用户界面置于用户控制之下  </p>
+<p>B:减少用户的记忆负担</p>
+<p>C:用户界面上应使用统一的IT术语  </p>
+<p>D:保持界面简洁和平衡</p>
+<p>l 第51题，敏捷开发的原则不包括( )</p>
+<p>A:使用分阶段的计划来管理流程，并详细地编写开发</p>
+<p>B:欢迎需求变化，并利用这种变化来提高用户的竞争优势</p>
+<p>C:尽早并持续地发布并交付有价值的软件以满足用户</p>
+<p>D:无论团队内外，面对面的交流始终是最有效的沟需求通方式</p>
+<p>l 第52题，在设计白盒测试用例时，( ) 是最弱的逻辑覆盖。在下图所示流程中，至少需要( )个测试用例才可以实现路径覆盖。</p>
+<p>A:条件覆盖  </p>
+<p>B:语句覆盖</p>
+<p>C:判定覆盖  </p>
+<p>D:路径覆盖</p>
+<p>l 第53题，</p>
+<p>A:1  </p>
+<p>B:2</p>
+<p>C:3  </p>
+<p>D:4</p>
+<p>l 第54题，以下关于软件可靠性测试的叙述中，错误的是( )。</p>
+<p>A:软件可靠性测试的目的是评估软件系统的可靠性  </p>
+<p>B:软件可靠性测试前应先确定软件可靠性的目标</p>
+<p>C:应平衡地考虑对软件开发进度和成本的影响  </p>
+<p>D:应选用适用于所有软件的标准的可靠性测试模型</p>
+<p>l 第55题，(模式将企业主要的数据处理过程从个人计算机或服务器转移到大型的数据中心，将计算能力、存储能力当作服务来提供。</p>
+<p>A:人工智能  </p>
+<p>B:物联网</p>
+<p>C:云计算 </p>
+<p>D:移动互联网</p>
+<p>l 第56题，以下关于企业信息化建设的叙述中，错误的是( )。</p>
+<p>A:应从技术驱动的角度来构建企业一体化的信息系统</p>
+<p>B:诸多信息孤岛催生了系统之间互联互通整合的需求</p>
+<p>C:业务经常变化引发了信息系统灵活适应变化的需求</p>
+<p>D:信息资源共享和业务协同将使企业获得更多的回报</p>
+<p>l 第57题，数据库的基本表与存储文件之间通过建立( )之间的映像，保证数据的物理独立性。</p>
+<p>A:外模式/模式  </p>
+<p>B:外模式/内模式</p>
+<p>C:模式/内模式  </p>
+<p>D:外模式/外模式</p>
+<p>l 第58题，事务的( )是指事务一旦提交，即使之后又发生故障，对其执行的结果也不会有任何影响。</p>
+<p>A:原子性  </p>
+<p>B:持久性</p>
+<p>C:隔离性  </p>
+<p>D:一致性</p>
+<p>l 第59题，若连接数据库过程中需要指定用户名和密码，则这种安全措施属于( )。</p>
+<p>A:授权机制  </p>
+<p>B:视图机制</p>
+<p>C:数据加密  </p>
+<p>D:用户标识与鉴别</p>
+<p>l 第60题，数据库的安全机制中，采用GRANT语句实现的是( )。</p>
+<p>A:加密  </p>
+<p>B:许可证</p>
+<p>C:用户授权  </p>
+<p>D:回收权限</p>
+<p>l 第61题，某企业信息管理系统的部分关系模式为:部门(部门号，部门名，负责人，电话), .职工(职工号，职工姓名，部门号，职位，住址，联系电话)。部门关系中的部门名为非空值，负责人参照职工关系的职工号，请将下述SQL语句的空缺部分补充完整。</p>
+<p>   CREATETABLE部门(部门号CHAR(4) PRIMARY KEY,</p>
+<p>   部门名CHAR(20)<u> ( ) </u>,</p>
+<p>负责人CHAR(6)，</p>
+<p>电话CHAR(15)，</p>
+<p><u> ( ) </u>)<div> </div></p>
+
+
+<p>A: UNIQUE  </p>
+<p>B: NOT NULL</p>
+<p>C: KEY UNIQUE  </p>
+<p>D: PRIMARY KEY</p>
+<p>l 第62题，</p>
+<p>A: PRIMARY KEY (部门号) NOTNULL UNIQUE </p>
+<p>B: PRIMARY KEY (部门名) UNIQUE</p>
+<p>C: FOREIGN KEY (负责人) REFERENCES职工(职</p>
+<p>D: FOREIGN KEY (负责人) REFERENCES职工(职工号)</p>
+<p>l 第63题，对于正实数a,.设[a]表示a的整数部分(例如[3.14]=3)，则[1/3]+[2/3)+[3/31+&amp;hell ip;+[99/3][100/3)=( )。”</p>
+<p>A:1650 </p>
+<p>B:1682</p>
+<p>C:1683 </p>
+<p>D:1749</p>
+<p>l 第64题，基道多项选择题有A、B、C、D、五个备选项，要求从中选择2项或2项以上，全部选对才算解答正确。按照E述要求，某考生凭猜测答题，解答正确的概率是( )。</p>
+<p>A:1/10 </p>
+<p>B:1/16</p>
+<p>C:1/26 </p>
+<p>D:1/31</p>
+<p>第65题，甲乙两人同时从同一地点出发向相反方向沿同一条环形公路匀速行走，甲将用3小时走完一圈，乙将用2小时走完一圈，则他们将在出发后( )小时第一“次相遇。<br>A:1.1 </p>
+<p>B:1.2</p>
+<p>C:13 </p>
+<p>D:1.4</p>
+<p>l 第66题，在TCP/P体系结构中，( )协议可将IP地址转化为MAC地址; ( )协议属于应用层协议。</p>
+<p>A:RARP </p>
+<p>B:ARP</p>
+<p>C:ICMP </p>
+<p>D:TCP</p>
+<p>l 第67题，</p>
+<p>A:UDP </p>
+<p>B:IP</p>
+<p>C:ARP </p>
+<p>D:DNS</p>
+<p>l 第68题，ICMP协议的作用是( )。<br>A:报告IP数据报传送中的差错 </p>
+<p>B:进行邮件收发<br>C:自动分配IP地址 </p>
+<p>D:进行距离矢量路由计算</p>
+<p>l 第69题，局域网中某主机的IP地址为202.116.1.12/21，该局域网的子网掩码为( )。</p>
+<p>A:255.255.255.0 </p>
+<p>B:55.255.252.0</p>
+<p>C:255.255.248.0 </p>
+<p>D:255.255.240.0</p>
+<p>l 第70题，如果访问一一个网站速度很慢，可能有多种原因，但首先应该排除的是( )。</p>
+<p>A:网络服务器忙 </p>
+<p>B:通信线路忙</p>
+<p>C:本地终端感染病毒 </p>
+<p>D:没有访问权限</p>
+<p>l 第71题，、The term‘sofware ( )”is used to describe the software engineering aciviti that occur fllowing delivery of asoftware product to the customer.<br> A: analysis </p>
+<p>B: maintenance</p>
+<p>C: design </p>
+<p>D: implementation</p>
+<p>l 第72题，( ) testing ensures that a software module operates correctly and reliably.</p>
+<p>A: Application </p>
+<p>B: Integration</p>
+<p>C: System  </p>
+<p>D: Unit732018 L</p>
+<p>l 第73题，( ) refers to the range of computer hardware and OS platforms on which the source code ofa program can becompiled and run.</p>
+<p>A: Usability  </p>
+<p>B: Portability</p>
+<p>C: Reliability  </p>
+<p>D: Maintainability</p>
+<p>l 第74题，A computer ( ) is a program that maliciously causes unwanted behavior on a computer.</p>
+<p>A: software  </p>
+<p>B: application</p>
+<p>C: virus  </p>
+<p>D: process</p>
+<p>l 第75题，( ) makes computers able to do jobs which till now, only human brains can do.</p>
+<p>A: Artificial inellience  </p>
+<p>B: Big data</p>
+<p>C: Cloud computing  </p>
+<p>D: Internet of things</p>
+<h1 id="下午真题"><a href="#下午真题" class="headerlink" title="下午真题"></a>下午真题</h1><p><strong>第一题：</strong></p>
+<p>阅读以下说明和流程图，<strong>填写流程图中的空缺</strong>，将解答填入答题纸的对应栏内。 </p>
+<p>​    <strong>[说明]</strong> 设[a1b1],[a2,b2],…,[an,bn]是数轴上从左到右排列的 n个互不重叠的区间(a1&lt;b1&lt;a2&lt;b2…&lt;an&lt;bn). 以下流程图将一个新的区间<a href="A%3CB">A,B</a>添加到上述区间集，形成新的从左到右排列的若千个互不重叠的区间(若 A、B落在原有的两个区间，则以原有区间最左端点和最右端点为基准，形成新的区间),最后依次输出这些区间的端点。 例如，给定区间集:[1,2],[4,6],[8,10],[13,15],[17,20],添加区间[5,14]后，依次输出 1,2,4,15,17,20， 表示合并后的区间集:[1,2],[4,15],[17,20]。 该流程图采用的算法是:先在 a1,b1,a2,b2,…,an,bn中扫描定位 A点，再继续描定位 B点，在扫描 过程中随时输出已确定的区间的端点值。</p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/image-20210309162942351.png" alt="image-20210309162942351"></p>
+<p>答：</p>
+<p><strong>第二题：</strong></p>
+<p>● 阅读以下 C代码，回答问题 1和问题 2，将解答填入答题纸的对应栏内。 </p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/image-20210309163130023.png" alt="image-20210309163130023"></p>
+<p><strong>【问题 1】</strong> 写出【C代码 1】运行时分别输入-1331、795的输出结果。 </p>
+<p> 答：</p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/image-20210309163205698.png" alt="image-20210309163205698"></p>
+<p><strong>【问题 2】</strong>  写出【C代码 2】运行时的输出结果。 </p>
+<p>答：</p>
+<p><strong>第三题：</strong></p>
+<p>阅读以下说明和 C代码，填写程序中的空(1) ～(6).将解答写入答题纸的对应栏内。 </p>
+<p><strong>【说明】</strong> 某地电价分三档: </p>
+<ul>
+<li><p>当月用电量不超过 180度时，每度电 0.5元: </p>
+</li>
+<li><p>当月用电量超出 180度但不超过 360度的部分，每度电 0.55元:</p>
+</li>
+<li><p>当月用电量超过 360度的部分，每度电 0.7元。</p>
+<p><strong>例如</strong>，某户 A一个月的用电量为 150度，其电费为 150<em>0.5=75.00元；某户 B用电量为 280 度，其电费为 180</em>0.5+(280-180)<em>0.55=145.00元；某户 C用电量为 450度，其电费为 180</em>0.5+(360-180)*0.55+(450-360)*0.7=90.0+99.0+63.0=252.00元 下面程序运行时读入 m(m&gt;0)个住户某月的用电量，计算该月每户应缴的电费并输出，同时找 出这 m个住户中该月的最大用电量和最小用电量。 </p>
+</li>
+</ul>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/image-20210309163609976.png" alt="image-20210309163609976"></p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/image-20210309163633618.png" alt="image-20210309163633618"></p>
+<p><strong>第四题：</strong></p>
+<p>阅读以下说明和 C代码，填写程序中的空(1) ～(6)，将解答写入答题纸的对应栏内。 </p>
+<p><strong>【说明】</strong> 函数 insertElem 的功能是在元素升序排列的数组中加入一个新元素并保持数组元素升序排列的特点。在 main函数中输入若干表示价格的实数，输入为 0或负数或实数个数超出限定数量时 终止，调用 insertElem将价格按升序保存在数组 pdata中，最后输出所输入的实数。 </p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/image-20210309163928979.png" alt="image-20210309163928979"></p>
+<p><strong>第5题：</strong> <strong>C++/JAVA 二选一写</strong></p>
+<p><strong>阅读下列说明和 C++代码，填写程序中的空(1) ～(5)，将解答写入答题纸的对应栏内。</strong> </p>
+<p><strong>【说明】</strong> 以下 C++代码实现一个简单乐器系统，音乐类(Music)可以使用各类乐器(Instument)进行演奏和 调音等操作。对部分乐器进行建模，其类图如图 6-1所示，包括:乐器(Instrument)、打击乐器 (Perussion)、 弦乐器(Stringed)、 管乐器( Wind)、木管乐器(Woodwind)、铜管乐器(Brass )。 </p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/image-20210309164124239.png" alt="image-20210309164124239"></p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/image-20210309164313851.png" alt="image-20210309164313851"></p>
+<p><strong>阅读以下说明和 Java程序，填写程序中的空(1) ～(5),将解答写入答题纸的对应栏内。</strong> </p>
+<p><strong>【说明】</strong> 以下 Java代码实现一个简单乐器系统，音乐类(Music)可以使用各类乐器(Instrument)进行演奏 和调音等操作。对部分乐器进行建模，其类图如图 5-1所示，包括:乐器 Instrument)、打击乐器(Percussion)、弦乐器(Stringed)、管乐器(Wind)、木管乐器(Woodwind)、铜管乐器(Brass)。 </p>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/image-20210309164652317.png" alt="image-20210309164652317"></p>
+<p>【Java代码】 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList; </span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Note</span></span>&#123;<span class="comment">/*枚举各种音调*/</span> MIDDLE_C,C_SHARP,B_FLAT;    <span class="comment">//其它略 &#125; </span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Instrument</span></span>&#123;<span class="comment">/*乐器*/</span> </span><br><span class="line">	(<span class="number">1</span>);                      <span class="comment">//play方法 </span></span><br><span class="line">	<span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">adjust__</span><span class="params">(<span class="number">5</span>)</span>__    <span class="comment">//adjust抽象方法 &#125; </span></span></span><br></pre></td></tr></table></figure>
+<p><img src="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/image-20210309164849873.png" alt="image-20210309164849873"></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">DSAD</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/">https://astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://astrals24.github.io" target="_blank">Astrals</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Astrals24.github.io/tags/%E8%BD%AF%E8%80%83/">软考</a></div><div class="post_share"><div class="social-share" data-image="https://img-blog.csdnimg.cn/20210309185735771.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Astrals24.github.io/2019/04/20/%E5%AD%A6%E6%A0%A1%E8%B4%A8%E7%AE%A1%E7%B3%BB%E7%BB%9F/"><img class="prev-cover" data-lazy-src="https://img-blog.csdnimg.cn/20210308144118201.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" onerror="onerror=null;src='/Astrals24.github.io/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">教师教学质量管理系统</div></div></a></div><div class="next-post pull-right"><a href="/Astrals24.github.io/2018/11/08/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F/"><img class="next-cover" data-lazy-src="https://img-blog.csdnimg.cn/20210308144103675.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" onerror="onerror=null;src='/Astrals24.github.io/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">人脸识别系统</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/Astrals24.github.io/2020/01/25/关于软考/" title="关于软考"><img class="relatedPosts_cover" data-lazy-src="https://img-blog.csdnimg.cn/20210308144148988.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-25</div><div class="relatedPosts_title">关于软考</div></div></a></div><div class="relatedPosts_item"><a href="/Astrals24.github.io/2019/07/08/软考中级-软件设计师/" title="软考中级-软件设计师"><img class="relatedPosts_cover" data-lazy-src="https://img-blog.csdnimg.cn/20210309190551711.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-08</div><div class="relatedPosts_title">软考中级-软件设计师</div></div></a></div><div class="relatedPosts_item"><a href="/Astrals24.github.io/2021/03/08/软考高级-系统架构师/" title="软考高级-系统架构师"><img class="relatedPosts_cover" data-lazy-src="https://img-blog.csdnimg.cn/20210309190513229.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-08</div><div class="relatedPosts_title">软考高级-系统架构师</div></div></a></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By DSAD</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/Astrals24.github.io/js/utils.js"></script><script src="/Astrals24.github.io/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/Astrals24.github.io/js/third-party/fireworks.js"></script><script src="/Astrals24.github.io/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/hideCategory.min.js"></script></div></body></html>
