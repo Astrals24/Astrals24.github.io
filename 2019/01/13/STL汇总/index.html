@@ -1,0 +1,369 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>STL汇总 | Astrals</title><meta name="description" content="学习STL时候的笔记，可用于快速回忆。"><meta name="keywords" content="算法,C/C++,STL,蓝桥杯,PAT"><meta name="author" content="DSAD"><meta name="copyright" content="DSAD"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/Astrals24.github.io/img/favicon.png"><link rel="canonical" href="https://astrals24.github.io/2019/01/13/STL%E6%B1%87%E6%80%BB/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="STL汇总"><meta property="og:url" content="https://astrals24.github.io/2019/01/13/STL%E6%B1%87%E6%80%BB/"><meta property="og:site_name" content="Astrals"><meta property="og:description" content="学习STL时候的笔记，可用于快速回忆。"><meta property="og:image" content="https://img-blog.csdnimg.cn/20210309190651466.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><meta property="article:published_time" content="2019-01-12T16:01:29.000Z"><meta property="article:modified_time" content="2021-03-09T17:37:33.910Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/Astrals24.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/Astrals24.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-03-10 01:37:33'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" type="text/css" href="/css/background.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/css/hideCategory.min.css"><meta name="generator" content="Hexo 5.3.0"></head><body><canvas class="fireworks"></canvas><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="https://img-blog.csdnimg.cn/20210309233718620.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/Astrals24.github.io/archives/"><div class="headline">文章</div><div class="length_num">10</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/Astrals24.github.io/tags/"><div class="headline">标签</div><div class="length_num">10</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/Astrals24.github.io/categories/"><div class="headline">分类</div><div class="length_num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">基础概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%AE%B9%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">常见容器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%BC%8F%E5%AE%B9%E5%99%A8%E4%B8%8E%E5%85%B3%E8%81%94%E5%BC%8F%E5%AE%B9%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">序列式容器与关联式容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%BC%8F%E5%AE%B9%E5%99%A8"><span class="toc-number">2.1.1.</span> <span class="toc-text">序列式容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E8%81%94%E5%BC%8F%E5%AE%B9%E5%99%A8"><span class="toc-number">2.1.2.</span> <span class="toc-text">关联式容器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vector"><span class="toc-number">2.2.</span> <span class="toc-text">Vector</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deque"><span class="toc-number">2.3.</span> <span class="toc-text">Deque</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#List"><span class="toc-number">2.4.</span> <span class="toc-text">List</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">迭代器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">3.0.1.</span> <span class="toc-text">迭代器的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84%E8%BF%AD%E4%BB%A3%E5%99%A8-%E2%80%94-%E9%85%8D%E6%8E%A5%E5%99%A8"><span class="toc-number">3.0.2.</span> <span class="toc-text">特殊的迭代器 —- 配接器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="toc-number">4.1.</span> <span class="toc-text">小技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0"><span class="toc-number">4.2.</span> <span class="toc-text">迭代器的相关辅助函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E9%85%8D%E6%8E%A5%E5%99%A8"><span class="toc-number">4.3.</span> <span class="toc-text">迭代器的配接器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BF%E5%87%BD%E6%95%B0%EF%BC%88%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">仿函数（函数对象）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E7%9A%84%E5%87%BD%E6%95%B0%E9%85%8D%E6%8E%A5%E5%99%A8"><span class="toc-number">4.4.1.</span> <span class="toc-text">预定义的函数配接器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0%E9%85%8D%E6%8E%A5%E5%99%A8"><span class="toc-number">4.4.2.</span> <span class="toc-text">针对成员函数的函数配接器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E4%B8%80%E8%88%AC%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0%E9%85%8D%E6%8E%A5%E5%99%A8"><span class="toc-number">4.4.3.</span> <span class="toc-text">针对一般函数的函数配接器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8"><span class="toc-number">4.4.4.</span> <span class="toc-text">部分应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#STL%E7%AE%97%E6%B3%95"><span class="toc-number">4.4.5.</span> <span class="toc-text">STL算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">4.4.5.1.</span> <span class="toc-text">算法的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#for-each"><span class="toc-number">4.4.5.1.1.</span> <span class="toc-text">for_each()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9D%9E%E5%8F%98%E5%8A%A8%E6%80%A7%E7%AE%97%E6%B3%95"><span class="toc-number">4.4.5.1.2.</span> <span class="toc-text">非变动性算法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%98%E5%8A%A8%E6%80%A7%E7%AE%97%E6%B3%95"><span class="toc-number">4.4.5.1.3.</span> <span class="toc-text">变动性算法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#transform"><span class="toc-number">4.4.5.1.3.1.</span> <span class="toc-text">transform()</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header"> <nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/Astrals24.github.io/">Astrals</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">STL汇总</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-01-12T16:01:29.000Z" title="发表于 2019-01-13 00:01:29">2019-01-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-03-09T17:37:33.910Z" title="更新于 2021-03-10 01:37:33">2021-03-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Astrals24.github.io/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p>参考书籍：<a target="_blank" rel="noopener" href="https://book.douban.com/subject/1110941/">C++标准程序库-自修教程与参考手册</a></p>
+<h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p>STL（标准模板库 Standard Template Library）</p>
+<p>STL组件：容器,迭代器,算法</p>
+<p>容器：用来管理某类对象的集合。</p>
+<p>迭代器：用来在在一个对象群集的元素上进行遍历操作。</p>
+<p>算法：用来处理群集内的元素。</p>
+<p>STL：将数据和操作分离。数据由容器类别加以管理,操作由可定制的算法定义之。</p>
+<h1 id="常见容器"><a href="#常见容器" class="headerlink" title="常见容器"></a><strong>常见容器</strong></h1><h2 id="序列式容器与关联式容器"><a href="#序列式容器与关联式容器" class="headerlink" title="序列式容器与关联式容器"></a>序列式容器与关联式容器</h2><h3 id="序列式容器"><a href="#序列式容器" class="headerlink" title="序列式容器"></a>序列式容器</h3><p> <strong>其中每个元素均有固定的位置——–取决于插入时机与地点，和元素值无关。如：vector，deque，list</strong></p>
+<ul>
+<li><p>序列式容器 添加元素都用 .push_back() 向尾部添加一个元素。</p>
+</li>
+<li><p>List与deque还可以使用 .push_front() 向头部添加一个元素，vector没有是因为效率太差(所有元素都需要移动)</p>
+</li>
+<li><p>可通过 i &lt; coll.size() 来遍历</p>
+</li>
+</ul>
+<h3 id="关联式容器"><a href="#关联式容器" class="headerlink" title="关联式容器"></a>关联式容器</h3><p><strong>元素位置决定于特定的排序准则，也就是说位置取决于元素的值。如：set，multiset，map，multimap  关联式容器也可被视作特殊的序列式容器</strong></p>
+<ul>
+<li><p>添加元素都用 .insert() 无法使用.push_back() 与 .push_front() 他们在这里毫无意义 因为你无法指定新元素的位置。</p>
+</li>
+<li><p>需要注意的是 使用map 或 multimap 添加元素 .insert(make_pair(1,”e”)); 利用辅助函数 make_pair() 是最快的做法 </p>
+</li>
+<li><p>如果你向取出值 使用 pos-&gt;first 或 pos-&gt;second  也可协作 (*pos).first … </p>
+</li>
+<li><p>通过map[“key”] = element 来修改值时 如果key拼写出错将会创建一个新的键值对。</p>
+</li>
+</ul>
+<h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><p>Vector 在尾部附加或移除元素非常快速 在中部和头部则比较慢 允许随机存取 （类似顺序表的性质）</p>
+<h2 id="Deque"><a href="#Deque" class="headerlink" title="Deque"></a>Deque</h2><p>Deque 在头部和尾部安插元素都非常快 在中间部分慢</p>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p>List 由双向链表实作而成 任何位置安插或删除元素都非常快 但不支持随机存取 读取元素性能较差</p>
+<h1 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h1><p><strong>定义</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>&lt;<span class="keyword">char</span>&gt;::iterator pos;</span><br></pre></td></tr></table></figure>
+<p>pos.begin() : 指向容器的起点 也就是第一个元素</p>
+<p>pos.end() : 指向容器的终点 在最后一个元素之后,形成左闭右开区间</p>
+<p><strong>[注意1]</strong>  如果使用const_iterator 则无法改变迭代器常量的值</p>
+<p><strong>[注意2]</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(pos = coll.begin();pos != coll.end();++pos)</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;*pos;</span><br></pre></td></tr></table></figure>
+<p><strong>前置式递增 ++pos 比,后置式递增 pos++ 效率要高</strong>,后者需要一个额外的临时对象 因为他必须有放迭代器原本的位置并将他返回。</p>
+<h3 id="迭代器的分类"><a href="#迭代器的分类" class="headerlink" title="迭代器的分类"></a><strong>迭代器的分类</strong></h3><ul>
+<li><p>双向迭代器（list set map） </p>
+</li>
+<li><p>随机存取迭代器 （vector deque strings）</p>
+</li>
+</ul>
+<p><strong>[注意3]</strong>  最好使用 pos != coll.end() 而不是使用 pos &lt; coll.end() 遍历，因为 operator &lt; 只有随机存取迭代器才支持，也就是说 list、set、map 都无法运作。</p>
+<h3 id="特殊的迭代器-—-配接器"><a href="#特殊的迭代器-—-配接器" class="headerlink" title="特殊的迭代器 —- 配接器"></a>特殊的迭代器 —- 配接器</h3><ul>
+<li><p>Insert iterator 安插型迭代器</p>
+</li>
+<li><p>Stream iterator 流迭代器</p>
+</li>
+<li><p>Reverse iterator 逆向迭代器</p>
+</li>
+</ul>
+<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><p><strong>头文件 ： algorithm</strong></p>
+<p>更易型算法 —- 删除或重排或修改元素</p>
+<p><strong>[注意4] 如果你需要以单一语句来删除元素请用：</strong>  Coll.erase(remove(coll.begin(),coll.end(),3),coll.end());</p>
+<p><strong>[注意5] 关联式容器可直接用成员函数 erase 移除元素</strong></p>
+<p><strong>[注意6] 如果高效率是你的最高目标，你应该永远优先选用成员函数</strong></p>
+<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 读入</span></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">coll</span><span class="params">((istream_iterator&lt;<span class="keyword">int</span>&gt;(<span class="built_in">cin</span>)),(istream_iterator&lt;<span class="keyword">int</span>&gt;()))</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出 </span></span><br><span class="line">copy(coll.begin(),coll.end(),ostream_iterator&lt;<span class="keyword">int</span>&gt;(<span class="built_in">cout</span>,<span class="string">&quot;\n&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="file:///C:\Users\DSADhh\AppData\Local\Temp\ksohtml9044\wps1.jpg" alt="img"> </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sort(coll.begin(),coll.end(),cmp);   <span class="comment">//缺省的是 operator &lt;  所以sort将容器以递增排序</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Find(coll.begin(),coll.end(),<span class="number">3</span>);    <span class="comment">//如果成功 将返回3的位置 否则将返回 .end()</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Reverse(coll.begin(),coll.end());    <span class="comment">//反转区间内的元素</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Equal(coll.begin(),coll.end(),coll2.begin(),coll2.end());  <span class="comment">//处理多个区间 须保证区间元素个数相等  </span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Coll.erase(remove(coll.begin(),coll.end(),<span class="number">3</span>),coll.end());  <span class="comment">//如果你需要以单一语句来删除元素请用：</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 需加头文件 iterator 读入与输出</span></span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">coll</span><span class="params">((istream_iterator&lt;<span class="keyword">int</span>&gt;(<span class="built_in">cin</span>)),(istream_iterator&lt;<span class="keyword">int</span>&gt;()))</span></span>; <span class="comment">//读入</span></span><br><span class="line"></span><br><span class="line">copy(coll.begin(),coll.end(),ostream_iterator&lt;<span class="keyword">int</span>&gt;(<span class="built_in">cout</span>,<span class="string">&quot;\n&quot;</span>));		<span class="comment">// 输出</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// for_each 遍历用法</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> elem)</span></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;elem&lt;&lt;<span class="string">&quot; &quot;</span>; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for_each(coll.begin(),coll.end(),print);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="迭代器的相关辅助函数"><a href="#迭代器的相关辅助函数" class="headerlink" title="迭代器的相关辅助函数"></a>迭代器的相关辅助函数</h2><p><strong>1.advance()  可让迭代器向前</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">advance(pos,<span class="number">3</span>) 	<span class="comment">//前进3</span></span><br><span class="line">advance(pos.<span class="number">-1</span>) <span class="comment">//后退1</span></span><br></pre></td></tr></table></figure>
+<p><strong>2.distance() 处理迭代器之间的距离</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">distance(coll.begin(),pos) <span class="comment">// 开始到pos的距离 并返回距离</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 早期版本</span></span><br><span class="line">distance(pos1,pos2,d) <span class="comment">// long d = 0; d为long</span></span><br></pre></td></tr></table></figure>
+<p><strong>3.iter_swap() 交换两个迭代器所指的内容</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Iter_swap(coll.begin(),--coll.begin());</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="迭代器的配接器"><a href="#迭代器的配接器" class="headerlink" title="迭代器的配接器"></a>迭代器的配接器</h2><p><strong>1.逆向迭代器</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">::Reverse_iterator</span><br></pre></td></tr></table></figure>
+<p><strong>2.插入迭代器</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">::back_insert_iterator &lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; iter(coll);</span><br></pre></td></tr></table></figure>
+<p> <strong>3.流迭代器</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ostream_iterator&lt;T&gt; <span class="title">coutPos</span><span class="params">(<span class="built_in">cout</span>,”\n”)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">Istream_iterator&lt;T&gt; <span class="title">cinPos</span><span class="params">(<span class="built_in">cin</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="仿函数（函数对象）"><a href="#仿函数（函数对象）" class="headerlink" title="仿函数（函数对象）"></a>仿函数（函数对象）</h2><p><strong>预定义的仿函数(详细见P305)</strong> </p>
+<p><strong>需包含头文件 include<function></function></strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">greater&lt;type&gt;() 	p1 &gt; p2</span><br><span class="line"></span><br><span class="line">less&lt;type&gt;()		p1 &lt; p2  (默认的仿函数)</span><br><span class="line"></span><br><span class="line">greater_equal&lt;type&gt;() p1 &gt;= p2</span><br><span class="line"></span><br><span class="line">less_equal&lt;type&gt;() p1 &lt;= p2</span><br><span class="line"></span><br><span class="line">logical_not/<span class="keyword">and</span>/<span class="keyword">or</span>  ! p1  /  p1 &amp;&amp; p2  /  p1 || p2</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="预定义的函数配接器"><a href="#预定义的函数配接器" class="headerlink" title="预定义的函数配接器"></a>预定义的函数配接器</h3><table>
+<thead>
+<tr>
+<th><strong>bind2nd(op,value)</strong></th>
+<th><strong>op(value,param)</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>not1(op)</strong></td>
+<td><strong>!op(param)</strong></td>
+</tr>
+<tr>
+<td><strong>not2(op)</strong></td>
+<td><strong>!op(param1,param2)</strong></td>
+</tr>
+</tbody></table>
+<p>配接器实际将一些<strong>二元仿函数转换为一元仿函数</strong> 它通常将<strong>第二参数传给由第一参数指出的二元仿函数作为后者的第二参数</strong>！</p>
+<h3 id="针对成员函数的函数配接器"><a href="#针对成员函数的函数配接器" class="headerlink" title="针对成员函数的函数配接器"></a><strong>针对成员函数的函数配接器</strong></h3><p>mem_fun_ref(op)  调用op 那是对象的一个const成员函数</p>
+<h3 id="针对一般函数的函数配接器"><a href="#针对一般函数的函数配接器" class="headerlink" title="针对一般函数的函数配接器"></a>针对一般函数的函数配接器</h3><p>ptr_fun(op)    op(param)   op(param1,param2)</p>
+<p>​                        </p>
+<h3 id="部分应用"><a href="#部分应用" class="headerlink" title="部分应用"></a>部分应用</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// coll元素都乘10插入coll2 </span></span><br><span class="line">transform(coll.begin(),coll.end(),back_inserter(coll2),bind2nd(multiplies&lt;<span class="keyword">int</span>&gt;(),<span class="number">10</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// coll元素都乘-1 </span></span><br><span class="line">transform(coll.begin(),coll.end(),coll.begin(),negate&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// coll元素平方 </span></span><br><span class="line">transform(coll.begin(),coll.end(),coll.begin(),coll.begin(),multiplies&lt;<span class="keyword">int</span>&gt;()); </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//检查某个int值是否大于42 </span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator pos;</span><br><span class="line">pos = find_if(coll.begin(),coll.end(),bind2nd(greater&lt;<span class="keyword">int</span>&gt;(),<span class="number">42</span>)); </span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;*pos&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line"><span class="comment">// 找出第一个为偶数的元素位置 </span></span><br><span class="line">pos = find_if(coll.begin(),coll.end(),not1(bind2nd(modulus&lt;<span class="keyword">int</span>&gt;(),<span class="number">2</span>))); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 找出第一个为奇数的元素位置</span></span><br><span class="line">pos =  find_if(coll.begin(),coll.end(),bind2nd(modulus&lt;<span class="keyword">int</span>&gt;(),<span class="number">2</span>)); </span><br></pre></td></tr></table></figure>
+
+
+<h3 id="STL算法"><a href="#STL算法" class="headerlink" title="STL算法"></a>STL算法</h3><h4 id="算法的分类"><a href="#算法的分类" class="headerlink" title="算法的分类"></a><strong>算法的分类</strong></h4><ul>
+<li><p>尾词 _if : 有尾词if的算法用来接收仿函数</p>
+</li>
+<li><p>尾词 _copy：用来表示词算法中，元素不光被操作，还会被复制到目标区间</p>
+</li>
+</ul>
+<ol>
+<li><p>非变动性算法</p>
+</li>
+<li><p>变动性算法</p>
+</li>
+<li><p>移除性算法</p>
+</li>
+<li><p>遍序性算法</p>
+</li>
+<li><p>排序算法</p>
+</li>
+<li><p>已序区间算法</p>
+</li>
+<li><p>数值算法</p>
+</li>
+</ol>
+<p>最重要的算之一便是<strong>for_each算法</strong> 他将调用者提供的操作施加于每一个元素身上。</p>
+<p>例如你可以用for_each来打印区间内的每个元素 也可以用来变动元素。</p>
+<h5 id="for-each"><a href="#for-each" class="headerlink" title="for_each()"></a>for_each()</h5><p>for_each(beg,end,op)</p>
+<p><strong>参数解释：</strong></p>
+<p>对区间的每个元素调用op(elem)</p>
+<p>for_each() 如需变动参数 必须以by reference方式传递</p>
+<p><strong>实例</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> elem)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;elem&lt;&lt;<span class="string">&quot; &quot;</span>; </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">square</span><span class="params">(<span class="keyword">int</span> &amp;elem)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	elem *= elem;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for_each(coll.begin(),coll.end(),square);</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h5 id="非变动性算法"><a href="#非变动性算法" class="headerlink" title="非变动性算法"></a>非变动性算法</h5><p><strong>1.元素计数</strong></p>
+<p>count(beg,end,const T&amp; value)</p>
+<p>count_if(beg,end,op)</p>
+<p> <strong>参数解释：</strong></p>
+<p>第一形式会计算区间[beg,end) 中元素值等于value的元素个数</p>
+<p>第二形式会计算区间[beg,end) 中令一元判断式OP(elem)结果为true的元素个数</p>
+<p>OP不应改动传进来的参数 也不能改变自身状态</p>
+<p>关联式容器(set,multisets,maps和multimaps) 提供了一个等效的成员函数count() </p>
+<p><strong>实例</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 值等于4的元素个数 </span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt; count(coll.begin(),coll.end(),<span class="number">4</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 为偶数的元素个数 </span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt; count_if(coll.begin(),coll.end(),cmp)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 大于4的元素个数 </span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;count_if(coll.begin(),coll.end(),bind2nd(greater&lt;<span class="keyword">int</span>&gt;(),<span class="number">4</span>))&lt;&lt;<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>2.最大值和最小值</strong></p>
+<p>min_element(beg,end)</p>
+<p>min_element(beg,end,op)</p>
+<p> <strong>参数解释：</strong></p>
+<p>如果存在多个最大最小值 则返回的是第一个最大最小值</p>
+<p>所有形式都返回区间内最大/最小元素的位置</p>
+<p>Op应该用来比较两个元素</p>
+<p>如果第一个元素小于第二个元素 应当返回true</p>
+<p><strong>实例</strong></p>
+<p><img src="file:///C:\Users\DSADhh\AppData\Local\Temp\ksohtml9044\wps2.jpg" alt="img"> </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可变更 &lt; 符号</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">abls</span><span class="params">(<span class="keyword">int</span> elem1,<span class="keyword">int</span> elem2)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">abs</span>(elem1) &lt; <span class="built_in">abs</span>(elem2);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 求绝对值的最大值</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;*max_element(coll.begin(),coll.end(),abls); </span><br></pre></td></tr></table></figure>
+
+
+<p><strong>3.搜寻元素</strong></p>
+<p><strong>搜索第一个匹配的元素</strong></p>
+<p>find(beg,end,value);</p>
+<p>find_if(beg,end,op);</p>
+<p> <strong>参数解释：</strong></p>
+<p>第一形式返回区间中元素等于value的元素位置</p>
+<p>第二形式返回区间令一元判断式结果为true的第一个元素</p>
+<p>如果没有找到匹配元素则都返回end</p>
+<p>关联式容器 提供了一个等效的成员函数find 拥有对数复杂度而非线性复杂度</p>
+<p><strong>实例</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//检查某个int值是否大于42 </span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator pos;</span><br><span class="line">pos = find_if(coll.begin(),coll.end(),bind2nd(greater&lt;<span class="keyword">int</span>&gt;(),<span class="number">42</span>)); </span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;*pos&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 找出第一个为偶数的元素位置 </span></span><br><span class="line">pos = find_if(coll.begin(),coll.end(),not1(bind2nd(modulus&lt;<span class="keyword">int</span>&gt;(),<span class="number">2</span>))); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 找出第一个为奇数的元素位置</span></span><br><span class="line">pos =  find_if(coll.begin(),coll.end(),bind2nd(modulus&lt;<span class="keyword">int</span>&gt;(),<span class="number">2</span>)); </span><br></pre></td></tr></table></figure>
+
+
+<p><strong>4.搜索前n个连续匹配值</strong></p>
+<p>Search_n(beg,end,size count,value);</p>
+<p>Search_n(beg,end,size count,value,op);</p>
+<p> <strong>参数解释：</strong></p>
+<p>第一形式返回区间连续count个元素值全等于value元素的位置</p>
+<p>第二形式返回区间连续count个元素造成以下二元判断式结果为true的元素位置</p>
+<p>如果没有匹配都返回end</p>
+<p><strong>实例</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 连续4个等于3的元素</span></span><br><span class="line">pos = search_n(coll.begin(),coll.end(),<span class="number">4</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 连续4个大于3的元素</span></span><br><span class="line">pos = search_n(coll.begin(),coll.end(),<span class="number">4</span>,<span class="number">3</span>,greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;distance(coll.begin(),pos)&lt;&lt;<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>5.搜索第一个子区间</strong></p>
+<p>Search(beg,end,searchBeg,searchEnd)；</p>
+<p>Search(beg,end,searchBeg,searchEnd,op)；</p>
+<p>  <strong>参数解释：</strong></p>
+<p>两种形式都返回2区间完全吻合的第一个子区间的第一个元素位置</p>
+<p>第一形式 子区间元素必须完全等于[searchBeg,searchEnd)中的元素</p>
+<p>第二形式 子区间的元素 和 [searchBeg,searchEnd)对应元素必须满足二元判断式op(elem,searchElem) 结果为true</p>
+<p>如果没有找到都返回end</p>
+<p><strong>实例</strong></p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 求出coll中包含coll2的第一个元素位置 </span></span><br><span class="line">pos = search(coll.begin(),coll.end(),coll2.begin(),coll2.end());	</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;distance(coll.begin(),pos)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// elem 对应第一区间 even对应第二区间 </span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> elem,<span class="keyword">bool</span> even)</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span>(even)</span><br><span class="line">	<span class="keyword">return</span> elem % <span class="number">2</span> == <span class="number">0</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"> 	<span class="keyword">return</span> elem % <span class="number">2</span> == <span class="number">1</span>;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> args[<span class="number">3</span>] = &#123;<span class="literal">true</span>,<span class="literal">false</span>,<span class="literal">true</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 偶数奇数排序的子序列 </span></span><br><span class="line">pos = search(coll.begin(),coll.end(),args,args+<span class="number">3</span>,check);</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;distance(coll.begin(),pos)&lt;&lt;<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>6.搜索某些元素第一次出现的地点</strong></p>
+<p>find_first_of(beg,end,searchBeg,searchEnd);</p>
+<p>find_first_of(beg,end,searchBeg,searchEnd,OP);</p>
+<p>  <strong>参数解释：</strong></p>
+<p>第一形式区间返回第一个既在区间1中出现又在区间2中出现的元素位置</p>
+<p>第二形式返回[beg,end)中第一个这样的元素 他和第二区间每个元素进行op(elem,searchElem)动作果都是true</p>
+<p>如果没有都返回end</p>
+<p>你可以用逆向迭代器来搜索最后这样的一个元素</p>
+<p> <strong>7.搜索两个连续且相当的元素</strong></p>
+<p>adjacent_find(beg,end)</p>
+<p>adjacent_find(beg,end,op)</p>
+<p>   <strong>参数解释：</strong></p>
+<p>第一形式返回区间中第一对连续两个相当元素之中第一元素的位置</p>
+<p>第二形式返回区间中第一对连续两个元素均使以下二元判断式op(elem,nextElem)的结构为true中第一元素的位置</p>
+<p>没有找到都返回end</p>
+<p><strong>实例</strong></p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">doubled</span><span class="params">(<span class="keyword">int</span> elem,<span class="keyword">int</span> elem2)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> elem *= elem2;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Pos = adjacent_find(coll.begin(),coll.end());</span><br><span class="line">Pos = adjacent_find(coll.begin(),coll.end(),doubled);</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>8.区间的比较</strong></p>
+<p> Equal(beg,end,cmpBeg);</p>
+<p> Equal(beg,end,cmpBeg,Op);</p>
+<p><strong>9.搜索第一处不同点</strong></p>
+<p>Mismatch(beg,end,cmpBeg)</p>
+<p>Mismatch(beg,end,cmpBeg,Op) </p>
+<p><strong>10.检验“小于” (字典次序)</strong></p>
+<p>Bool  lexicographical_compare(beg1,end1,beg2,end2)</p>
+<p>Bool  lexicographical_compare(beg1,end1,beg2,end2,op)</p>
+<h5 id="变动性算法"><a href="#变动性算法" class="headerlink" title="变动性算法"></a>变动性算法</h5><p>变动性算法要不直接改变元素值，要不就在复制到另一区间的过程中改变元素值。</p>
+<p>最基本的<strong>变动性算法就是for_each() 和 transform()</strong> 两者都可以变动序列中所有的元素值。</p>
+<p><strong>[注意7] 变动性算法不能是关联式容器</strong></p>
+<h6 id="transform"><a href="#transform" class="headerlink" title="transform()"></a>transform()</h6><p>运用某些操作 改操作返回被改动后的参数 此间奥妙在于他可以被用来将结果复制给元素值 如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">square</span><span class="params">(<span class="keyword">int</span> elem)</span></span>&#123;</span><br><span class="line">	elem *= elem;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">transform(coll.begin(),coll.end(),   <span class="comment">//  source range</span></span><br><span class="line">coll.begin(),   	<span class="comment">//  destination range</span></span><br><span class="line">square);		  <span class="comment">//  operation</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">DSAD</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://astrals24.github.io/2019/01/13/STL%E6%B1%87%E6%80%BB/">https://astrals24.github.io/2019/01/13/STL%E6%B1%87%E6%80%BB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://astrals24.github.io" target="_blank">Astrals</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Astrals24.github.io/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="post-meta__tags" href="/Astrals24.github.io/tags/C-C/">C/C++</a><a class="post-meta__tags" href="/Astrals24.github.io/tags/STL/">STL</a><a class="post-meta__tags" href="/Astrals24.github.io/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a><a class="post-meta__tags" href="/Astrals24.github.io/tags/PAT/">PAT</a></div><div class="post_share"><div class="social-share" data-image="https://img-blog.csdnimg.cn/20210309190651466.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Astrals24.github.io/2019/07/08/%E8%BD%AF%E8%80%83%E4%B8%AD%E7%BA%A7-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/"><img class="prev-cover" data-lazy-src="https://img-blog.csdnimg.cn/20210309190551711.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" onerror="onerror=null;src='/Astrals24.github.io/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">软考中级-软件设计师</div></div></a></div><div class="next-post pull-right"><a href="/Astrals24.github.io/2019/01/12/%E8%BD%AF%E8%80%83%E5%88%9D%E7%BA%A7-%E7%A8%8B%E5%BA%8F%E5%91%98/"><img class="next-cover" data-lazy-src="https://img-blog.csdnimg.cn/20210309190400515.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" onerror="onerror=null;src='/Astrals24.github.io/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">软考初级-程序员</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/Astrals24.github.io/2018/04/08/刷题小记/" title="刷题小记"><img class="relatedPosts_cover" data-lazy-src="https://img-blog.csdnimg.cn/20210309191206324.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2018-04-08</div><div class="relatedPosts_title">刷题小记</div></div></a></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2021 By DSAD</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/Astrals24.github.io/js/utils.js"></script><script src="/Astrals24.github.io/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/Astrals24.github.io/js/third-party/fireworks.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    $.getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js', () => {
+      pangu.spacingElementById('content-inner')
+    })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguFn)</script><script src="/Astrals24.github.io/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/hideCategory.min.js"></script></div></body></html>
