@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>数据库原理相关汇总 | Astrals</title><meta name="description" content="复习数据库原理时的相关记录，以便快速回忆。"><meta name="keywords" content="技术小结,基础知识"><meta name="author" content="DSAD"><meta name="copyright" content="DSAD"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/Astrals24.github.io/img/favicon.png"><link rel="canonical" href="https://astrals24.github.io/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%9B%B8%E5%85%B3%E6%B1%87%E6%80%BB/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="数据库原理相关汇总"><meta property="og:url" content="https://astrals24.github.io/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%9B%B8%E5%85%B3%E6%B1%87%E6%80%BB/"><meta property="og:site_name" content="Astrals"><meta property="og:description" content="复习数据库原理时的相关记录，以便快速回忆。"><meta property="og:image" content="https://img-blog.csdnimg.cn/20210309233718620.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><meta property="article:published_time" content="2020-09-18T11:00:59.000Z"><meta property="article:modified_time" content="2021-03-18T15:18:45.717Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/Astrals24.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/Astrals24.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-03-18 23:18:45'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" type="text/css" href="/css/background.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/css/hideCategory.min.css"><meta name="generator" content="Hexo 5.3.0"></head><body><canvas class="fireworks"></canvas><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="https://img-blog.csdnimg.cn/20210309233718620.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/Astrals24.github.io/archives/"><div class="headline">文章</div><div class="length_num">15</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/Astrals24.github.io/tags/"><div class="headline">标签</div><div class="length_num">11</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/Astrals24.github.io/categories/"><div class="headline">分类</div><div class="length_num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.</span> <span class="toc-text">&#x3D;&#x3D;数据库&#x3D;&#x3D;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E9%A1%BE"><span class="toc-number">1.0.1.</span> <span class="toc-text">回顾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E6%8D%9F%E8%BF%9E%E6%8E%A5%E4%B8%8E%E6%A8%A1%E5%BC%8F%E5%88%86%E8%A7%A3"><span class="toc-number">1.0.2.</span> <span class="toc-text">无损连接与模式分解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-number">1.0.3.</span> <span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E9%A2%98%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB"><span class="toc-number">1.0.4.</span> <span class="toc-text">选择题知识点汇总</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">视图</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#CREATE-VIEW-%E5%8F%AA%E6%98%AF%E6%8A%8A%E8%A7%86%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E5%AD%98%E5%85%A5%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E4%B8%AD%EF%BC%8C%E5%BD%93%E5%AF%B9%E8%A7%86%E5%9B%BE%E8%BF%9B%E8%A1%8C%E6%9F%A5%E8%AF%A2%E6%97%B6%E6%89%8D%E4%BC%9A%E6%8C%89%E8%A7%86%E5%9B%BE%E7%9A%84%E5%AE%9A%E4%B9%89%E4%BB%8E%E5%9F%BA%E6%9C%AC%E8%A1%A8%E4%B8%AD%E5%B0%86%E6%95%B0%E6%8D%AE%E6%9F%A5%E5%87%BA"><span class="toc-number">1.0.4.1.0.1.</span> <span class="toc-text">CREATE VIEW 只是把视图的定义存入数据字典中，当对视图进行查询时才会按视图的定义从基本表中将数据查出</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E5%8F%AF%E4%BB%A5%E7%94%A8%E6%9D%A5%E5%AE%9A%E4%B9%89%E6%96%B0%E7%9A%84%E8%A7%86%E5%9B%BE"><span class="toc-number">1.0.4.1.0.2.</span> <span class="toc-text">视图可以用来定义新的视图</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%B9%B6%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E8%A7%86%E5%9B%BE%E9%83%BD%E6%98%AF%E5%8F%AF%E4%BB%A5%E6%9B%B4%E6%96%B0%E7%9A%84%EF%BC%8C%E8%A7%86%E5%9B%BE%E6%98%AF%E8%99%9A%E8%A1%A8%EF%BC%8C%E5%AF%B9%E8%A7%86%E5%9B%BE%E7%9A%84%E6%9B%B4%E6%96%B0%E8%A6%81%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%AF%B9%E5%9F%BA%E6%9C%AC%E8%A1%A8%E7%9A%84%E6%9B%B4%E6%96%B0%EF%BC%8C%E5%9F%BA%E6%9C%AC%E8%A1%A8%E6%97%A0%E6%B3%95%E6%9B%B4%E6%96%B0%EF%BC%8C%E8%A7%86%E5%9B%BE%E4%B9%9F%E5%B0%B1%E6%97%A0%E6%B3%95%E6%9B%B4%E6%96%B0"><span class="toc-number">1.0.4.1.0.3.</span> <span class="toc-text">并不是所有视图都是可以更新的，视图是虚表，对视图的更新要转化为对基本表的更新，基本表无法更新，视图也就无法更新</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E5%9F%BA%E6%9C%AC%E9%98%B6%E6%AE%B5"><span class="toc-number">1.0.4.2.</span> <span class="toc-text">数据库设计基本阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%84%E7%B1%BB%E5%BC%82%E5%B8%B8"><span class="toc-number">1.0.4.3.</span> <span class="toc-text">各类异常</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E5%A4%A7%E5%9F%BA%E6%9C%AC%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97"><span class="toc-number">1.0.4.4.</span> <span class="toc-text">四大基本关系运算</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%80%89%E6%8B%A9"><span class="toc-number">1.0.4.4.1.</span> <span class="toc-text">选择</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8A%95%E5%BD%B1"><span class="toc-number">1.0.4.4.2.</span> <span class="toc-text">投影</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.0.4.4.3.</span> <span class="toc-text">连接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%99%A4%E6%B3%95"><span class="toc-number">1.0.4.4.4.</span> <span class="toc-text">除法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-number">1.0.4.5.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CRUD"><span class="toc-number">1.0.4.6.</span> <span class="toc-text">CRUD</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E7%BA%A7%E9%94%81%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.0.4.7.</span> <span class="toc-text">三级锁协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%A4%E6%AE%B5%E9%94%81%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.0.4.8.</span> <span class="toc-text">两段锁协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E4%BE%9D%E8%B5%96%E9%9B%86"><span class="toc-number">1.0.4.9.</span> <span class="toc-text">最小依赖集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SQL%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.0.4.10.</span> <span class="toc-text">SQL语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E4%B8%AA%E5%AE%8C%E6%95%B4%E6%80%A7%E7%BA%A6%E6%9D%9F"><span class="toc-number">1.0.4.11.</span> <span class="toc-text">三个完整性约束</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E7%9B%B8%E5%85%B3"><span class="toc-number">1.0.4.12.</span> <span class="toc-text">并发相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.0.4.13.</span> <span class="toc-text">数据模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.0.4.14.</span> <span class="toc-text">术语</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8C%83%E5%BC%8F"><span class="toc-number">1.0.4.15.</span> <span class="toc-text">范式</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header"> <nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/Astrals24.github.io/">Astrals</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/Astrals24.github.io/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">数据库原理相关汇总</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-09-18T11:00:59.000Z" title="发表于 2020-09-18 19:00:59">2020-09-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-03-18T15:18:45.717Z" title="更新于 2021-03-18 23:18:45">2021-03-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/Astrals24.github.io/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E7%BB%93/">技术小结</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="数据库"><a href="#数据库" class="headerlink" title="==数据库=="></a>==<strong>数据库</strong>==</h1><h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a><strong>回顾</strong></h3><p>质管系统数据库读写权限设计有多值函数依赖</p>
+<p>需要继续规范化 使其关系模式到达4NF，即拆分为(工号,学院,读写权限)  (工号,类别,读写权限)   关系 &amp; 都为1则为1  有0则0 </p>
+<h3 id="无损连接与模式分解"><a href="#无损连接与模式分解" class="headerlink" title="无损连接与模式分解"></a>无损连接与模式分解</h3><img src="/Astrals24.github.io/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%9B%B8%E5%85%B3%E6%B1%87%E6%80%BB/公式法.jpg" alt="公式法" style="zoom:50%;">
+
+
+
+
+
+<img src="/Astrals24.github.io/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%9B%B8%E5%85%B3%E6%B1%87%E6%80%BB/模式分解.jpg" alt="模式分解" style="zoom:50%;">
+
+
+
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p><strong>说白话一点：闭包就是由一个属性直接或间接推导出的所有属性的集合。</strong></p>
+<p>​     例如：f={a-&gt;b，b-&gt;c，a-&gt;d，e-&gt;f}；由a可直接得到b和d，间接得到c，则a的闭包就是{a，b，c，d} 包括a自己</p>
+<h3 id="选择题知识点汇总"><a href="#选择题知识点汇总" class="headerlink" title="选择题知识点汇总"></a>选择题知识点汇总</h3><h4 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h4><ol>
+<li><h6 id="CREATE-VIEW-只是把视图的定义存入数据字典中，当对视图进行查询时才会按视图的定义从基本表中将数据查出"><a href="#CREATE-VIEW-只是把视图的定义存入数据字典中，当对视图进行查询时才会按视图的定义从基本表中将数据查出" class="headerlink" title="CREATE VIEW 只是把视图的定义存入数据字典中，当对视图进行查询时才会按视图的定义从基本表中将数据查出"></a>CREATE VIEW 只是把视图的定义存入数据字典中，当对视图进行查询时才会按视图的定义从基本表中将数据查出</h6></li>
+<li><h6 id="视图可以用来定义新的视图"><a href="#视图可以用来定义新的视图" class="headerlink" title="视图可以用来定义新的视图"></a>视图可以用来定义新的视图</h6></li>
+<li><h6 id="并不是所有视图都是可以更新的，视图是虚表，对视图的更新要转化为对基本表的更新，基本表无法更新，视图也就无法更新"><a href="#并不是所有视图都是可以更新的，视图是虚表，对视图的更新要转化为对基本表的更新，基本表无法更新，视图也就无法更新" class="headerlink" title="并不是所有视图都是可以更新的，视图是虚表，对视图的更新要转化为对基本表的更新，基本表无法更新，视图也就无法更新"></a>并不是所有视图都是可以更新的，视图是虚表，对视图的更新要转化为对基本表的更新，基本表无法更新，视图也就无法更新</h6></li>
+</ol>
+<p>21.00</p>
+<p>WITH CHECK OPTION 在需要对视图进行DML时 需要加在最后</p>
+<h4 id="数据库设计基本阶段"><a href="#数据库设计基本阶段" class="headerlink" title="数据库设计基本阶段"></a>数据库设计基本阶段</h4><ol>
+<li>需求分析：</li>
+<li>概念结构设计：E-R图，数据字典 独立于机器</li>
+<li>逻辑结构设计：E-R图转换成关系数据模型  关系表，非关系  视图 外模式</li>
+<li>物理结构设计：存储，索引，数据库内模式</li>
+</ol>
+<h4 id="各类异常"><a href="#各类异常" class="headerlink" title="各类异常"></a>各类异常</h4><p>在对数据库进行一些操作的时候我们可能会遇到以下的一些问题:</p>
+<ul>
+<li>数据冗余(想修改一个属性,就要更新多行数据)</li>
+<li>插入异常(该插入的没插入)</li>
+<li>删除异常(不该删的删了)</li>
+<li>更新异常(不用修的非要修，想更新一条数据,结果工作量大,还容易出错)</li>
+</ul>
+<h4 id="四大基本关系运算"><a href="#四大基本关系运算" class="headerlink" title="四大基本关系运算"></a>四大基本关系运算</h4><h5 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h5><h5 id="投影"><a href="#投影" class="headerlink" title="投影"></a>投影</h5><p>关系R是的投影是从关系R中选择出若干属性列组成新的关系。</p>
+<p>分为两步：</p>
+<p>(1)选择出指定的属性，形成一个可能含有重复行的表。</p>
+<p>(2)删除重复行，形成新的关系。</p>
+<p>投影后元组可能变少</p>
+<p>==<strong>只有含有相同属性列才能进行 并 和 交 运算</strong>==</p>
+<h5 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h5><p>等值连接表示为R A=BS，自然连接表示为R S；自然连接是除去重复性的等值连接。两者之间的区别和联系如下属:</p>
+<p>1、自然连接一定是等值连接，但等值连接不一定是自然连接</p>
+<p>2、等值连接要求相等的分量，不一定是公共属性；而自然连接要求相等的分量必须是公共属性。</p>
+<p>3、等值连接不把重复的属性除去；而自然连接要把重复的属性除去。</p>
+<h5 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h5><p>首先呢，我把除运算的定义给摘录了下来：</p>
+<p>设关系R除以关系S的结果为关系T，则T包含所有在R但不在S中的属性及其值，且T的元组与S的元组的所有组合都在R中。</p>
+<p>刚看到这个定义，说实话一头雾水，也许是我理解能力比较差。</p>
+<p>所以结合着例子，对于定义进行理解吧：</p>
+<p>首先呢给出关系R和关系S<img src="/Astrals24.github.io/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%9B%B8%E5%85%B3%E6%B1%87%E6%80%BB/Center" alt="img"></p>
+<p>1、定义中说，<strong>T包含所有在R但不在S中的属性</strong>，所以呢 R 所包含的属性有{A，B，C}，S中所包含的属性有{B，C，D}，显而易见，关系T中应该只包含</p>
+<p> 一个属性—A；</p>
+<p>2、<strong>及其值</strong>，只考虑关系R中A属性的值{a1，a2，a3，a4}，关系T属性A的元素应该是{a1，a2，a3，a4}的子集；</p>
+<p>3、<strong>且T的元组与S的元组的所有组合都在R中</strong>，很明显，S中的需要考虑的只是属性B和属性C，所以</p>
+<p><img src="/Astrals24.github.io/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%9B%B8%E5%85%B3%E6%B1%87%E6%80%BB/Center2" alt="img"></p>
+<p>所以符合定义要求的值只有a1了。</p>
+<p>从而得出：</p>
+<p><img src="/Astrals24.github.io/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%9B%B8%E5%85%B3%E6%B1%87%E6%80%BB/Center3" alt="img"></p>
+<p><strong>除法和关系运算</strong></p>
+<ol>
+<li>看到XX全部XX  </li>
+<li>看到XX至少XX </li>
+</ol>
+<p>都需要考虑用除法</p>
+<h4 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h4><p>==事务是<strong>并发控制</strong>的基本单位==</p>
+<p><strong>定义事务语句</strong></p>
+<p>BEGIN TRANSACTION;</p>
+<p>COMMIT;</p>
+<p>ROLLBACK;</p>
+<p><strong>所有事务两段式 - 事务的并发调度是可串行化的</strong></p>
+<p>事务撤销(UNDO)</p>
+<p>重做(REDO)</p>
+<p><strong>登记日记两条：</strong> </p>
+<p>次序严格按并发事务执行的时间次序</p>
+<p>必须先写日志文件，后写数据库</p>
+<h4 id="CRUD"><a href="#CRUD" class="headerlink" title="CRUD"></a>CRUD</h4><p>insert into student(XX,XX,XX) values(‘’,’’,’’)</p>
+<p>update table set name=’hh’</p>
+<p>delete from table where </p>
+<h4 id="三级锁协议"><a href="#三级锁协议" class="headerlink" title="三级锁协议"></a>三级锁协议</h4><p>一级锁协议 加X锁  事务结束释放   防止<strong>丢失修改</strong></p>
+<p>二级锁协议 在一级基础上 加S锁  读完释放 <strong>防止读脏数据</strong></p>
+<p>三级锁协议 在一级上加S锁  事务结束释放 进一步<strong>防止不可重复读</strong></p>
+<p><strong>封锁粒度逐渐减小</strong></p>
+<h4 id="两段锁协议"><a href="#两段锁协议" class="headerlink" title="两段锁协议"></a>两段锁协议</h4><p>第一阶段获得封锁   -  扩展阶段 - 可以申请锁 但不能释放</p>
+<p>第二阶段释放封锁 - 收缩阶段 - 可以释放锁 但不能封锁</p>
+<p><strong>事务遵循两段锁协议 是 可串行化调度的充分条件 不是必要条件</strong></p>
+<p>封锁粒度 与 并发度和并发控制有关</p>
+<h4 id="最小依赖集"><a href="#最小依赖集" class="headerlink" title="最小依赖集"></a>最小依赖集</h4><p> <strong>一、定义</strong></p>
+<p>最小函数依赖集也称为极小函数依赖集、最小覆盖；如果函数依赖集 F 满足下列条件，则称 F 为一个最小依赖集。</p>
+<p>F 中任意函数依赖的右部仅含有一个属性<br>F 中不存在这样的函数依赖X→A,使得 F 与 F - {X→A}等价，即 F 中的函数依赖均不能由 F 中其他函数依赖导出<br>F 中不存在这样的函数依赖X→A，X有真子集 Z 使得 F - {X→A} ∪ {Z→A}与 F 等价，即 F 中各函数依赖左部均为最小属性集（不存在冗余属性）</p>
+<p> <strong>二、算法步骤：</strong></p>
+<p>将 F 中的所有函数依赖的右边化为单一属性<br>去掉 F 中的所有函数依赖左边的冗余属性（只针对F中左部不是单一属性的函数依赖）<br>去掉 F 中的所有冗余的函数依赖<br>三、例子说明</p>
+<p>假设R&lt;U , F&gt; ，U = ABCD，函数依赖集F={A→BD，AB→C，C→D}，求：F 最小函数依赖集</p>
+<p>第一步：将F中的所有函数依赖的右边化为单一属性：</p>
+<p>　　因为F = {A→BD，AB→C，C→D}，函数依赖右边化为单一属性得：F = {A→B，A→D，AB→C，C→D}；</p>
+<p>第二步：去掉F中的所有函数依赖左边的冗余属性（只针对F中左部不是单一属性的函数依赖）</p>
+<p>　　　F={A→B，A→D，AB→C，C→D}中只有函数依赖AB→C左部不是单一属性，所以要对其进行去掉左边冗余属性的处理：</p>
+<p>先看A是不是冗余属性：因为BF+ ={ B }不包含A，所以A属性不冗余         //这里应该注意的是，要看哪一个属性是否是冗余属性，则求该函数依赖左部除要查看的属性外的其他属性的集关于 F 的闭包是否包含要查看属性<br>再看B是不是冗余属性：因为AF+ ={A，B，C，D} 包含的B，所以B属性冗余<br> 　　因此只将函数依赖AB→C左部B属性去掉，所以F={A→B，A→D，A→C，C→D}。</p>
+<p><strong>第三步：去掉 F 中的所有冗余的函数依赖</strong></p>
+<p>依据引理：设F为属性集U上的一组函数依赖，X，Y ⊆ U，X→Y 能由 F 根据Armstrong公理导出的充分必要条件是Y⊆ XF+ 。即判断 F 中一个函数依赖X→Y是否冗余，则只需要判定 Y 是否为的XF+ 子集。</p>
+<p> 因为有F={A→B，A→D，A→C，C→D}：</p>
+<p>先看判断函数依赖A→D是否冗余，则把函数依赖A→D从F={A→B，A→D，A→C，C→D}中去掉后得F={A→B，A→C，C→D}，求得AF+ = { A，B，C，D} 包含了D，所以为函数依赖A→D冗余，所以应该从F={A→B，A→D，A→C，C→D}中去掉函数依赖A→D，得F={A→B，A→C，C→D}<br>再从F={A→B，A→C，C→D}依次判断每一个函数依赖是否冗余，直至所有冗余的函数依赖都被消除。本例子中经过第1步后已消除 F 中的所有冗余函数依赖了，因此原F={A→BD，AB→C，C→D}的最小函数依赖集为 F ={A→B，A→C，C→D}。<br> 注意点：</p>
+<p>F的最小依赖集F m 不一定是唯一的，它与对个函数依赖FDi 及X→A中个属性的处置的顺序有关。在本例子中在去掉F中的冗余的函数依赖时（绿色字体那一步）若不是首先判断A→D是否冗余，而是首先判断其它函数依赖是否冗余，那么所得的最小函数依赖就可能不同了<br>要搞清楚在判断一个函数依赖X→A是否为冗余时，是求X关于上一步所求得的新的函数依赖集 F 的闭包XF+ ，然后在判断A是否包含在该XF+ </p>
+<p><strong>总结：</strong></p>
+<p>1.最小依赖集其右部只包含一个属性，先把所有右部都拆分为单一属性</p>
+<p>2.对其左部多属性去冗余，如 A-&gt;B  AB-&gt;C   则B冗余  可化为 A-&gt;B  A-&gt;C</p>
+<p>3.去除所有冗余关系 如F(A-&gt;B,B-C,C-D,A-D)  则A-D可去除 因为 C-D   理论依据是  去除C-&gt;D后      A的闭包仍然包含D</p>
+<h4 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h4><ol>
+<li><p>将<strong>平均成绩**</strong>大于80分<strong>的</strong>男生<strong>的</strong>学号和平均成绩**存入到关系S_GRADE(Sno,A_Grade)中，用SQL表达</p>
+<p>INSERT INTO S_GRADE(Sno,A_Grade)  </p>
+<p>SELCET Sno,Avg(Grade) FROM SC </p>
+<p>WHERE Sno IN</p>
+<p>(SELECT Sno FROM S WHERE Ssex=’男’ GROUP BY Sno HAVING  AVG(Grade)&gt;80)</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>为用户经常要查询每个学生的选修课程(成绩非空)的门数和平均成绩建立视图S_GRADE(Sno,C_NUM,A_Grade)</p>
+<p>CREATE VIEW S_GRADE(Sno,C_NUM,A_Grade)</p>
+<p>AS</p>
+<p>SELECT Sno,COUNT(Cno),AVG(Grade)</p>
+<p>FROM SC </p>
+<p>WHERE Grade IS NOT NULL </p>
+<p>GROUP BY Sno</p>
+</li>
+</ol>
+<ol start="3">
+<li>见到全部，至少关键词 用 <strong>除号</strong></li>
+<li>既没有也没有 <strong>减号</strong></li>
+</ol>
+<p>​                                                                                  </p>
+<p>BETWEEN 20 AND 30</p>
+<p>EXIST NO      与     EXIST 只返回真假 不返回数据                    </p>
+<p>权限控制： WITH GRANT OPTION  赋值给其他人权限</p>
+<p>删除权限：REVOKE </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>=</th>
+<th>&lt;&gt;</th>
+<th>&lt;</th>
+<th>&lt;=</th>
+<th>&gt;</th>
+<th>&gt;=</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ANL</td>
+<td>IN</td>
+<td></td>
+<td>&lt;MAX</td>
+<td>&lt;=MAX</td>
+<td>&gt;MIN</td>
+<td>&gt;=MIN</td>
+</tr>
+<tr>
+<td>ALL</td>
+<td></td>
+<td>NOT IN</td>
+<td>&lt;MIN</td>
+<td>&lt;=MIN</td>
+<td>&gt;MAX</td>
+<td>&gt;=MAX</td>
+</tr>
+</tbody></table>
+<p> = ANL 等价 IN</p>
+<p>&lt;&gt;ALL 等价 NOT IN</p>
+<p>HAVING 后面可以嵌套select  只要select 只返回唯一的一条数据                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </p>
+<h4 id="三个完整性约束"><a href="#三个完整性约束" class="headerlink" title="三个完整性约束"></a>三个完整性约束</h4><p>实体完整性 - 唯一实体 主键    PRIMARY KEY</p>
+<p>参照完整性 - 外键  ON DELETE CASCADE</p>
+<p>用户定义完整性 - 某些特殊字段的特殊条件范围  CHECK</p>
+<p>constraint</p>
+<p>CONSTRAINT  + PRIMARY KEY + FOREIGN KEY + UNIQUE</p>
+<h4 id="并发相关"><a href="#并发相关" class="headerlink" title="并发相关"></a>并发相关</h4><p>并发带来的问题：</p>
+<h4 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h4><p>数据模型： 数据结构 数据操作 数据完整性约束</p>
+<p>数据结构  层次模型(一对一 or 多) 网状模型(倒立的树)  关系模型</p>
+<p>完整性约束 三种</p>
+<p>数据操作：DML,DDL</p>
+<h4 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h4><p>分量 一条记录中的一个列值</p>
+<p>C1级 自主存取控制 (DAC)</p>
+<p>B1级 强制存取控制 (MAC)</p>
+<ol>
+<li><strong>主体许可证大于客体 可以读</strong></li>
+<li><strong>主体许可证小于客体 可以写</strong></li>
+</ol>
+<p>用户权限两要素：数据库对象和操作类型</p>
+<p>X-&gt;Y  但 Y 不属于X    非平凡函数依赖</p>
+<p>X-&gt;Y   Y属于X  平凡函数依赖</p>
+<p>码=超键：唯一标识一条记录或属性属性集</p>
+<p>候选码：没有多余属性的超键</p>
+<p>包含在任何一个候选码中的属性 叫 主属性</p>
+<p>全码：所有属性共同构成一个候选码</p>
+<h4 id="范式"><a href="#范式" class="headerlink" title="范式"></a>范式</h4><p>第一范式（1NF）：属性不可分。<br>第二范式（2NF）：符合1NF，并且，非主属性完全依赖于码。<br>第三范式（3NF）：符合2NF，并且，消除传递依赖<br>BC范式（BCNF）：符合3NF，并且，主属性不依赖于主属性<br>第四范式（4NF）：要求把同一表内的多对多关系删除。<br>第五范式（5NF）：从最终结构重新建立原始结构。</p>
+<p>主要区别3NF和BCNF，<br>一句话就是3NF是要满足不存在非主属性对候选码的传递函数依赖，<br>BCNF是要满足不存在任一属性（包含非主属性和主属性）对候选码的传递函数依赖。</p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">DSAD</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://astrals24.github.io/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%9B%B8%E5%85%B3%E6%B1%87%E6%80%BB/">https://astrals24.github.io/2020/09/18/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E7%9B%B8%E5%85%B3%E6%B1%87%E6%80%BB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://astrals24.github.io" target="_blank">Astrals</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/Astrals24.github.io/tags/%E6%8A%80%E6%9C%AF%E5%B0%8F%E7%BB%93/">技术小结</a><a class="post-meta__tags" href="/Astrals24.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a></div><div class="post_share"><div class="social-share" data-image="https://img-blog.csdnimg.cn/20210309233718620.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Astrals24.github.io/2020/09/20/%E5%AD%A6%E6%A0%A1%E8%B4%A8%E7%AE%A1%E7%B3%BB%E7%BB%9F/"><img class="prev-cover" data-lazy-src="https://img-blog.csdnimg.cn/20210308144118201.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" onerror="onerror=null;src='/Astrals24.github.io/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">教师教学质量管理系统</div></div></a></div><div class="next-post pull-right"><a href="/Astrals24.github.io/2020/09/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9B%B8%E5%85%B3%E6%B1%87%E6%80%BB/"><img class="next-cover" data-lazy-src="https://img-blog.csdnimg.cn/20210309211552607.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70" onerror="onerror=null;src='/Astrals24.github.io/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数据结构相关汇总</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/Astrals24.github.io/2019/01/13/STL汇总/" title="STL汇总"><img class="relatedPosts_cover" data-lazy-src="https://img-blog.csdnimg.cn/20210309190651466.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2019-01-13</div><div class="relatedPosts_title">STL汇总</div></div></a></div><div class="relatedPosts_item"><a href="/Astrals24.github.io/2020/12/03/docker/" title="docker汇总"><img class="relatedPosts_cover" data-lazy-src="https://img-blog.csdnimg.cn/20210308144023174.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-03</div><div class="relatedPosts_title">docker汇总</div></div></a></div><div class="relatedPosts_item"><a href="/Astrals24.github.io/2020/09/18/数据结构相关汇总/" title="数据结构相关汇总"><img class="relatedPosts_cover" data-lazy-src="https://img-blog.csdnimg.cn/20210309211552607.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-18</div><div class="relatedPosts_title">数据结构相关汇总</div></div></a></div><div class="relatedPosts_item"><a href="/Astrals24.github.io/2018/06/25/二分法及其扩展/" title="二分法及其扩展"><img class="relatedPosts_cover" data-lazy-src="https://img-blog.csdnimg.cn/20210319132746391.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2018-06-25</div><div class="relatedPosts_title">二分法及其扩展</div></div></a></div><div class="relatedPosts_item"><a href="/Astrals24.github.io/2018/04/08/刷题小记/" title="刷题小记"><img class="relatedPosts_cover" data-lazy-src="https://img-blog.csdnimg.cn/20210309191206324.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2018-04-08</div><div class="relatedPosts_title">刷题小记</div></div></a></div><div class="relatedPosts_item"><a href="/Astrals24.github.io/2018/06/15/快速幂迭代与递归/" title="快速幂迭代与递归"><img class="relatedPosts_cover" data-lazy-src="https://img-blog.csdnimg.cn/20210309191206324.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FzdHJhbHM=,size_16,color_FFFFFF,t_70"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2018-06-15</div><div class="relatedPosts_title">快速幂迭代与递归</div></div></a></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2021 By DSAD</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/Astrals24.github.io/js/utils.js"></script><script src="/Astrals24.github.io/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/Astrals24.github.io/js/third-party/fireworks.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    $.getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js', () => {
+      pangu.spacingElementById('content-inner')
+    })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguFn)</script><script src="/Astrals24.github.io/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/js/hideCategory.min.js"></script></div></body></html>
