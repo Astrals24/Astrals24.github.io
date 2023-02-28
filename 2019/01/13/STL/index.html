@@ -1,0 +1,391 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>STL知识汇总 | Astrals</title><meta name="author" content="DSAD"><meta name="copyright" content="DSAD"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="article">
+<meta property="og:title" content="STL知识汇总">
+<meta property="og:url" content="http://example.com/2019/01/13/STL/index.html">
+<meta property="og:site_name" content="Astrals">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/C++.jpg">
+<meta property="article:published_time" content="2019-01-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-02-28T16:00:00.000Z">
+<meta property="article:author" content="DSAD">
+<meta property="article:tag" content="读书记录">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/C++.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2019/01/13/STL/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'STL知识汇总',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2019-03-01 00:00:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.3.0"></head><body><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/./../images/%E9%80%8F%E6%98%8E.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Astrals"><span class="site-name">Astrals</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">STL知识汇总</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-01-12T16:00:00.000Z" title="发表于 2019-01-13 00:00:00">2019-01-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2019-02-28T16:00:00.000Z" title="更新于 2019-03-01 00:00:00">2019-03-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C/">C++</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="STL知识汇总"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>参考书籍：<a target="_blank" rel="noopener" href="https://book.douban.com/subject/1110941/">C++ 标准程序库 - 自修教程与参考手册</a></p>
+<h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p>STL（标准模板库 Standard Template Library）</p>
+<p>STL 组件：容器，迭代器，算法</p>
+<p>容器：用来管理某类对象的集合。</p>
+<p>迭代器：用来在在一个对象群集的元素上进行遍历操作。</p>
+<p>算法：用来处理群集内的元素。</p>
+<p>STL：将数据和操作分离。数据由容器类别加以管理，操作由可定制的算法定义之。</p>
+<h1 id="常见容器"><a href="#常见容器" class="headerlink" title="常见容器"></a><strong>常见容器</strong></h1><h2 id="序列式容器与关联式容器"><a href="#序列式容器与关联式容器" class="headerlink" title="序列式容器与关联式容器"></a>序列式容器与关联式容器</h2><h3 id="序列式容器"><a href="#序列式容器" class="headerlink" title="序列式容器"></a>序列式容器</h3><p><strong>其中每个元素均有固定的位置 ——–取决于插入时机与地点，和元素值无关。如：vector，deque，list</strong></p>
+<ul>
+<li>序列式容器 添加元素都用 .push_back () 向尾部添加一个元素。</li>
+<li>List 与 deque 还可以使用 .push_front () 向头部添加一个元素，vector 没有是因为效率太差 (所有元素都需要移动)</li>
+<li>可通过 i &lt;coll.size () 来遍历</li>
+</ul>
+<h3 id="关联式容器"><a href="#关联式容器" class="headerlink" title="关联式容器"></a>关联式容器</h3><p><strong>元素位置决定于特定的排序准则，也就是说位置取决于元素的值。如：set，multiset，map，multimap 关联式容器也可被视作特殊的序列式容器</strong></p>
+<ul>
+<li>添加元素都用 .insert () 无法使用.push_back () 与 .push_front () 他们在这里毫无意义 因为你无法指定新元素的位置。</li>
+<li>需要注意的是 使用 map 或 multimap 添加元素 .insert (make_pair (1,”e”)); 利用辅助函数 make_pair () 是最快的做法</li>
+<li>如果你向取出值 使用 pos-&gt;first 或 pos-&gt;second 也可协作 (*pos).first …</li>
+<li>通过 map [“key”] &#x3D; element 来修改值时 如果 key 拼写出错将会创建一个新的键值对。</li>
+</ul>
+<h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><p>Vector 在尾部附加或移除元素非常快速 在中部和头部则比较慢 允许随机存取 （类似顺序表的性质）</p>
+<h2 id="Deque"><a href="#Deque" class="headerlink" title="Deque"></a>Deque</h2><p>Deque 在头部和尾部安插元素都非常快 在中间部分慢</p>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p>List 由双向链表实作而成 任何位置安插或删除元素都非常快 但不支持随机存取 读取元素性能较差</p>
+<h1 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h1><p><strong>定义</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">list&lt;char&gt;::iterator pos;</span><br></pre></td></tr></table></figure>
+
+<p>pos.begin () : 指向容器的起点 也就是第一个元素</p>
+<p>pos.end () : 指向容器的终点 在最后一个元素之后，形成左闭右开区间</p>
+<p><strong>[注意 1]</strong> 如果使用 const_iterator 则无法改变迭代器常量的值</p>
+<p><strong>[注意 2]</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">for(pos = coll.begin();pos != coll.end();++pos)</span><br><span class="line">	cout&lt;&lt;*pos;</span><br></pre></td></tr></table></figure>
+
+<p><strong>前置式递增 ++pos 比，后置式递增 pos++ 效率要高</strong> , 后者需要一个额外的临时对象 因为他必须有放迭代器原本的位置并将他返回。</p>
+<h2 id="迭代器的分类"><a href="#迭代器的分类" class="headerlink" title="迭代器的分类"></a><strong>迭代器的分类</strong></h2><ul>
+<li>双向迭代器（list set map）</li>
+<li>随机存取迭代器 （vector deque strings）</li>
+</ul>
+<p><strong>[注意 3]</strong> 最好使用 pos !&#x3D; coll.end () 而不是使用 pos &lt; coll.end () 遍历，因为 operator &lt; 只有随机存取迭代器才支持，也就是说 list、set、map 都无法运作。</p>
+<h2 id="特殊的迭代器-—-配接器"><a href="#特殊的迭代器-—-配接器" class="headerlink" title="特殊的迭代器 —- 配接器"></a>特殊的迭代器 —- 配接器</h2><ul>
+<li>Insert iterator 安插型迭代器</li>
+<li>Stream iterator 流迭代器</li>
+<li>Reverse iterator 逆向迭代器</li>
+</ul>
+<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><p><strong>头文件 ： algorithm</strong></p>
+<p>更易型算法 —- 删除或重排或修改元素</p>
+<p><strong>[注意 4] 如果你需要以单一语句来删除元素请用：</strong> Coll.erase(remove(coll.begin(),coll.end(),3),coll.end());</p>
+<p><strong>[注意 5] 关联式容器可直接用成员函数 erase 移除元素</strong></p>
+<p><strong>[注意 6] 如果高效率是你的最高目标，你应该永远优先选用成员函数</strong></p>
+<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a>小技巧</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">// 读入</span><br><span class="line">vector&lt;int&gt; coll((istream_iterator&lt;int&gt;(cin)),(istream_iterator&lt;int&gt;()));</span><br><span class="line"></span><br><span class="line">// 输出 </span><br><span class="line">copy(coll.begin(),coll.end(),ostream_iterator&lt;int&gt;(cout,&quot;\n&quot;));</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://astrals24.com/Astrals24.github.io/2019/01/13/STL%E6%B1%87%E6%80%BB/wps1.jpg"><img src="https://astrals24.com/Astrals24.github.io/2019/01/13/STL%E6%B1%87%E6%80%BB/wps1.jpg" alt="img"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">Sort(coll.begin(),coll.end(),cmp);   //缺省的是 operator &lt;  所以sort将容器以递增排序</span><br><span class="line">C++</span><br><span class="line">Find(coll.begin(),coll.end(),3);    //如果成功 将返回3的位置 否则将返回 .end()</span><br><span class="line">C++</span><br><span class="line">Reverse(coll.begin(),coll.end());    //反转区间内的元素</span><br><span class="line">C++</span><br><span class="line">Equal(coll.begin(),coll.end(),coll2.begin(),coll2.end());  //处理多个区间 须保证区间元素个数相等  </span><br><span class="line">C++</span><br><span class="line">Coll.erase(remove(coll.begin(),coll.end(),3),coll.end());  //如果你需要以单一语句来删除元素请用：</span><br><span class="line"></span><br><span class="line">vec.erase(remove_if(vec.begin(), vec.end(), [](int x)&#123;return x == 3;&#125;), vec.end()); // 用lambad</span><br><span class="line">C++</span><br><span class="line">// 需加头文件 iterator 读入与输出</span><br><span class="line">vector&lt;int&gt; coll((istream_iterator&lt;int&gt;(cin)),(istream_iterator&lt;int&gt;())); //读入</span><br><span class="line"></span><br><span class="line">copy(coll.begin(),coll.end(),ostream_iterator&lt;int&gt;(cout,&quot;\n&quot;));		// 输出</span><br><span class="line">C++</span><br><span class="line">// for_each 遍历用法</span><br><span class="line">void print(int elem)&#123;</span><br><span class="line">	cout&lt;&lt;elem&lt;&lt;&quot; &quot;; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for_each(coll.begin(),coll.end(),print);</span><br></pre></td></tr></table></figure>
+
+<h2 id="迭代器的相关辅助函数"><a href="#迭代器的相关辅助函数" class="headerlink" title="迭代器的相关辅助函数"></a>迭代器的相关辅助函数</h2><p><strong>1.advance () 可让迭代器向前</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">advance(pos,3) 	//前进3</span><br><span class="line">advance(pos.-1) //后退1</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.distance () 处理迭代器之间的距离</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">distance(coll.begin(),pos) // 开始到pos的距离 并返回距离</span><br><span class="line">    </span><br><span class="line">// 早期版本</span><br><span class="line">distance(pos1,pos2,d) // long d = 0; d为long</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.iter_swap () 交换两个迭代器所指的内容</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">Iter_swap(coll.begin(),--coll.begin());</span><br></pre></td></tr></table></figure>
+
+<h2 id="迭代器的配接器"><a href="#迭代器的配接器" class="headerlink" title="迭代器的配接器"></a>迭代器的配接器</h2><p><strong>1. 逆向迭代器</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">::Reverse_iterator</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 插入迭代器</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">::back_insert_iterator &lt;vector&lt;int&gt; &gt; iter(coll);</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 流迭代器</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">ostream_iterator&lt;T&gt; coutPos(cout,”\n”);</span><br><span class="line"></span><br><span class="line">Istream_iterator&lt;T&gt; cinPos(cin);</span><br></pre></td></tr></table></figure>
+
+<h2 id="仿函数（函数对象）"><a href="#仿函数（函数对象）" class="headerlink" title="仿函数（函数对象）"></a>仿函数（函数对象）</h2><p><strong>预定义的仿函数 (详细见 P305)</strong></p>
+<p><strong>需包含头文件 include</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">greater&lt;type&gt;() 	p1 &gt; p2</span><br><span class="line"></span><br><span class="line">less&lt;type&gt;()		p1 &lt; p2  (默认的仿函数)</span><br><span class="line"></span><br><span class="line">greater_equal&lt;type&gt;() p1 &gt;= p2</span><br><span class="line"></span><br><span class="line">less_equal&lt;type&gt;() p1 &lt;= p2</span><br><span class="line"></span><br><span class="line">logical_not/and/or  ! p1  /  p1 &amp;&amp; p2  /  p1 || p2</span><br></pre></td></tr></table></figure>
+
+<h3 id="预定义的函数配接器"><a href="#预定义的函数配接器" class="headerlink" title="预定义的函数配接器"></a>预定义的函数配接器</h3><table>
+<thead>
+<tr>
+<th><strong>bind2nd(op,value)</strong></th>
+<th><strong>op(value,param)</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>not1(op)</strong></td>
+<td><strong>!op(param)</strong></td>
+</tr>
+<tr>
+<td><strong>not2(op)</strong></td>
+<td><strong>!op(param1,param2)</strong></td>
+</tr>
+</tbody></table>
+<p>配接器实际将一些<strong>二元仿函数转换为一元仿函数</strong> 它通常将<strong>第二参数传给由第一参数指出的二元仿函数作为后者的第二参数</strong>！</p>
+<h3 id="针对成员函数的函数配接器"><a href="#针对成员函数的函数配接器" class="headerlink" title="针对成员函数的函数配接器"></a><strong>针对成员函数的函数配接器</strong></h3><p>mem_fun_ref (op) 调用 op 那是对象的一个 const 成员函数</p>
+<h3 id="针对一般函数的函数配接器"><a href="#针对一般函数的函数配接器" class="headerlink" title="针对一般函数的函数配接器"></a>针对一般函数的函数配接器</h3><p>ptr_fun(op) op(param) op(param1,param2)</p>
+<h3 id="部分应用"><a href="#部分应用" class="headerlink" title="部分应用"></a>部分应用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">// coll元素都乘10插入coll2 </span><br><span class="line">transform(coll.begin(),coll.end(),back_inserter(coll2),bind2nd(multiplies&lt;int&gt;(),10));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// coll元素都乘-1 </span><br><span class="line">transform(coll.begin(),coll.end(),coll.begin(),negate&lt;int&gt;());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// coll元素平方 </span><br><span class="line">transform(coll.begin(),coll.end(),coll.begin(),coll.begin(),multiplies&lt;int&gt;()); </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//检查某个int值是否大于42 </span><br><span class="line">vector&lt;int&gt;::iterator pos;</span><br><span class="line">pos = find_if(coll.begin(),coll.end(),bind2nd(greater&lt;int&gt;(),42)); </span><br><span class="line">cout&lt;&lt;*pos&lt;&lt;endl;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">// 找出第一个为偶数的元素位置 </span><br><span class="line">pos = find_if(coll.begin(),coll.end(),not1(bind2nd(modulus&lt;int&gt;(),2))); </span><br><span class="line"></span><br><span class="line">// 找出第一个为奇数的元素位置</span><br><span class="line">pos =  find_if(coll.begin(),coll.end(),bind2nd(modulus&lt;int&gt;(),2)); </span><br></pre></td></tr></table></figure>
+
+<h3 id="STL-算法"><a href="#STL-算法" class="headerlink" title="STL 算法"></a>STL 算法</h3><h4 id="算法的分类"><a href="#算法的分类" class="headerlink" title="算法的分类"></a><strong>算法的分类</strong></h4><ul>
+<li>尾词 _if : 有尾词 if 的算法用来接收仿函数</li>
+<li>尾词 _copy：用来表示词算法中，元素不光被操作，还会被复制到目标区间</li>
+</ul>
+<ol>
+<li>非变动性算法</li>
+<li>变动性算法</li>
+<li>移除性算法</li>
+<li>遍序性算法</li>
+<li>排序算法</li>
+<li>已序区间算法</li>
+<li>数值算法</li>
+</ol>
+<p>最重要的算之一便是 <strong>for_each 算法</strong> 他将调用者提供的操作施加于每一个元素身上。</p>
+<p>例如你可以用 for_each 来打印区间内的每个元素 也可以用来变动元素。</p>
+<h5 id="for-each"><a href="#for-each" class="headerlink" title="for_each()"></a>for_each()</h5><p>for_each(beg,end,op)</p>
+<p><strong>参数解释：</strong></p>
+<p>对区间的每个元素调用 op (elem)</p>
+<p>for_each () 如需变动参数 必须以 by reference 方式传递</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">void print(int elem)&#123;</span><br><span class="line"></span><br><span class="line">	cout&lt;&lt;elem&lt;&lt;&quot; &quot;; </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void square(int &amp;elem)&#123;</span><br><span class="line"></span><br><span class="line">	elem *= elem;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">for_each(coll.begin(),coll.end(),square);</span><br></pre></td></tr></table></figure>
+
+<h5 id="非变动性算法"><a href="#非变动性算法" class="headerlink" title="非变动性算法"></a>非变动性算法</h5><p><strong>1. 元素计数</strong></p>
+<p>count(beg,end,const T&amp; value)</p>
+<p>count_if(beg,end,op)</p>
+<p><strong>参数解释：</strong></p>
+<p>第一形式会计算区间 [beg,end) 中元素值等于 value 的元素个数</p>
+<p>第二形式会计算区间 [beg,end) 中令一元判断式 OP (elem) 结果为 true 的元素个数</p>
+<p>OP 不应改动传进来的参数 也不能改变自身状态</p>
+<p>关联式容器 (set,multisets,maps 和 multimaps) 提供了一个等效的成员函数 count ()</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">// 值等于4的元素个数 </span><br><span class="line">cout&lt;&lt; count(coll.begin(),coll.end(),4)&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 为偶数的元素个数 </span><br><span class="line">cout&lt;&lt; count_if(coll.begin(),coll.end(),cmp)&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 大于4的元素个数 </span><br><span class="line">cout&lt;&lt;count_if(coll.begin(),coll.end(),bind2nd(greater&lt;int&gt;(),4))&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 最大值和最小值</strong></p>
+<p>min_element(beg,end)</p>
+<p>min_element(beg,end,op)</p>
+<p><strong>参数解释：</strong></p>
+<p>如果存在多个最大最小值 则返回的是第一个最大最小值</p>
+<p>所有形式都返回区间内最大 &#x2F; 最小元素的位置</p>
+<p>Op 应该用来比较两个元素</p>
+<p>如果第一个元素小于第二个元素 应当返回 true</p>
+<p><strong>实例</strong></p>
+<p><a target="_blank" rel="noopener" href="https://astrals24.com/Astrals24.github.io/2019/01/13/STL%E6%B1%87%E6%80%BB/wps2.jpg"><img src="https://astrals24.com/Astrals24.github.io/2019/01/13/STL%E6%B1%87%E6%80%BB/wps2.jpg" alt="img"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">// 可变更 &lt; 符号</span><br><span class="line">bool abls(int elem1,int elem2)&#123;</span><br><span class="line">	return abs(elem1) &lt; abs(elem2);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 求绝对值的最大值</span><br><span class="line">cout&lt;&lt;*max_element(coll.begin(),coll.end(),abls); </span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 搜寻元素</strong></p>
+<p><strong>搜索第一个匹配的元素</strong></p>
+<p>find(beg,end,value);</p>
+<p>find_if(beg,end,op);</p>
+<p><strong>参数解释：</strong></p>
+<p>第一形式返回区间中元素等于 value 的元素位置</p>
+<p>第二形式返回区间令一元判断式结果为 true 的第一个元素</p>
+<p>如果没有找到匹配元素则都返回 end</p>
+<p>关联式容器 提供了一个等效的成员函数 find 拥有对数复杂度而非线性复杂度</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">//检查某个int值是否大于42 </span><br><span class="line">vector&lt;int&gt;::iterator pos;</span><br><span class="line">pos = find_if(coll.begin(),coll.end(),bind2nd(greater&lt;int&gt;(),42)); </span><br><span class="line">cout&lt;&lt;*pos&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">// 找出第一个为偶数的元素位置 </span><br><span class="line">pos = find_if(coll.begin(),coll.end(),not1(bind2nd(modulus&lt;int&gt;(),2))); </span><br><span class="line"></span><br><span class="line">// 找出第一个为奇数的元素位置</span><br><span class="line">pos =  find_if(coll.begin(),coll.end(),bind2nd(modulus&lt;int&gt;(),2)); </span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 搜索前 n 个连续匹配值</strong></p>
+<p>Search_n(beg,end,size count,value);</p>
+<p>Search_n(beg,end,size count,value,op);</p>
+<p><strong>参数解释：</strong></p>
+<p>第一形式返回区间连续 count 个元素值全等于 value 元素的位置</p>
+<p>第二形式返回区间连续 count 个元素造成以下二元判断式结果为 true 的元素位置</p>
+<p>如果没有匹配都返回 end</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">// 连续4个等于3的元素</span><br><span class="line">pos = search_n(coll.begin(),coll.end(),4,3);</span><br><span class="line"></span><br><span class="line">// 连续4个大于3的元素</span><br><span class="line">pos = search_n(coll.begin(),coll.end(),4,3,greater&lt;int&gt;());</span><br><span class="line"></span><br><span class="line">cout&lt;&lt;distance(coll.begin(),pos)&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5. 搜索第一个子区间</strong></p>
+<p>Search(beg,end,searchBeg,searchEnd)；</p>
+<p>Search(beg,end,searchBeg,searchEnd,op)；</p>
+<p><strong>参数解释：</strong></p>
+<p>两种形式都返回 2 区间完全吻合的第一个子区间的第一个元素位置</p>
+<p>第一形式 子区间元素必须完全等于 [searchBeg,searchEnd) 中的元素</p>
+<p>第二形式 子区间的元素 和 [searchBeg,searchEnd) 对应元素必须满足二元判断式 op (elem,searchElem) 结果为 true</p>
+<p>如果没有找到都返回 end</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">// 求出coll中包含coll2的第一个元素位置 </span><br><span class="line">pos = search(coll.begin(),coll.end(),coll2.begin(),coll2.end());	</span><br><span class="line">cout&lt;&lt;distance(coll.begin(),pos)&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">// elem 对应第一区间 even对应第二区间 </span><br><span class="line">bool check(int elem,bool even)&#123;</span><br><span class="line">if(even)</span><br><span class="line">	return elem % 2 == 0;</span><br><span class="line">else</span><br><span class="line"> 	return elem % 2 == 1;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">bool args[3] = &#123;true,false,true&#125;;</span><br><span class="line"></span><br><span class="line">// 偶数奇数排序的子序列 </span><br><span class="line">pos = search(coll.begin(),coll.end(),args,args+3,check);</span><br><span class="line">cout&lt;&lt;distance(coll.begin(),pos)&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
+
+<p><strong>6. 搜索某些元素第一次出现的地点</strong></p>
+<p>find_first_of(beg,end,searchBeg,searchEnd);</p>
+<p>find_first_of(beg,end,searchBeg,searchEnd,OP);</p>
+<p><strong>参数解释：</strong></p>
+<p>第一形式区间返回第一个既在区间 1 中出现又在区间 2 中出现的元素位置</p>
+<p>第二形式返回 [beg,end) 中第一个这样的元素 他和第二区间每个元素进行 op (elem,searchElem) 动作果都是 true</p>
+<p>如果没有都返回 end</p>
+<p>你可以用逆向迭代器来搜索最后这样的一个元素</p>
+<p><strong>7. 搜索两个连续且相当的元素</strong></p>
+<p>adjacent_find(beg,end)</p>
+<p>adjacent_find(beg,end,op)</p>
+<p><strong>参数解释：</strong></p>
+<p>第一形式返回区间中第一对连续两个相当元素之中第一元素的位置</p>
+<p>第二形式返回区间中第一对连续两个元素均使以下二元判断式 op (elem,nextElem) 的结构为 true 中第一元素的位置</p>
+<p>没有找到都返回 end</p>
+<p><strong>实例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">bool doubled(int elem,int elem2)&#123;</span><br><span class="line">	return elem *= elem2;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Pos = adjacent_find(coll.begin(),coll.end());</span><br><span class="line">Pos = adjacent_find(coll.begin(),coll.end(),doubled);</span><br></pre></td></tr></table></figure>
+
+<p><strong>8. 区间的比较</strong></p>
+<p>Equal(beg,end,cmpBeg);</p>
+<p>Equal(beg,end,cmpBeg,Op);</p>
+<p><strong>9. 搜索第一处不同点</strong></p>
+<p>Mismatch(beg,end,cmpBeg)</p>
+<p>Mismatch(beg,end,cmpBeg,Op)</p>
+<p><strong>10. 检验 “小于” (字典次序)</strong></p>
+<p>Bool lexicographical_compare(beg1,end1,beg2,end2)</p>
+<p>Bool lexicographical_compare(beg1,end1,beg2,end2,op)</p>
+<h5 id="变动性算法"><a href="#变动性算法" class="headerlink" title="变动性算法"></a>变动性算法</h5><p>变动性算法要不直接改变元素值，要不就在复制到另一区间的过程中改变元素值。</p>
+<p>最基本的<strong>变动性算法就是 for_each () 和 transform ()</strong> 两者都可以变动序列中所有的元素值。</p>
+<p><strong>[注意 7] 变动性算法不能是关联式容器</strong></p>
+<h6 id="transform"><a href="#transform" class="headerlink" title="transform()"></a>transform()</h6><p>运用某些操作 改操作返回被改动后的参数 此间奥妙在于他可以被用来将结果复制给元素值 如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">void square(int elem)&#123;</span><br><span class="line">	elem *= elem;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">transform(coll.begin(),coll.end(),   //  source range</span><br><span class="line">coll.begin(),   	//  destination range</span><br><span class="line">square);		  //  operation</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="一些技巧"><a href="#一些技巧" class="headerlink" title="一些技巧"></a>一些技巧</h3><p>It has been 540 days since the last update, the content of the article may be outdated.</p>
+<h4 id="printf-格式化输出"><a href="#printf-格式化输出" class="headerlink" title="printf 格式化输出"></a><strong>printf 格式化输出</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">printf(&quot;%md&quot;); 			// 不足m位 以m位进行对右输出 高位空格补齐</span><br><span class="line">printf(&quot;%0md&quot;);			// 不足</span><br></pre></td></tr></table></figure>
+
+<h4 id="读入与输出"><a href="#读入与输出" class="headerlink" title="读入与输出"></a><strong>读入与输出</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">// 字符数组</span><br><span class="line">char str[100];</span><br><span class="line">cin.getline(str,100);</span><br><span class="line"></span><br><span class="line">// 字符串</span><br><span class="line">string str;</span><br><span class="line">getline(cin,str);</span><br><span class="line"></span><br><span class="line">getline(cin,str);   // getline 以回车为结束符 如果使用getline 之前还 使用了cin 那么getline 会读入回车 必须先使用 cin.ignore()忽略 或 cin.get();先读取 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cin.getline(char *,int len) // 用来处理字符型 第二个参数是字符长度</span><br><span class="line">    </span><br><span class="line">// 不能用cin处理大数据  必须用scanf(&quot;%lld&quot;) 处理long long  PTA-A1065**</span><br></pre></td></tr></table></figure>
+
+<h4 id="double-精度"><a href="#double-精度" class="headerlink" title="double 精度"></a>double 精度</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">//eps 精度修正</span><br><span class="line">const double eps = 1e-8 //10的-8次方</span><br><span class="line">#define Equ(a,b) ((fabs((a)-(b)))&lt;(eps))    </span><br><span class="line"></span><br><span class="line">// π</span><br><span class="line">const double Pi = acos(-1.0);</span><br></pre></td></tr></table></figure>
+
+<h4 id="静态链表"><a href="#静态链表" class="headerlink" title="静态链表"></a>静态链表</h4><p>此类静态链表题目注意事项：<br>1、用例会参杂无用测试结点，往往需要遍历链表进行先一遍处理<br>2、注意链表 0 结点的情况，往往需要提前判断输出（即全是无用测试点）<br>3、静态链表使用的数组若长度太大需要定义为全局变量（全局变量在堆中分配）</p>
+<h4 id="队列使用"><a href="#队列使用" class="headerlink" title="队列使用"></a>队列使用</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C</span><br><span class="line">list.push_back(arr[firstAddress]); </span><br></pre></td></tr></table></figure>
+
+<p>对于上述这类代码，特别是使用 queue 时，当最后是需要修改元素而不仅仅是访问时，可以只入队下标，而不入队元素本身。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">list.push_back(firstAddress); </span><br><span class="line">arr[list.back()]; //输出最后一个元素</span><br></pre></td></tr></table></figure>
+
+<h4 id="二分查找与其扩展"><a href="#二分查找与其扩展" class="headerlink" title="二分查找与其扩展"></a><strong>二分查找与其扩展</strong></h4><p>mid &#x3D; (left + right)&#x2F;2 中 left + right 超过 int 导致溢出</p>
+<p>用 mid &#x3D; left + (right - left)&#x2F;2</p>
+<h4 id="快速幂迭代与递归写法"><a href="#快速幂迭代与递归写法" class="headerlink" title="快速幂迭代与递归写法"></a><strong>快速幂迭代与递归写法</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef long long LL;</span><br><span class="line"></span><br><span class="line">// 求a的b次方与m取余的结果   递归 </span><br><span class="line">LL binaryPow(LL a,LL b,LL m)&#123;</span><br><span class="line">	</span><br><span class="line">	if(b == 0) // a的0次方 </span><br><span class="line">		return 1;</span><br><span class="line">	</span><br><span class="line">	if(b &amp; 1)&#123; // 次方为奇数 如 2的5次方 则为 a*a的四次方 </span><br><span class="line">		return a*binaryPow(a,b-1,m)%m;</span><br><span class="line">	&#125; </span><br><span class="line">	else&#123;</span><br><span class="line">		LL num = binaryPow(a,b &gt;&gt; 1,m); // b&gt;&gt;=1 等价 b/2</span><br><span class="line">		return num*num%m;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//</span><br><span class="line">LL binaryPow2(LL a,LL b,LL m)&#123;</span><br><span class="line">	if(a == 1 || b == 0)</span><br><span class="line">		return 1;</span><br><span class="line">	</span><br><span class="line">	LL ans = 1;	</span><br><span class="line">	while(b &gt; 0)&#123;</span><br><span class="line">		if(b &amp; 1)&#123;</span><br><span class="line">			ans = ans*a%m;  // 10 = 2的3次方 + 2的一次方   101</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		a = a*a%m;  // 每次都需要a的平方 </span><br><span class="line">		b &gt;&gt;= 1;	</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	return ans;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	cout&lt;&lt;&quot;快速幂的递归法：&quot;&lt;&lt;binaryPow(2,15,10007)&lt;&lt;endl; </span><br><span class="line">	cout&lt;&lt;&quot;快速幂的迭代法：&quot;&lt;&lt;binaryPow2(2,15,10007)&lt;&lt;endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h4 id="two-pointers-问题"><a href="#two-pointers-问题" class="headerlink" title="two pointers 问题"></a><strong>two pointers 问题</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">/*</span><br><span class="line">	给定一个正整数序列M，求序列中两个不同位置数a和b 使他们和恰好等于M 输出所有满足条件的方案。 </span><br><span class="line">	如 序列 &#123;1,2,3,4,5,6&#125; M=8  存在&#123;2,6&#125; 和 &#123;3,5&#125; </span><br><span class="line">*/</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstdlib&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	int a[]=&#123;1,2,3,4,5,6,7,8,9&#125;;</span><br><span class="line">	int M = 9;</span><br><span class="line">	int i=0,j=sizeof(a)/sizeof(a[0]);</span><br><span class="line"></span><br><span class="line">	while(i &lt; j)&#123;</span><br><span class="line">		if(a[i] + a[j] == M)&#123;</span><br><span class="line">			printf(&quot;%d + %d = %d\n&quot;,a[i],a[j],M);</span><br><span class="line">			i++;</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		else if(a[i] + a[j] &gt; M)&#123;</span><br><span class="line">			j--;</span><br><span class="line">		&#125;</span><br><span class="line">		else&#123;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125; </span><br><span class="line">	</span><br><span class="line">	return 0;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h4 id="素数快排全排列模板"><a href="#素数快排全排列模板" class="headerlink" title="素数快排全排列模板"></a>素数快排全排列模板</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line">C++</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">/*</span><br><span class="line">	素数算法</span><br><span class="line">	</span><br><span class="line">	概述: 质数只会是 6x-1 或 6x+1  </span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	n：被检测的数 </span><br><span class="line">*/ </span><br><span class="line">bool isprime(int n)</span><br><span class="line">&#123;</span><br><span class="line">	if(n==0 || n==1)    //先判断这些小于5的数 </span><br><span class="line">		return false;</span><br><span class="line">	if(n==2 || n==3)    </span><br><span class="line">		return true;</span><br><span class="line">		</span><br><span class="line">	if(n%6!=1 &amp;&amp; n%6!=5)  //判断数是否是6x-1或者6x+1 </span><br><span class="line">		return false;</span><br><span class="line">		</span><br><span class="line">	for(int i=5;i&lt;=sqrt(n);i+=6)</span><br><span class="line">	&#123;</span><br><span class="line">		if(n%i==0 || n%(i+2)==0) //每次只用判断是否是它两的倍数 (i 对应 6i-1  i+2 对应 6i+1)</span><br><span class="line">			return false;	</span><br><span class="line">	&#125;</span><br><span class="line">	return true;		 //都满足了，即为质数 </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"></span><br><span class="line">	快速排序</span><br><span class="line">	</span><br><span class="line">*/ </span><br><span class="line"></span><br><span class="line">int partition(int a[],int start,int end)&#123;  // 分割数列 </span><br><span class="line">	int i = start;   // 基准点坐标 </span><br><span class="line">	int j = end;</span><br><span class="line">	int x = a[i];</span><br><span class="line">	</span><br><span class="line">	while(true)&#123;</span><br><span class="line">	</span><br><span class="line">		while(a[++i] &lt; x &amp;&amp; i &lt; end);</span><br><span class="line">		while(a[--j] &gt; x);</span><br><span class="line">		</span><br><span class="line">		if( i &lt; j )&#123;</span><br><span class="line">			swap(a[i],a[j]);</span><br><span class="line">		&#125; </span><br><span class="line">		else</span><br><span class="line">		    break;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	swap(a[start],a[j]);  // 由于j最后会指向比基准点小的数 i会指向比基准点大的数 而且此时 j &lt; i 所以是交换 基准点坐标与j坐标对应的值 </span><br><span class="line">						  //  a[start] 就是旧基准点的值 与 a[j] 交换之后  a[j]的左边所有数都比a[j]小 a[j]的右边所有数都比j大 j已经不用排序了 </span><br><span class="line">	</span><br><span class="line">	for(int i=0;i&lt;7;++i)&#123;</span><br><span class="line">		cout&lt;&lt;a[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">	</span><br><span class="line">	return j;    // 此时j就是基准点坐标   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 区间 左闭右开 </span><br><span class="line">void quicksort(int a[],int start,int end)&#123;</span><br><span class="line">	if(start &lt; end)&#123;	</span><br><span class="line">		int pos = partition(a,start,end);  // 得到基准点坐标 </span><br><span class="line">		quicksort(a,start,pos-1);  // 基准点之前的排列 </span><br><span class="line">		quicksort(a,pos+1,end);    // 基准点之后的排列 </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	全排列手动模板 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*/ </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">long long ans = 0;</span><br><span class="line">int a[10] = &#123;0,1,2,3,4,5,6,7,8,9&#125;;</span><br><span class="line"></span><br><span class="line">bool check()&#123;</span><br><span class="line">	return true; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void dfs(int step) &#123;</span><br><span class="line">	</span><br><span class="line">	// 出口 </span><br><span class="line">	if(step == 10)&#123;</span><br><span class="line">		if(check())&#123;</span><br><span class="line">			ans++;</span><br><span class="line">		&#125;</span><br><span class="line">		return ;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	for(int i=step;i&lt;=9;++i)&#123;</span><br><span class="line">		swap(a[i],a[step]);</span><br><span class="line">		dfs(step+1);</span><br><span class="line">		swap(a[i],a[step]);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">	</span><br><span class="line">//	dfs(0);</span><br><span class="line">//	cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">	int a[]=&#123;21,25,5,17,9,23,30&#125;;</span><br><span class="line">	quicksort(a,0,7);</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">DSAD</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2019/01/13/STL/">http://example.com/2019/01/13/STL/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Astrals</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/">读书记录</a><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a></div><div class="post_share"><div class="social-share" data-image="/./../images/C++.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2019/05/08/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F/" title="人脸识别系统"><img class="cover" src="/./../images/%E9%A2%84%E8%A7%88%E5%9B%BE03.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">人脸识别系统</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/01/17/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/" title="深入理解Go"><img class="cover" src="/./../images/go%E5%90%89%E7%A5%A5%E7%89%A94.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-17</div><div class="title">深入理解Go</div></div></a></div><div><a href="/2022/06/09/linux%E5%86%85%E6%A0%B8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/" title="&lt;&lt;Linux内核设计与实现&gt;&gt;读书记录"><img class="cover" src="/./../images/Linux.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-09</div><div class="title">&lt;&lt;Linux内核设计与实现&gt;&gt;读书记录</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">DSAD</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Astrals24/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">自己看,随缘更新,旨在记录一些大事情方便回忆,偶尔分享一些自己觉得不错的书籍笔记。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">基础概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%AE%B9%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">常见容器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%BC%8F%E5%AE%B9%E5%99%A8%E4%B8%8E%E5%85%B3%E8%81%94%E5%BC%8F%E5%AE%B9%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">序列式容器与关联式容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%BC%8F%E5%AE%B9%E5%99%A8"><span class="toc-number">2.1.1.</span> <span class="toc-text">序列式容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E8%81%94%E5%BC%8F%E5%AE%B9%E5%99%A8"><span class="toc-number">2.1.2.</span> <span class="toc-text">关联式容器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vector"><span class="toc-number">2.2.</span> <span class="toc-text">Vector</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deque"><span class="toc-number">2.3.</span> <span class="toc-text">Deque</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#List"><span class="toc-number">2.4.</span> <span class="toc-text">List</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">迭代器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">3.1.</span> <span class="toc-text">迭代器的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84%E8%BF%AD%E4%BB%A3%E5%99%A8-%E2%80%94-%E9%85%8D%E6%8E%A5%E5%99%A8"><span class="toc-number">3.2.</span> <span class="toc-text">特殊的迭代器 —- 配接器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="toc-number">4.1.</span> <span class="toc-text">小技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E7%9B%B8%E5%85%B3%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0"><span class="toc-number">4.2.</span> <span class="toc-text">迭代器的相关辅助函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E9%85%8D%E6%8E%A5%E5%99%A8"><span class="toc-number">4.3.</span> <span class="toc-text">迭代器的配接器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BF%E5%87%BD%E6%95%B0%EF%BC%88%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">仿函数（函数对象）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E7%9A%84%E5%87%BD%E6%95%B0%E9%85%8D%E6%8E%A5%E5%99%A8"><span class="toc-number">4.4.1.</span> <span class="toc-text">预定义的函数配接器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0%E9%85%8D%E6%8E%A5%E5%99%A8"><span class="toc-number">4.4.2.</span> <span class="toc-text">针对成员函数的函数配接器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9%E4%B8%80%E8%88%AC%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0%E9%85%8D%E6%8E%A5%E5%99%A8"><span class="toc-number">4.4.3.</span> <span class="toc-text">针对一般函数的函数配接器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E5%88%86%E5%BA%94%E7%94%A8"><span class="toc-number">4.4.4.</span> <span class="toc-text">部分应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#STL-%E7%AE%97%E6%B3%95"><span class="toc-number">4.4.5.</span> <span class="toc-text">STL 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">4.4.5.1.</span> <span class="toc-text">算法的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#for-each"><span class="toc-number">4.4.5.1.1.</span> <span class="toc-text">for_each()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9D%9E%E5%8F%98%E5%8A%A8%E6%80%A7%E7%AE%97%E6%B3%95"><span class="toc-number">4.4.5.1.2.</span> <span class="toc-text">非变动性算法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%98%E5%8A%A8%E6%80%A7%E7%AE%97%E6%B3%95"><span class="toc-number">4.4.5.1.3.</span> <span class="toc-text">变动性算法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#transform"><span class="toc-number">4.4.5.1.3.1.</span> <span class="toc-text">transform()</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E6%8A%80%E5%B7%A7"><span class="toc-number">4.4.6.</span> <span class="toc-text">一些技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#printf-%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA"><span class="toc-number">4.4.6.1.</span> <span class="toc-text">printf 格式化输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BB%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA"><span class="toc-number">4.4.6.2.</span> <span class="toc-text">读入与输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#double-%E7%B2%BE%E5%BA%A6"><span class="toc-number">4.4.6.3.</span> <span class="toc-text">double 精度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E9%93%BE%E8%A1%A8"><span class="toc-number">4.4.6.4.</span> <span class="toc-text">静态链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%9F%E5%88%97%E4%BD%BF%E7%94%A8"><span class="toc-number">4.4.6.5.</span> <span class="toc-text">队列使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E4%B8%8E%E5%85%B6%E6%89%A9%E5%B1%95"><span class="toc-number">4.4.6.6.</span> <span class="toc-text">二分查找与其扩展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%B9%82%E8%BF%AD%E4%BB%A3%E4%B8%8E%E9%80%92%E5%BD%92%E5%86%99%E6%B3%95"><span class="toc-number">4.4.6.7.</span> <span class="toc-text">快速幂迭代与递归写法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#two-pointers-%E9%97%AE%E9%A2%98"><span class="toc-number">4.4.6.8.</span> <span class="toc-text">two pointers 问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A0%E6%95%B0%E5%BF%AB%E6%8E%92%E5%85%A8%E6%8E%92%E5%88%97%E6%A8%A1%E6%9D%BF"><span class="toc-number">4.4.6.9.</span> <span class="toc-text">素数快排全排列模板</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/01/23/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" title="为什么会是虚拟内存?"><img src="/./../images/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="为什么会是虚拟内存?"/></a><div class="content"><a class="title" href="/2023/01/23/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" title="为什么会是虚拟内存?">为什么会是虚拟内存?</a><time datetime="2023-01-22T16:00:00.000Z" title="发表于 2023-01-23 00:00:00">2023-01-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/17/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/" title="深入理解Go"><img src="/./../images/go%E5%90%89%E7%A5%A5%E7%89%A94.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="深入理解Go"/></a><div class="content"><a class="title" href="/2023/01/17/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/" title="深入理解Go">深入理解Go</a><time datetime="2023-01-16T16:00:00.000Z" title="发表于 2023-01-17 00:00:00">2023-01-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/09/linux%E5%86%85%E6%A0%B8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/" title="&lt;&lt;Linux内核设计与实现&gt;&gt;读书记录"><img src="/./../images/Linux.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="&lt;&lt;Linux内核设计与实现&gt;&gt;读书记录"/></a><div class="content"><a class="title" href="/2022/06/09/linux%E5%86%85%E6%A0%B8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/" title="&lt;&lt;Linux内核设计与实现&gt;&gt;读书记录">&lt;&lt;Linux内核设计与实现&gt;&gt;读书记录</a><time datetime="2022-06-08T16:00:00.000Z" title="发表于 2022-06-09 00:00:00">2022-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/01/%E6%B7%B1%E5%85%A5%E5%88%A8%E6%9E%90Kubernetes%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/" title="&lt;&lt;深入刨析Kubernetes&gt;&gt;读书记录"><img src="/./../images/kubernetes.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="&lt;&lt;深入刨析Kubernetes&gt;&gt;读书记录"/></a><div class="content"><a class="title" href="/2021/11/01/%E6%B7%B1%E5%85%A5%E5%88%A8%E6%9E%90Kubernetes%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/" title="&lt;&lt;深入刨析Kubernetes&gt;&gt;读书记录">&lt;&lt;深入刨析Kubernetes&gt;&gt;读书记录</a><time datetime="2021-10-31T16:00:00.000Z" title="发表于 2021-11-01 00:00:00">2021-11-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/10/17/keepalived+MySQL%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%8F%AF%E7%94%A8/" title="Keepalived+MySQL实现高可用"><img src="/./../images/Astral.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Keepalived+MySQL实现高可用"/></a><div class="content"><a class="title" href="/2021/10/17/keepalived+MySQL%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%8F%AF%E7%94%A8/" title="Keepalived+MySQL实现高可用">Keepalived+MySQL实现高可用</a><time datetime="2021-10-16T16:00:00.000Z" title="发表于 2021-10-17 00:00:00">2021-10-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By DSAD</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

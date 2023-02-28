@@ -1,0 +1,439 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>&lt;&lt;深入刨析Kubernetes&gt;&gt;读书记录 | Astrals</title><meta name="author" content="DSAD"><meta name="copyright" content="DSAD"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="article">
+<meta property="og:title" content="&lt;&lt;深入刨析Kubernetes&gt;&gt;读书记录">
+<meta property="og:url" content="http://example.com/2021/11/01/%E6%B7%B1%E5%85%A5%E5%88%A8%E6%9E%90Kubernetes%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Astrals">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/kubernetes.jpg">
+<meta property="article:published_time" content="2021-10-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-02T16:00:00.000Z">
+<meta property="article:author" content="DSAD">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="Kubernetes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/kubernetes.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/11/01/%E6%B7%B1%E5%85%A5%E5%88%A8%E6%9E%90Kubernetes%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '<<深入刨析Kubernetes>>读书记录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-02-03 00:00:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.3.0"></head><body><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/./../images/%E9%80%8F%E6%98%8E.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Astrals"><span class="site-name">Astrals</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">&lt;&lt;深入刨析Kubernetes&gt;&gt;读书记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-10-31T16:00:00.000Z" title="发表于 2021-11-01 00:00:00">2021-11-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-02-02T16:00:00.000Z" title="更新于 2022-02-03 00:00:00">2022-02-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>27分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="&lt;&lt;深入刨析Kubernetes&gt;&gt;读书记录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="重新认识容器"><a href="#重新认识容器" class="headerlink" title="重新认识容器"></a>重新认识容器</h2><p><strong>简单的说：</strong></p>
+<p>容器可以被一分为二的看待</p>
+<p>一组联合挂载在&#x2F;var&#x2F;lib&#x2F;docker&#x2F;overlay2上的rootfs，这部分称为<strong>容器镜像(image)</strong></p>
+<p>一个由Namspace+Cgroup隔离构成的隔特殊的进程，这部分称为<strong>容器运行时(runtime)</strong></p>
+<p><strong>容器是一种特殊的进程，它通过Namespace，Cgroup，Union Mount 技术施加了障眼法，让容器中只能看到它想给你看到的信息。</strong></p>
+<p>（1）Linux Namespace-负责隔离进程：</p>
+<p>Mount Namespace 用于让被隔离只看到当前挂载点的信息，</p>
+<p>Network Namespace用于让被隔离的进程只看到当前Namespace里的网络和配置。</p>
+<p>创建容器时，会指定一组namespace参数，这样容器中将只能看到当前“namespace”所限定的资源，文件，设备，状态配置等信息。其应用进程是容器中PID&#x3D;1的进程，也是后续创建容器中其他进程的父进程。这意味着<strong>当PID&#x3D;1的进程退出时，容器也就退出了。容器和应用进程”同生共死“，这个特性在后续对容器编排中起到了很大的作用，</strong>也意味着一个容器无法运行两个不同的应用，除非有一个公共的PID&#x3D;1的程序来充当两个不同应用的父进程。</p>
+<p>所以对于宿主机来说，<strong>容器和其他的进程并没有本质区别</strong>，不像在虚拟机中对隔离的应用进程直接直接负责的是Hypervisor，在容器中对隔离环境真正负责的是宿主机，所以多个容器都共享宿主机的操作系统内核，不用像虚拟机那样每个隔离环境都需要单独的客户操作系统，这是容器“轻量”的一个原因。另外由于容器并不是完整的操作系统，<strong>容器内部并不需要其内核，不需要定位，解压，初始化，也不需要有内核启动过程中对硬件的遍历和初始化，只需要宿主机操作系统的共享内核是启动的，</strong>所以唯一对容器启动时间有影响的就是容器内应用启动所花费的时间。这是也容器可以秒级启动的原因.</p>
+<p>实际上，进程的每种Linux Namespace 都在它对应的<code>proc/[进程号]/ns</code>下的虚拟文件中，连接到一个真实的namespace文件上，这意味着，<strong>一个进程可以选择加入某个进程的namespace中，这也是<code>docker exec</code>的原理，这个操作依赖了名为setns()的Linux系统调用</strong></p>
+<p>Namespace隔离技术相对与虚拟化也有其缺点：主要问题是隔离的不彻底，由于共享宿主机操作系统内核，那么<strong>windows宿主机上将不能运行Linux容器，低版本的Linux宿主机也无法运行高版本的Linux容器</strong>，拥有硬件虚拟化技术和独立客户操系统的虚拟机就不存在此类问题。其次是很多资源都无法通过Namespace技术来隔离，一个典型例子是“时间”，在容器中的程序使用settimeofday(2)系统调用修改时间，那宿主机上的时间也会被随之修改，这显然不符合预期。</p>
+<p>由于共享宿主机内核的事实，容器相对于虚拟机将面临更多的安全问题，所以<strong>在生产环境中千万不要把在物理机中运行容器直接暴露到公网上。</strong></p>
+<p><img src="/./../images/%E5%AE%B9%E5%99%A8%E4%B8%8E%E8%99%9A%E6%8B%9F%E6%9C%BA.jpg" alt="img"></p>
+<p>（2）Linux Cgroup -为进程组设置资源上限</p>
+<p>Cgroup 以文件和目录的方式组织在操作系统的<code>/sys/fs/cgroup</code>路径下，下面的子目录代表着当前机器可以被限制的资源种类。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-12-17-centos cgroup]# pwd</span><br><span class="line">/sys/fs/cgroup</span><br><span class="line">[root@VM-12-17-centos cgroup]# ls</span><br><span class="line">blkio  cpu  cpuacct  cpu,cpuacct  cpuset  devices  freezer  hugetlb  memory  net_cls  net_cls,net_prio  net_prio  perf_event  pids  systemd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>cpu：限制进程在某段时间内分配到的cpu时间</li>
+<li>3blkio：为块设备设置I&#x2F;O限制，一般用于磁盘等设备</li>
+<li>cpuset：为进程分配单独的CPU核和对应的内存节点</li>
+<li>memory：为进程设定内存使用限制</li>
+</ul>
+<p>以cpu为例子，在cpu目录中的docker目录下有两个文件cpu.cfs_period_us和cpu.cfs_quota_us，这两个参数分别组合负责CPU在period时段内的quota用量。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">默认是100ms(100000us)</span></span><br><span class="line">[root@VM-12-17-centos docker]# cat cpu.cfs_period_us </span><br><span class="line">100000</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-1代表没有显示，若设置为20000 将表明在100000us中只能使用20000us时间的cpu，即只能使用20%的CPU带宽。</span></span><br><span class="line">[root@VM-12-17-centos docker]# cat cpu.cfs_quota_us </span><br><span class="line">-1</span><br></pre></td></tr></table></figure>
+
+<p><code>/sys/fs/cgroup/cpu/docker</code>这个路径下的task文件负责记录限制的进程PID，写入容器进程在宿主机上的PID后即可对该进程进行限制。</p>
+<p>这些参数都可通过在<code>docker run</code>后指定，例如<code>docker run -it --cpu-period=1000 --cpu-quota=20 ubuntu /bin/bash</code></p>
+<p>Cgroup也有很多不完善的地方，比如&#x2F;proc文件系统的问题。</p>
+<p>Linux 下的 &#x2F;proc 目录存储的是记录当前内核运行状态的一系列特殊文件，用户可以通过访问这些文件，查看系统以及当前正在运行的进程的信息，比如 CPU 使用情况、内存占用率等，这些文件也是 top 指令查看系统信息的主要数据来源。</p>
+<p>但是如果你在容器中执行top命令就会发现，它显示的信息居然是宿主机的 CPU 和内存数据，而不是当前容器的数据，造成这个问题的原因就是，&#x2F;proc文件系统并不知道用户通过Cgroups给容器做了什么样的资源限制，即：**&#x2F;proc 文件系统不了解 Cgroups 限制的存在。**</p>
+<p>这在生产环境中将可能出现问题，例如很多基于JVM的java程序，应用启动时会根据系统的资源上限来分配JVM的堆栈大小，若JVM获取的是物理机资源，而给容器分配的资源又有限，那将导致程序无法成功启动。</p>
+<p><strong>使用lxcfs技术可以解决这个问题</strong></p>
+<p>lxcfs 是通过文件挂载的方式，把 cgroup 中关于系统的相关信息读取出来，通过 docker 的 volume 挂载给容器内部的 proc 系统。 然后让 docker 内的应用读取 proc 中信息的时候以为就是读取的宿主机的真实的 proc。</p>
+<p><img src="D:\images\docker-network\lxcfs" alt="lxcfs"></p>
+<p>上图说明了，当我们把宿主机的 <code>/var/lib/lxcfs/proc/memoinfo</code> 文件挂载到 Docker 容器的 <code>/proc/meminfo</code> 位置后，容器中进程读取相应文件内容时，lxcfs 的 <code>/dev/fuse</code> 实现会从容器对应的 Cgroup 中读取正确的内存限制。从而使得应用获得正确的资源约束。 cpu 的限制原理也是一样的。</p>
+<p>（3）联合挂载-理解容器镜像</p>
+<p>Namespace的作用是“隔离”，它让应用进程只能“看到”该Namespace内的“世界”，而Cgroup的作用是“限制”，它给这个“世界”围了一圈看不见的墙，如此一来，进程就被装进了一个与世隔绝的“房间”里。</p>
+<p>但容器内部是什么样的景象呢？因为Mount namspace 原因，容器内的应用进程应该看到一台完全独立的文件系统，它应该可以在自己的容器目录下操作，不会受到宿主机和其他容器的影响. 这是如何实现的？其实它是在容器启动之前重新挂载了容器的整个根目录，而由于Mount namspace的存在，整个挂载对宿主机不可见。</p>
+<p>在Linux中有一个名为<code>chroot</code>的命令，它的作用就是改变进程的根目录到指定的位置，它的用法也非常简单，例如有一个<code>$HOME/test</code>的目录，你想把它作为一个<code>/bin/bash</code>进程的根目录，只用<code>chroot $HOME/test /bin/bash</code>。Mount Namespace 就是通过对chroot不断改良得来的。</p>
+<p>为了使容器更加真实，我们一般会在这个容器根目录下挂载一个完整的操作系统的文件系统，<strong>这个挂载在容器根目录上用来为容器进程提供隔离后执行的文件系统，就是所谓的“容器镜像”。</strong>它另一个名字就是：<strong>rootfs（根文件系统）。</strong></p>
+<p>通过上述内容也揭示了Docker项目最核心的三个步骤：</p>
+<ul>
+<li>启动Linux Namespace配置</li>
+<li>设置指定的Cgroups参数</li>
+<li>切换进程的根目录（change root）</li>
+</ul>
+<p>另外，需要明确的是rootfs只是一个操作系统所包含的文件，配置和目录，并不包含操作系统的内核，在操作系统中这两部分是分开存放的，操作系统开机时才会加载指定版本的内核。</p>
+<p>正是由于rootfs的存在,容器有了一个重要特性”一致性“，rootfs打包的不止是应用而是整个操作系统的文件和目录，这意味这，应用以及它所需要运行的依赖都被封装在了一起，这里的依赖不只是编程语言层面的依赖包，而是整个操作系统级的运行环境本身。</p>
+<p>这种一致性使得无论是在云端，本地，还是任何一台机器上，只要用户使用打包好的容器镜像，容器所需要的完整执行环境便能重现。</p>
+<p>新的问题是若每开发或升级一个容器应用都需要重新制作roots会显得很麻烦，所以若能利用之前制作的rootfs能大大减少重复流程，以增量的方式去修改是一个很好的方法，所有人都只需要维护一个相对较旧的base rootfs，而不是每次修改都重新制造一个，基于此想法Docker在镜像设计中引入了层的概念，用户的每一步操作都会生成一个层，也就是一个增量rootfs。</p>
+<p>这种方法用到了一种叫UnionFS的能力，也就是联合挂载(如今使用overlay2)，它最主要的功能就是把不同位置的目录挂载到同以目录下。</p>
+<p>这样我们就可以把每层都生产一个目录，在需要那些层的同时都集中挂载到同一目录了。</p>
+<p>层的信息保存在<code>/var/lib/docker/overlay2/</code>这个目录中。</p>
+<p>docker 通过调用containerd（管理容器生命周期stop|pause|start|rm和镜像）+ runc（创建容器 调用namespace，cgroup等工具）。</p>
+<p>containerd 指挥 runc 来创建容器，实际上它每次都会fork一个runc实例，容器创建完毕后runc进程就会退出，此时shim将会接管容器。其作用1.保持STDIN和STDOUT是开启的，daemon重启时，容器不会因为管道的关闭而终止 2. 容器退出状态返回给daemon。</p>
+<p><strong>容器的价值非常有限，真正有价值的是“容器编排”。</strong></p>
+<h2 id="为什么需要Pod"><a href="#为什么需要Pod" class="headerlink" title="为什么需要Pod"></a>为什么需要Pod</h2><p>Pod只是一个逻辑概念，Kubernetes 真正处理的，还是宿主机操作系统上 Linux 容器的 Namespace 和 Cgroups，而并不存在一个所谓的 Pod 的边界或者隔离环境。</p>
+<p><strong>Pod，其实是一组共享了某些资源的容器。</strong></p>
+<p>具体的说：<strong>Pod 里的所有容器，共享的是同一个 Network Namespace，并且可以声明共享同一个 Volume。</strong></p>
+<p>由于需要保证pod内容器的对等性往往pod实现需要使用一个中间容器，这个让其叫<strong>Infra容器</strong>。</p>
+<p>在这个 Pod 中，Infra 容器永远都是第一个被创建的容器，而其他用户定义的容器，则通过 Join Network </p>
+<p>Namespace 的方式，与 Infra 容器关联在一起。</p>
+<p>infra容器详解：</p>
+<p>infra容器占用资源极少，使用的是一个非常特殊的镜像，<code>k8s.gcr.io/pause</code>用汇编语言编写。</p>
+<p>这也就意味着，对于 Pod 里的容器 A 和容器 B 来说：</p>
+<ul>
+<li>它们可以直接使用 localhost 进行通信；</li>
+<li>它们看到的网络设备跟 Infra 容器看到的完全一样；</li>
+<li>一个 Pod 只有一个 IP 地址，也就是这个 Pod 的 Network Namespace 对应的 IP 地址；</li>
+<li>当然，其他的所有网络资源，都是一个 Pod 一份，并且被该 Pod 中的所有容器共享；</li>
+<li>Pod 的生命周期只跟 Infra 容器一致，而与容器 A 和 B 无关。</li>
+</ul>
+<p><strong>Pod类似一台完整的虚拟机功能，自己的网络，存储和内部的容器进程。</strong></p>
+<p>Pod生命周期：</p>
+<ul>
+<li><p>Pending 意味着Pod的YAML文件已经提交给了k8s，API对象已经被保存到了etcd中，但是pod内有些容器因为某种原因部能被顺利创建，比如调度不成功</p>
+</li>
+<li><p>Running 这个状态下，Pod 已经调度成功，跟一个具体的节点绑定。它包含的容器都已经创建成功，并且至</p>
+<p>少有一个正在运行中</p>
+</li>
+<li><p>Succeeded。这个状态意味着，Pod 里的所有容器都正常运行完毕，并且已经退出了。这种情况在运行一次性</p>
+<p>任务时最为常见</p>
+</li>
+<li><p>Failed。这个状态下，Pod 里至少有一个容器以不正常的状态（非 0 的返回码）退出。这个状态的出现，意味</p>
+<p>着你得想办法 Debug 这个容器的应用，比如查看 Pod 的 Events 和日志。</p>
+</li>
+<li><p>Unknown。这是一个异常状态，意味着 Pod 的状态不能持续地被 kubelet 汇报给 kube-apiserver，这很有可</p>
+<p>能是主从节点（Master 和 Kubelet）间的通信出现了问题。</p>
+</li>
+</ul>
+<p>仔细阅读$GOPATH&#x2F;src&#x2F;k8s.io&#x2F;kubernetes&#x2F;vendor&#x2F;k8s.io&#x2F;api&#x2F;core&#x2F;v1&#x2F;types.go 里，type Pod struct ，尤其是 </p>
+<p>PodSpec 部分的内容</p>
+<p>Project Volume</p>
+<ol>
+<li>Secret；</li>
+<li>ConfigMap；</li>
+<li>Downward API；</li>
+<li>ServiceAccountToken。</li>
+</ol>
+<p><strong>Pod容器健康检查和恢复机制</strong></p>
+<p>Kubelet根据“探针” Probe的返回值来决定这个容器的状态，而不是以容器是否运行作为根据。</p>
+<p>例如</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">test-liveness-exec</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">liveness</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">busybox</span></span><br><span class="line">    <span class="attr">args:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">/bin/sh</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">-c</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">touch</span> <span class="string">/tmp/healthy;</span> <span class="string">sleep</span> <span class="number">30</span><span class="string">;</span> <span class="string">rm</span> <span class="string">-rf</span> <span class="string">/tmp/healthy;</span> <span class="string">sleep</span> <span class="number">600</span></span><br><span class="line">    <span class="attr">livenessProbe:</span></span><br><span class="line">      <span class="attr">exec:</span></span><br><span class="line">        <span class="attr">command:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">cat</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">/tmp/healthy</span></span><br><span class="line">      <span class="attr">initialDelaySeconds:</span> <span class="number">5</span></span><br><span class="line">      <span class="attr">periodSeconds:</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p>我们定义了一个这样的 livenessProbe（健康检查）。它的类型是 exec，这意味着，它会在容器启动后，在容器</p>
+<p>里面执行一句我们指定的命令，比如：“cat &#x2F;tmp&#x2F;healthy”。这时，如果这个文件存在，这条命令的返回值就是 </p>
+<p>0，Pod 就会认为这个容器不仅已经启动，而且是健康的。这个健康检查，在容器启动 5 s 后开始执行</p>
+<p>（initialDelaySeconds: 5），每 5 s 执行一次（periodSeconds: 5）。</p>
+<p>Pod的恢复机制永远发生在当前节点上，而不会跑到其他节点上，如果想让pod出现在其他节点上，必须使用Deployment 控制器来管理pod。</p>
+<p>而作为用户，你还可以通过设置 restartPolicy，改变 Pod 的恢复策略。除了 Always，它还有 OnFailure 和 Never 两种情况：</p>
+<ul>
+<li>Always：在任何情况下，只要容器不在运行状态，就自动重启容器；</li>
+<li>OnFailure: 只在容器 异常时才自动重启容器；</li>
+<li>Never: 从来不重启容器。</li>
+</ul>
+<p>值得一提的是，Kubernetes 的官方文档，把 restartPolicy 和 Pod 里容器的状态，以及 Pod 状态的对应关系，<a target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#example-states">总结了非常复杂的一大堆情况</a>。实际上，你根本不需要死记硬背这些对应关系，只要记住如下两个基本的设计原理即可：</p>
+<ol>
+<li><strong>只要 Pod 的 restartPolicy 指定的策略允许重启异常的容器（比如：Always），那么这个 Pod 就会保持 Running 状态，并进行容器重启</strong>。否则，Pod 就会进入 Failed 状态 。</li>
+<li><strong>对于包含多个容器的 Pod，只有它里面所有的容器都进入异常状态后，Pod 才会进入 Failed 状态</strong>。在此之前，Pod 都是 Running 状态。此时，Pod 的 READY 字段会显示正常容器的个数，</li>
+</ol>
+<p>在 Kubernetes 的 Pod 中，还有一个叫 readinessProbe 的字段。虽然它的用法与 livenessProbe 类似，但作用</p>
+<p>却大不一样。readinessProbe 检查结果的成功与否，决定的这个 Pod 是不是能被通过 Service 的方式访问到，而</p>
+<p>并不影响 Pod 的生命周期。</p>
+<p><strong>Pod 两种探针简介</strong></p>
+<ul>
+<li><strong>LivenessProbe（存活探针）：</strong> 存活探针主要作用是，用指定的方式进入容器检测容器中的应用是否正常运行，如果检测失败，则认为容器不健康，那么 <code>Kubelet</code> 将根据 <code>Pod</code> 中设置的 <code>restartPolicy</code> （重启策略）来判断，Pod 是否要进行重启操作，如果容器配置中没有配置 <code>livenessProbe</code> 存活探针，<code>Kubelet</code> 将认为存活探针探测一直为成功状态。</li>
+<li><strong>ReadinessProbe（就绪探针）：</strong> 用于判断容器中应用是否启动完成，当探测成功后才使 Pod 对外提供网络访问，设置容器 <code>Ready</code> 状态为 <code>true</code>，如果探测失败，则设置容器的 <code>Ready</code> 状态为 <code>false</code>。对于被 Service 管理的 Pod，<code>Service</code> 与 <code>Pod</code>、<code>EndPoint</code> 的关联关系也将基于 Pod 是否为 <code>Ready</code> 状态进行设置，如果 Pod 运行过程中 <code>Ready</code> 状态变为 <code>false</code>，则系统自动从 <code>Service</code> 关联的 <code>EndPoint</code> 列表中移除，如果 Pod 恢复为 <code>Ready</code> 状态。将再会被加回 <code>Endpoint</code> 列表。<strong>通过这种机制就能防止将流量转发到不可用的 Pod 上。</strong></li>
+</ul>
+<p><strong>Pod 探针的探测方式与结果</strong></p>
+<p>目前 LivenessProbe 和 ReadinessProbe 两种探针都支持下面三种探测方法：</p>
+<ul>
+<li><strong>ExecAction：</strong> 在容器中执行指定的命令，如果能成功执行，则探测成功。</li>
+<li><strong>HTTPGetAction：</strong> 通过容器的IP地址、端口号及路径调用 HTTP Get 方法，如果响应的状态码 200 ≤ status ≤ 400，则认为容器探测成功。</li>
+<li><strong>TCPSocketAction：</strong> 通过容器的 IP 地址和端口号执行 TCP 检查，如果能够建立 TCP 连接，则探测成功。</li>
+</ul>
+<p>探针探测结果有以下值：</p>
+<ul>
+<li><p><strong>Success</strong>：表示通过检测。</p>
+</li>
+<li><p><strong>Failure</strong>：表示未通过检测。</p>
+</li>
+<li><p><strong>Unknown</strong>：表示检测没有正常进行。</p>
+<p><strong>Pod 探针的相关属性</strong></p>
+</li>
+</ul>
+<p>两种探针有许多可选字段，可以用来更加精确的控制 LivenessProbe 和 ReadinessProbe 两种探针的探测，具体如下：</p>
+<ul>
+<li><strong>initialDelaySeconds：</strong> Pod 启动后首次进行检查的等待时间，单位“秒”。</li>
+<li><strong>periodSeconds：</strong> 检查的间隔时间，默认为 10s，单位“秒”。</li>
+<li><strong>timeoutSeconds：</strong> 探针执行检测请求后，等待响应的超时时间，默认为 1s，单位“秒”。</li>
+<li><strong>successThreshold：</strong> 探针检测失败后认为成功的最小连接成功次数，默认为 1s，在 Liveness 探针中必须为 1s，最小值为 1s。</li>
+<li><strong>failureThreshold：</strong> 探测失败的重试次数，重试一定次数后将认为失败，在 readiness 探针中，Pod会被标记为未就绪，默认为 3s，最小值为 1s。</li>
+</ul>
+<p><strong>两种探针的区别</strong></p>
+<p>总的来说 ReadinessProbe 和 LivenessProbe 是使用相同探测的方式，只是探测后对 Pod 的处置方式不同：</p>
+<ul>
+<li><strong>ReadinessProbe：</strong> 当检测失败后，将 Pod 的 IP:Port 从对应 Service 关联的 EndPoint 地址列表中删除。</li>
+<li><strong>LivenessProbe：</strong> 当检测失败后将杀死容器，并根据 Pod 的重启策略来决定作出对应的措施。</li>
+</ul>
+<blockquote>
+<p>备注：endpoint是k8s集群中的一个资源对象，存储在etcd中，用来记录一个service对应的所有pod的访问地址。service配置selector，endpoint controller才会自动创建对应的endpoint对象；否则，不会生成endpoint对象.</p>
+<p>例如，k8s集群中创建一个名为hello的service，就会生成一个同名的endpoint对象，ENDPOINTS就是service关联的pod的ip地址和端口。</p>
+</blockquote>
+<h2 id="“控制器”的思想"><a href="#“控制器”的思想" class="headerlink" title="“控制器”的思想"></a>“控制器”的思想</h2><p>Deployment 对象中 Replicas 字段的值。很明显，这些信息往往都保存在 Etcd 中。</p>
+<p>接下来，以 Deployment 为例，我和你简单描述一下它对控制器模型的实现：</p>
+<ol>
+<li>Deployment 控制器从 Etcd 中获取到所有携带了“app: nginx”标签的 Pod，然后统计它们的数量，这就是实际状态；</li>
+<li>Deployment 对象的 Replicas 字段的值就是期望状态；</li>
+<li>Deployment 控制器将两个状态做比较，然后根据比较结果，确定是创建 Pod，还是删除已有的 Pod（具体如何操作 Pod 对象，我会在下一篇文章详细介绍）。</li>
+</ol>
+<p>可以看到，一个 Kubernetes 对象的主要编排逻辑，实际上是在第三步的“对比”阶段完成的。</p>
+<p>这个操作，通常被叫作调谐（Reconcile）。这个调谐的过程，则被称作“Reconcile Loop”（调谐循环）或者“Sync Loop”（同步循环）。</p>
+<p><strong>水平扩展</strong></p>
+<p><img src="/./../images/%E6%B0%B4%E5%B9%B3%E6%89%A9%E5%B1%95.png" alt="img"></p>
+<p>通过这张图，我们就很清楚的看到，一个定义了 replicas&#x3D;3 的 Deployment，与它的 ReplicaSet，以及 Pod 的关系，实际上是一种“层层控制”的关系。</p>
+<p>其中，ReplicaSet 负责通过“控制器模式”，保证系统中 Pod 的个数永远等于指定的个数（比如，3 个）。这也正是 Deployment 只允许容器的 restartPolicy&#x3D;Always 的主要原因：只有在容器能保证自己始终是 Running 状态的前提下，ReplicaSet 调整 Pod 的个数才有意义。</p>
+<p>而在此基础上，Deployment 同样通过“控制器模式”，来操作 ReplicaSet 的个数和属性，进而实现“水平扩展 &#x2F; 收缩”和“滚动更新”这两个编排动作。</p>
+<p>其中，“水平扩展 &#x2F; 收缩”非常容易实现，Deployment Controller 只需要修改它所控制的 ReplicaSet 的 Pod 副本个数就可以了。</p>
+<p>比如，把这个值从 3 改成 4，那么 Deployment 所对应的 ReplicaSet，就会根据修改后的值自动创建一个新的 Pod。这就是“水平扩展”了；“水平收缩”则反之。</p>
+<p>而用户想要执行这个操作的指令也非常简单，就是 <code>kubectl scale</code>，比如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">kubectl scale deployment nginx-deployment --replicas=4</span></span><br><span class="line">deployment.apps/nginx-deployment scaled</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>滚动更新</strong></p>
+<p>用户在提交一个deployment对象后，deployment Controller立即创建一个Pod副本为X的ReplicaSet。</p>
+<p>使用kubect edit 修改了 Deployment 里的 Pod 定义之后，Deployment Controller 会使用这个修改后的 Pod 模板，创建一个新的 ReplicaSet（hash&#x3D;1764197365），这个新的 ReplicaSet 的初始 Pod 副本数是：0。</p>
+<p>新 ReplicaSet 管理的 Pod 副本数，从 0 个变成 1 个，再变成 2 个，最后变成 3 个。而旧的 ReplicaSet 管理的 Pod 副本数则从 3 个变成 2 个，再变成 1 个，最后变成 0 个。这样，就完成了这一组 Pod 的版本升级过程。</p>
+<p>像这样，<strong>将一个集群中正在运行的多个 Pod 版本，交替地逐一升级的过程，就是“滚动更新”</strong></p>
+<blockquote>
+<p>备注：kubectl edit 并不神秘，它不过是把 API 对象的内容下载到了本地文件，让你修改完成后再提交上去。</p>
+</blockquote>
+<p>Deployment 的控制器，实际上控制的是 ReplicaSet 的数目，以及每个 ReplicaSet 的属性。</p>
+<p>而一个应用的版本，对应的正是一个 ReplicaSet；这个版本应用的 Pod 数量，则由 ReplicaSet 通过它自己的控制器（ReplicaSet Controller）来保证。</p>
+<p>回滚命令</p>
+<p><code> kubectl rollout undo</code></p>
+<p><code>kubectl rollout status xxx</code></p>
+<p>每次对deployment进行操作都会生产一个新的ReplicaSet对象，若你在更新Deployment 前，你要先执行一条 </p>
+<p>kubectl rollout pause 指令，再修改Deployment里的内容就不会创建新的ReplicaSet。</p>
+<p>之后再执行一条 kubectl rollout resume 指令，就可以恢复Deployment</p>
+<p>Deployment 对象有一个字段，叫作 spec.revisionHistoryLimit，就是 Kubernetes 为 Deployment 保留的“历史版本”个数。所以，如果把它设置为 0，你就再也不能做回滚操作了。</p>
+<p>通过这些讲解，你应该了解到：Deployment 实际上是一个<strong>两层控制器</strong>。首先，它通过<strong>ReplicaSet 的个数</strong>来描述应用的版本；然后，它再通过<strong>ReplicaSet 的属性</strong>（比如 replicas 的值），来保证 Pod 的副本数量。</p>
+<blockquote>
+<p>备注：Deployment 控制 ReplicaSet（版本），ReplicaSet 控制 Pod（副本数）。这个两层控制关系一定要牢记。</p>
+</blockquote>
+<p>金丝雀发布和蓝绿发布也是基于Deployment实现的。（滚动更新很像自动更新的金丝雀发布）</p>
+<p>[k8s-deployment-strategies&#x2F;canary at master · ContainerSolutions&#x2F;k8s-deployment-strategies · GitHub](</p>
+<h2 id="声明式API"><a href="#声明式API" class="headerlink" title="声明式API"></a>声明式API</h2><p>作为用户，当然最希望容器编排系统能自动把所有意外因素都消灭掉，让任何每一个服务都永远健康，永不出错。但永不出错的服务是不切实际的，只有凑齐七颗龙珠才有望办到。那就只能退而求其次，让编排系统在这些服务出现问题，运行状态不正确的时候，能自动将它们调整成正确的状态。这种需求听起来也是贪心的，却已经具备足够的可行性，应对的解决办法在<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Industrial_control_system">工业控制系统</a>里已经有非常成熟的应用，叫作<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Control_loop">控制回路</a>（Control Loop）。</p>
+<p><a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/concepts/architecture/controller/">Kubernetes 官方文档</a>是以房间中空调自动调节温度为例子介绍了控制回路的一般工作过程的：当你设置好了温度，就是告诉空调你对温度的“期望状态”（Desired State），而传感器测量出的房间实际温度是“当前状态”（Current State）。根据当前状态与期望状态的差距，控制器对空调制冷的开关进行调节控制，就能让其当前状态逐渐接近期望状态。</p>
+<p><img src="/./../images/%E5%A3%B0%E6%98%8E%E5%BC%8FAPI-%E6%8E%A7%E5%88%B6%E5%9B%9E%E8%B7%AF.png" alt="img">图 11-5 控制回路</p>
+<p>将这种控制回路的思想迁移应用到容器编排上，自然会为 Kubernetes 中的资源附加上了期望状态与实际状态两项属性。不论是已经出现在上节的资源模型中，用于抽象容器运行环境的计算资源，还是没有登场的另一部分对应于安全、服务、令牌、网络等功能的资源，用户要想使用这些资源来实现某种需求，并不提倡像平常编程那样去调用某个或某一组方法来达成目的，<strong>而是通过描述清楚这些资源的期望状态，由 Kubernetes 中对应监视这些资源的控制器来驱动资源的实际状态逐渐向期望状态靠拢</strong>，以此来达成目的。这种交互风格被称为是 Kubernetes 的声明式 API，如果你已有过实际操作 Kubernetes 的经验，那你日常在元数据文件中的<code>spec</code>字段所描述的便是资源的期望状态。</p>
+<p><strong>滚动更新</strong></p>
+<p>将这个过程放到 ReplicaSet 上，就是先创建新版本的 ReplicaSet，然后一边让新 ReplicaSet 逐步创建新版 Pod 的副本，一边让旧的 ReplicaSet 逐渐减少旧版 Pod 的副本。</p>
+<p>之所以<code>kubectl rolling-update</code>命令会被淘汰，是因为这样的命令式交互完全不符合 Kubernetes 的设计理念（这是台面上的说法，笔者觉得淘汰的根本原因主要是因为它不够好用），如果你希望改变某个资源的某种状态，应该将期望状态告诉 Kubernetes，而不是去教 Kubernetes 具体该如何操作。因此，新的部署资源（Deployment）与部署控制器被设计出来，可以由 Deployment 来创建 ReplicaSet，再由 ReplicaSet 来创建 Pod，当你更新 Deployment 中的信息（譬如更新了镜像的版本）以后，部署控制器就会跟踪到你新的期望状态，自动地创建新 ReplicaSet，并逐渐缩减旧的 ReplicaSet 的副本数，直至升级完成后彻底删除掉旧 ReplicaSet</p>
+<p>如果你觉得已经理解了前面的几种资源和控制器的例子，那不妨思考一下以下几个问题：假设我想限制某个 Pod 持有的最大存储卷数量，应该会如何设计？假设集群中某个 Node 发生硬件故障，Kubernetes 要让调度任务避开这个 Node，应该如何设计？假设一旦这个 Node 重新恢复，Kubernetes 要能尽快利用上面的资源，又该如何去设计？只要你真正接受了资源与控制器是贯穿整个 Kubernetes 的两大设计理念，即便不去查文档手册，也应该能推想出个大概轮廓，以此为基础当你再去看手册或者源码时，想必就能够事半功倍</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://icyfenix.cn/immutable-infrastructure/container/container-build-system.html">http://icyfenix.cn/immutable-infrastructure/container/container-build-system.html</a></p>
+</blockquote>
+<h2 id="容器网络模型"><a href="#容器网络模型" class="headerlink" title="容器网络模型"></a>容器网络模型</h2><p><strong>单机容器网络模型 - docker0网桥</strong></p>
+<p>在前面讲解容器基础时，我曾经提到过一个 Linux 容器能看见的“网络栈”，实际上是被隔离在它自己的 Network Namespace 当中的。</p>
+<p>而所谓“网络栈”，就包括了：网卡（Network Interface）、回环设备（Loopback Device）、路由表（Routing Table）和 iptables 规则。对于一个进程来说，这些要素，其实就构成了它发起和响应网络请求的基本环境。</p>
+<blockquote>
+<p>作为容器 可以直接使用宿主机的网络栈。-net host 即不开启Network Namespace(端口可能不够用)。</p>
+</blockquote>
+<p><strong>这个被隔离的容器进程，该如何跟其他 Network Namespace 里的容器进程进行交互呢？</strong></p>
+<p>想要若实现两台主机之间通信，最简单的方法就是通过网线连接起来，若多台主机相互通信则需要网线连接在一台交换机上。</p>
+<blockquote>
+<p>在 Linux 中，能够起到虚拟交换机作用的网络设备，是网桥（Bridge）。它是一个工作在数据链路层（Data Link）的设备，主要功能是根据 MAC 地址学习来将数据包转发到网桥的不同端口（Port）上。</p>
+</blockquote>
+<p>可以把容器看作一台主机，为实现不同容器的通信，docker会在宿主机上创建一个叫docker0的网桥，充当虚拟交换机的作用，所有与docker0网桥相连接的容器都可以通过它来进行通信。</p>
+<p><strong>如何把这些容器连接到docker0网桥上呢？</strong></p>
+<p>这使用到了一种叫Veth Pair的虚拟设备，它被创建后总是成对存在，其中一张网卡发出的数据包 会之间出现在对应的网卡上，哪怕是在不同的Network Namespace种。</p>
+<p>每当有容器被创建，docker0上就会多出一张与容器eth0网卡对应的veth pair网卡，此时该虚拟设备会降级成docker0网桥上的一个端口</p>
+<blockquote>
+<p>Veth Pair 解释</p>
+</blockquote>
+<p><strong>同宿主机不同容器通信流程：</strong></p>
+<p>有两容器nginx01 172.17.0.2与nginx02 172.17.0.3  </p>
+<p>nginx01 首先通过eth0网卡（veth Pair）发送一个ARP请求，来通过nginx02的ip查找到对应MAC地址，由于eth0网卡是一个veth pair docker0会充当二层交换机的角色，把ARP转发到其他通过veth Pair 与docker0相连的网卡上，这样同样连接在docker0上的nginx02就会接受到ARP(包含nginx01的ip和MAC地址)，然后把自己的MAC地址<strong>直接</strong>回复给ngxin01容器。</p>
+<p>nginx01获得nginx02的MAC地址后，根据veth pair eth0发送的数据包将首先通过docker0网桥，docker0网桥根据目的MAC地址（nginx02）在它的CAM表（存放端口和MAC地址的关系）查询到nginx02的插在docker0上的veth端口（即网卡） 然后通过其发送给nginx02.</p>
+<p><img src="/./../images/flannel.png" alt="img"></p>
+<p><strong>容器与其他宿主机通信：</strong></p>
+<p>容器试图与其他宿主机连接时，数据包首先会发往docker0，通过NAT转发到宿主机的网卡上，然后宿主机网卡根据路由表规则转发到对应的网络上。</p>
+<p>所以说，<strong>当你遇到容器连不通“外网”的时候，你都应该先试试 docker0 网桥能不能 ping 通，然后查看一下跟 docker0 和 Veth Pair 设备相关的 iptables 规则是不是有异常，往往就能够找到问题的答案了</strong></p>
+<p><strong>跨主机容器网络模型 - 覆盖网络</strong></p>
+<p>对于不同宿主机上的不同容器想要通信，通常创建一个整个集群公用的公共网桥，然后把所有容器都连接到网桥上，构建这种容器网络的核心在于：我们需要在已有的宿主机网络上，再通过软件构建一个覆盖在已有宿主机网络之上的、可以把所有容器连通在一起的虚拟网络这就叫<strong>覆盖网络</strong></p>
+<p><img src="/./../images/%E5%A4%9A%E6%9C%BA%E8%A6%86%E7%9B%96%E7%BD%91%E7%BB%9C.png" alt="img"></p>
+<p>Flannel 支持的三种容器跨主机网络主流方案</p>
+<ol>
+<li>VXLAN；</li>
+<li>host-gw；</li>
+<li>UDP（性能问题 被弃用）</li>
+</ol>
+<p><strong>基于 Flannel UDP 模式的跨主通信的基本原理</strong></p>
+<p><img src="/./../images/Flannel-UDP%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%B7%A8%E4%B8%BB%E6%9C%BA%E9%80%9A%E4%BF%A1%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86.png"></p>
+<p>流程：</p>
+<p>性能问题：</p>
+<p>相比于两台宿主机之间的直接通信，基于 Flannel UDP 模式的容器通信多了一个额外的步骤，即 flanneld 的处理</p>
+<p>过程。而这个过程，由于使用到了 flannel0 这个 TUN 设备，仅在发出 IP 包的过程中，就需要经过三次用户态与</p>
+<p>内核态之间的数据拷贝，如下所示：</p>
+<img src="./../images/flnnel性能问题.png" alt="img" style="zoom:80%;" />
+
+
+
+<p>我们可以看到：</p>
+<p>第一次：用户态的容器进程发出的 IP 包经过 docker0 网桥进入内核态；</p>
+<p>第二次：IP 包根据路由表进入 TUN（flannel0）设备，从而回到用户态的 flanneld 进程；</p>
+<p>第三次：flanneld 进行 UDP 封包之后重新进入内核态，将 UDP 包通过宿主机的 eth0 发出去。</p>
+<p>此外，我们还可以看到，Flannel 进行 UDP 封装（Encapsulation）和解封装（Decapsulation）的过程，也都是</p>
+<p>在用户态完成的。在 Linux 操作系统中，上述这些上下文切换和用户态操作的代价其实是比较高的，这也正是造</p>
+<p>成 Flannel UDP 模式性能不好的主要原因</p>
+<p><strong>我们在进行系统级编程的时候，有一个非常重要的优化原则，就是要减少用户态到内核态的切换次数，并且把</strong></p>
+<p><strong>核心的处理逻辑都放在内核态进行</strong>成 Flannel UDP 模式性能不好的主要原因。</p>
+<p><strong>VXLAN模式</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">DSAD</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2021/11/01/%E6%B7%B1%E5%85%A5%E5%88%A8%E6%9E%90Kubernetes%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/">http://example.com/2021/11/01/%E6%B7%B1%E5%85%A5%E5%88%A8%E6%9E%90Kubernetes%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Astrals</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/docker/">docker</a><a class="post-meta__tags" href="/tags/Kubernetes/">Kubernetes</a></div><div class="post_share"><div class="social-share" data-image="/./../images/kubernetes.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/06/09/linux%E5%86%85%E6%A0%B8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/" title="&lt;&lt;Linux内核设计与实现&gt;&gt;读书记录"><img class="cover" src="/./../images/Linux.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">&lt;&lt;Linux内核设计与实现&gt;&gt;读书记录</div></div></a></div><div class="next-post pull-right"><a href="/2021/10/17/keepalived+MySQL%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%8F%AF%E7%94%A8/" title="Keepalived+MySQL实现高可用"><img class="cover" src="/./../images/Astral.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Keepalived+MySQL实现高可用</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/04/03/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BADocker%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/" title="&lt;&lt;深入浅出Docker&gt;&gt;读书记录"><img class="cover" src="/./../images/docker.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-03</div><div class="title">&lt;&lt;深入浅出Docker&gt;&gt;读书记录</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">DSAD</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Astrals24/"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">自己看,随缘更新,旨在记录一些大事情方便回忆,偶尔分享一些自己觉得不错的书籍笔记。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%E5%AE%B9%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">重新认识容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81Pod"><span class="toc-number">2.</span> <span class="toc-text">为什么需要Pod</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9C%E6%8E%A7%E5%88%B6%E5%99%A8%E2%80%9D%E7%9A%84%E6%80%9D%E6%83%B3"><span class="toc-number">3.</span> <span class="toc-text">“控制器”的思想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E5%BC%8FAPI"><span class="toc-number">4.</span> <span class="toc-text">声明式API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.</span> <span class="toc-text">容器网络模型</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/01/23/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" title="为什么会是虚拟内存?"><img src="/./../images/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="为什么会是虚拟内存?"/></a><div class="content"><a class="title" href="/2023/01/23/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" title="为什么会是虚拟内存?">为什么会是虚拟内存?</a><time datetime="2023-01-22T16:00:00.000Z" title="发表于 2023-01-23 00:00:00">2023-01-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/17/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/" title="深入理解Go"><img src="/./../images/go%E5%90%89%E7%A5%A5%E7%89%A94.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="深入理解Go"/></a><div class="content"><a class="title" href="/2023/01/17/Go%E8%AF%AD%E8%A8%80%E7%AC%94%E8%AE%B0/" title="深入理解Go">深入理解Go</a><time datetime="2023-01-16T16:00:00.000Z" title="发表于 2023-01-17 00:00:00">2023-01-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/06/09/linux%E5%86%85%E6%A0%B8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/" title="&lt;&lt;Linux内核设计与实现&gt;&gt;读书记录"><img src="/./../images/Linux.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="&lt;&lt;Linux内核设计与实现&gt;&gt;读书记录"/></a><div class="content"><a class="title" href="/2022/06/09/linux%E5%86%85%E6%A0%B8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/" title="&lt;&lt;Linux内核设计与实现&gt;&gt;读书记录">&lt;&lt;Linux内核设计与实现&gt;&gt;读书记录</a><time datetime="2022-06-08T16:00:00.000Z" title="发表于 2022-06-09 00:00:00">2022-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/01/%E6%B7%B1%E5%85%A5%E5%88%A8%E6%9E%90Kubernetes%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/" title="&lt;&lt;深入刨析Kubernetes&gt;&gt;读书记录"><img src="/./../images/kubernetes.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="&lt;&lt;深入刨析Kubernetes&gt;&gt;读书记录"/></a><div class="content"><a class="title" href="/2021/11/01/%E6%B7%B1%E5%85%A5%E5%88%A8%E6%9E%90Kubernetes%E8%AF%BB%E4%B9%A6%E8%AE%B0%E5%BD%95/" title="&lt;&lt;深入刨析Kubernetes&gt;&gt;读书记录">&lt;&lt;深入刨析Kubernetes&gt;&gt;读书记录</a><time datetime="2021-10-31T16:00:00.000Z" title="发表于 2021-11-01 00:00:00">2021-11-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/10/17/keepalived+MySQL%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%8F%AF%E7%94%A8/" title="Keepalived+MySQL实现高可用"><img src="/./../images/Astral.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Keepalived+MySQL实现高可用"/></a><div class="content"><a class="title" href="/2021/10/17/keepalived+MySQL%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%8F%AF%E7%94%A8/" title="Keepalived+MySQL实现高可用">Keepalived+MySQL实现高可用</a><time datetime="2021-10-16T16:00:00.000Z" title="发表于 2021-10-17 00:00:00">2021-10-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By DSAD</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
